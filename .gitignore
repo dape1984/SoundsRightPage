@@ -1,0 +1,8 @@
+# Apple hidden files
+.DS_Store
+
+# Screenshot subdirs (resize output) — only root-level PNGs + script are committed
+screenshots/1242x2688/
+screenshots/1284x2778/
+screenshots/2688x1242/
+screenshots/2778x1284/

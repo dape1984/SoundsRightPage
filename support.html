@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SoundsRight 耳顺英语 - Support &amp; Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fafafa;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #5c5c5c;
+      --accent: #0d9488;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Charter', 'Georgia', serif;
+      padding: 0;
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .top-nav {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      font-family: 'Poppins', sans-serif;
+    }
+    .top-nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .top-nav a:hover { color: var(--accent); text-decoration: none; }
+    .top-nav a.support { color: var(--accent); font-weight: 600; }
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    p, ul { margin: 0.5rem 0 1rem; }
+    ul { padding-left: 1.25rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer {
+      background: var(--bg-card);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    footer .copy { font-size: 0.8rem; color: var(--text-muted); }
+    footer .footer-site { margin: 0.35rem 0; }
+    footer .footer-site a { font-weight: 600; }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="index.html">Home</a>
+    <a href="product.html">Product</a>
+    <a href="product.html#data-sources">Data Sources</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="support.html" class="support">Support &amp; Contact</a>
+  </nav>
+  <div style="padding: 2rem;">
+  <h1>SoundsRight 耳顺英语 &middot; Support &amp; Contact</h1>
+  <p>Thank you for using SoundsRight (耳顺英语). If you have questions, suggestions, or feedback, we'd love to hear from you.</p>
+
+  <h2>Feedback &amp; Suggestions</h2>
+  <p>You can reach us through the following channels:</p>
+  <!-- If you change email or GitHub below, update SoundsRight/src/constants/supportContact.ts (mobile app modal). -->
+  <ul>
+    <li>GitHub (issues &amp; feature requests): <a href="https://github.com/dape1984/SoundsRightPage" target="_blank" rel="noopener">github.com/dape1984/SoundsRightPage</a></li>
+    <li>Email: <strong>soundsrightcn@gmail.com</strong></li>
+  </ul>
+
+  <h2>Subscriptions &amp; Refunds</h2>
+  <p>Pro subscriptions are purchased through the Apple App Store or Google Play. To cancel a subscription, request a refund, or restore a previous purchase, use the "Restore Purchases" option in the app, or manage your subscription in your device's system settings. Refund policies are governed by Apple's and Google's respective terms.</p>
+
+  <h2>Related Links</h2>
+  <ul>
+    <li><a href="product.html">Product Features &amp; Highlights</a></li>
+    <li><a href="product.html#data-sources">Data Sources &amp; Attribution</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+  </ul>
+
+  </div>
+  <footer>
+    <div class="copy">粤ICP备2026028389号-1</div>
+    <div class="copy footer-site"><a href="https://soundsright.cn">soundsright.cn</a></div>
+    <div class="copy">&copy; 2026 SoundsRight. All rights reserved.</div>
+  </footer>
+</body>
+</html>

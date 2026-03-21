@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SoundsRight 耳顺英语 - Product Features &amp; Highlights</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fafafa;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #5c5c5c;
+      --accent: #0d9488;
+      --accent-hover: #0f766e;
+      --border: #e5e7eb;
+      --border-light: #f0f0f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Charter', 'Georgia', serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .top-nav {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      font-family: 'Poppins', sans-serif;
+    }
+    .top-nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .top-nav a:hover { color: var(--accent); text-decoration: none; }
+    .top-nav a.product { color: var(--accent); font-weight: 600; }
+
+    .page { max-width: 900px; margin: 0 auto; padding: 0 2rem 3rem; }
+
+    .hero {
+      background: var(--bg-card);
+      color: var(--text);
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .overview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: box-shadow 0.2s;
+    }
+    .overview-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .overview-card .num { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .overview-card .label { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-top: 0.25rem; }
+    .overview-card p { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.4; }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h2:first-of-type { margin-top: 0; }
+    h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.25rem 0 0.5rem;
+      color: var(--accent);
+    }
+    p, ul { margin: 0.5rem 0 1rem; }
+    ul { padding-left: 1.25rem; }
+
+    .feature-section { margin-bottom: 2rem; }
+    .feature-row {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .feature-row .screenshot { flex: 0 0 200px; }
+    .feature-row .screenshot img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .feature-row .content { flex: 1; min-width: 280px; }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+    .card h3 { margin-top: 0; }
+    .highlight {
+      background: rgba(13, 148, 136, 0.06);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .book-list, .category-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding-left: 0; }
+    .book-list li { background: rgba(13, 148, 136, 0.1); padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.9rem; }
+    .category-grid li { background: rgba(13, 148, 136, 0.08); padding: 0.3rem 0.7rem; border-radius: 5px; font-size: 0.88rem; }
+    .scenario-catalog-intro { font-size: 0.85rem; color: var(--text-muted); margin: 0 0 0.75rem 0; line-height: 1.5; }
+    .scenario-catalog { margin-top: 0.5rem; }
+    .scenario-category {
+      background: rgba(13, 148, 136, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .scenario-category h4 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 0.6rem 0;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .scenario-list { margin: 0; padding-left: 1.2rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+    .scenario-list li { margin-bottom: 0.2rem; }
+    .scenario-id {
+      display: inline-block;
+      min-width: 1.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+    }
+    .test-mode { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .test-mode .num {
+      background: var(--accent);
+      color: white;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .toc h3 { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
+    .toc a { display: block; padding: 0.25rem 0; font-size: 0.9rem; color: var(--text-muted); }
+    .toc a:hover { color: var(--accent); }
+
+    footer {
+      background: var(--bg-card);
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+    footer .copy { font-size: 0.8rem; color: var(--text-muted); }
+    footer .footer-site { margin: 0.35rem 0; }
+    footer .footer-site a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    footer .footer-site a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .overview { grid-template-columns: 1fr; }
+      .feature-row { flex-direction: column; align-items: center; }
+      .feature-row .screenshot { flex: 0 0 auto; max-width: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="index.html">Home</a>
+    <a href="product.html" class="product">Product</a>
+    <a href="product.html#data-sources">Data Sources</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="support.html">Support &amp; Contact</a>
+  </nav>
+
+  <div class="hero">
+    <h1>SoundsRight 耳顺英语 &middot; Product</h1>
+    <p>Fully offline English read-aloud and pronunciation scoring. 14,829 words; <strong>100 mini-scenarios</strong> in <strong>10 topic areas</strong> (3 levels &times; 50 exchanges each &rarr; 15,000+ dialogue lines); 7 McGuffey Readers. Kokoro TTS + Whisper ASR. No internet required.</p>
+  </div>
+
+  <div class="page">
+    <div class="overview">
+      <div class="overview-card">
+        <div class="num">14,829</div>
+        <div class="label">Words</div>
+        <p>CEFR-J five bands + CET-4/CET-6 + GRE/TOEFL tags · Word Link · phonetics &amp; Chinese</p>
+      </div>
+      <div class="overview-card">
+        <div class="num">15,000+</div>
+        <div class="label">Dialogue Lines</div>
+        <p>100 scenes &times; 3 levels &times; 50 exchanges &mdash; 15,000+ lines</p>
+      </div>
+      <div class="overview-card">
+        <div class="num">7 + 10</div>
+        <div class="label">McGuffey &amp; Genres</div>
+        <p>Classic readers + literary collections, all with Chinese</p>
+      </div>
+    </div>
+
+    <div class="toc">
+      <h3>Jump to</h3>
+      <a href="#word-practice">1. Word Practice</a>
+      <a href="#word-test">2. Word Test</a>
+      <a href="#dialogue-practice">3. Dialogue Practice</a>
+      <a href="#dialogue-test">4. Dialogue Test</a>
+      <a href="#article-practice">5. Article Practice</a>
+      <a href="#article-test">6. Article Test</a>
+      <a href="#data-sources">Data Sources</a>
+    </div>
+
+  <section id="word-practice" class="feature-section">
+    <h2>1. Word Practice</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/WordPractice.png" alt="Word Practice" /></div>
+      <div class="content">
+        <p>Build vocabulary and perfect pronunciation with <strong>14,829 words</strong> organized into <strong>five levels</strong>. The ladder is anchored in <strong>CEFR-J</strong> (A1&ndash;B2) for global proficiency bands, and the upper bands also incorporate <strong>China CET-4 / CET-6</strong> and <strong>GRE / TOEFL</strong> vocabulary tags from the dictionary — so you can drill pronunciation in the same buckets that many learners use for CET-4/6 and exam prep for studying abroad.</p>
+
+        <div class="card">
+          <h3>CEFR-J five bands + CET-4 / CET-6 + GRE / TOEFL</h3>
+          <p><strong>CEFR-J</strong> (Common European Framework &mdash; Japanese profile, TUFS) supplies the A1&rarr;B2 progression. <strong>CET-4</strong> and <strong>CET-6</strong> lists, plus <strong>GRE</strong> and <strong>TOEFL</strong> tags, come from the open <strong>ECDICT</strong> dataset and are merged into the levels below. Together they give a single practice path from everyday English to exam-heavy vocabulary:</p>
+          <ul>
+            <li><strong>Level 5 (CEFR-J A1)</strong> — Beginner: most common words for basic communication (free)</li>
+            <li><strong>Level 4 (CEFR-J A2)</strong> — Elementary: high-frequency words for everyday use (partially free)</li>
+            <li><strong>Level 3 (CEFR-J B1 + CET-4)</strong> — Intermediate: B1 band plus <strong>CET-4</strong> (College English Test Band 4) vocabulary (Pro)</li>
+            <li><strong>Level 2 (CEFR-J B2 + CET-6)</strong> — Upper-intermediate: B2 band plus <strong>CET-6</strong> (College English Test Band 6) vocabulary (Pro)</li>
+            <li><strong>Level 1 (GRE + TOEFL)</strong> — Advanced: words tagged <strong>GRE</strong> and/or <strong>TOEFL</strong> for academic and test prep (Pro)</li>
+          </ul>
+          <p>CEFR-J from <a href="https://www.cefr-j.org" target="_blank" rel="noopener">cefr-j.org</a> and <a href="https://github.com/openlanguageprofiles/olp-en-cefrj" target="_blank" rel="noopener">Open Language Profiles</a>. CET / GRE / TOEFL tags and Chinese glosses from <a href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noopener">ECDICT</a> (see Data Sources).</p>
+        </div>
+
+        <div class="card">
+          <h3>Word Link — Smart Grouping for Better Retention</h3>
+          <p>Words are <strong>not</strong> presented in random or alphabetical order. Instead, SoundsRight uses an intelligent <strong>Word Link</strong> system powered by deep learning word embeddings to group and order words in your practice sequence:</p>
+          <ul>
+            <li><strong>Related by meaning</strong> — e.g. <em>apple</em>, <em>orange</em>, <em>banana</em> (fruits together)</li>
+            <li><strong>Same word class</strong> — e.g. <em>I</em>, <em>you</em>, <em>he</em>, <em>she</em> (pronouns together)</li>
+            <li><strong>Shared prefix or suffix</strong> — words with the same root, e.g. <em>un-</em> (unhappy, unfair), <em>-tion</em> (action, decision)</li>
+          </ul>
+          <p>Deep learning word embeddings group related words together for better retention.</p>
+        </div>
+
+        <div class="card">
+          <h3>Auto Mode</h3>
+          <p>Hands-free: TTS plays, you record, get scored, next word — no touching.</p>
+        </div>
+
+        <div class="card">
+          <h3>Listen Mode</h3>
+          <p><strong>Background TTS only</strong> — no recording. Tap 🎧 to play all words in the stage. Works when locked or in background. Configurable silence between words for you to repeat. <strong>Listen mode does not record in the background</strong>; it only plays audio.</p>
+        </div>
+
+        <div class="card">
+          <h3>Instant Word Lookup</h3>
+          <p>Search any word by spelling or partial match. Phonetics, definitions, Chinese on demand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="word-test" class="feature-section">
+    <h2>2. Word Test</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/WordTest.png" alt="Word Test" /></div>
+      <div class="content">
+        <p>Reinforce what you've learned with <strong>6 different test modes</strong> covering listening, reading, translation, and spelling:</p>
+
+        <div class="card">
+          <h3>6 Test Modes</h3>
+          <div class="test-mode"><span class="num">1</span> <span>Listen to a sentence &rarr; choose the correct Chinese translation</span></div>
+          <div class="test-mode"><span class="num">2</span> <span>Listen to a word &rarr; choose the matching English word</span></div>
+          <div class="test-mode"><span class="num">3</span> <span>Listen to a word &rarr; choose the correct Chinese meaning</span></div>
+          <div class="test-mode"><span class="num">4</span> <span>Listen to a word &rarr; choose the correct English definition</span></div>
+          <div class="test-mode"><span class="num">5</span> <span>See a Chinese definition &rarr; type the English word</span></div>
+          <div class="test-mode"><span class="num">6</span> <span>See an English definition &rarr; type the English word</span></div>
+          <p>Each mode can be enabled or disabled individually. Set the number of questions per mode, or let the app distribute them automatically. Track your accuracy and per-mode statistics after each test.</p>
+        </div>
+
+        <div class="card">
+          <h3>Word Book — Auto-Collect Weak Words</h3>
+          <p>Words you miss in tests are <strong>automatically added</strong> to your personal Word Book. No manual saving needed. Practice your weak spots anytime, or remove words once you&apos;ve mastered them. You can also choose Word Book as a practice source to focus exclusively on your collected vocabulary.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dialogue-practice" class="feature-section">
+    <h2>3. Dialogue Practice</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/DialoguePractice.png" alt="Dialogue Practice" /></div>
+      <div class="content">
+        <p>Practice real-world conversations with <strong>15,000+ dialogue lines</strong> across <strong>100 scenarios</strong> organized into <strong>10 thematic categories</strong>. Role-play as Speaker A or Speaker B, each with independently scored pronunciation.</p>
+
+        <div class="card">
+          <h3>10 Conversation Categories</h3>
+          <ul class="category-grid">
+            <li>Social Basics</li>
+            <li>School &amp; Education</li>
+            <li>Work &amp; Career</li>
+            <li>Shopping &amp; Services</li>
+            <li>Food &amp; Dining</li>
+            <li>Travel &amp; Transport</li>
+            <li>Home &amp; Living</li>
+            <li>Health &amp; Wellness</li>
+            <li>Entertainment &amp; Leisure</li>
+            <li>Emergencies &amp; Life Events</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>3 Difficulty Levels</h3>
+          <ul>
+            <li><strong>Easy</strong> — Short, simple exchanges with basic vocabulary (free)</li>
+            <li><strong>Medium</strong> — Longer conversations with richer vocabulary (Pro)</li>
+            <li><strong>Hard</strong> — Complex dialogues with nuanced expressions and idioms (Pro)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Dual-Role Scoring</h3>
+          <p>Choose to practice as Speaker A, Speaker B, or both. Every line is individually scored on <strong>Accuracy</strong> and <strong>Fluency</strong>. Assign different TTS voices to each speaker for a natural dialogue experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dialogue-test" class="feature-section">
+    <h2>4. Dialogue Test</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/DialogueTest.png" alt="Dialogue Test" /></div>
+      <div class="content">
+        <p>Timed dialogue tests challenge you to maintain fluency under pressure.</p>
+
+        <div class="card">
+          <h3>Dialogue Test Mode</h3>
+          <p>Complete a full conversation within a <strong>5-minute time limit</strong>. Receive a comprehensive score report with per-line breakdowns — perfect for simulating real conversation pace.</p>
+        </div>
+
+        <div class="card">
+          <h3>Bilingual Display Toggle — 4 Modes</h3>
+          <p>Switch freely among four display modes:</p>
+          <ul>
+            <li><strong>English</strong> — English only for full immersion</li>
+            <li><strong>Chinese</strong> — Chinese only for comprehension check</li>
+            <li><strong>Both</strong> — Side-by-side English and Chinese for quick reference</li>
+            <li><strong>Random</strong> — Each line randomly shows either English or Chinese, great for mixed practice</li>
+          </ul>
+          <p>Your preference is remembered for the next session.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="article-practice" class="feature-section">
+    <h2>5. Article Practice</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/ArticlePractice.PNG" alt="Article Practice" /></div>
+      <div class="content">
+        <p>Read and speak along with full-length English passages — sentence by sentence. Each sentence is played via TTS, you read it aloud, and get instant pronunciation feedback.</p>
+
+        <div class="card">
+          <h3>Auto Mode for Articles</h3>
+          <p>In auto mode, the app handles everything: play TTS for the current sentence, record your voice, display your score, then advance to the next sentence. Audio is cached so playback is instant after the first listen. Chinese translations can be shown or hidden.</p>
+        </div>
+
+        <div class="highlight">
+          <h3>Featured: McGuffey Readers — 7 Classic Books</h3>
+          <p>SoundsRight includes the complete <strong>McGuffey Eclectic Readers</strong> series — one of the most influential English reading curricula in American history. First published in 1836 by William Holmes McGuffey, these readers have sold over <strong>130 million copies</strong> and remain a gold standard for structured, progressive English reading education.</p>
+          <p>The seven volumes are arranged from easiest to most advanced:</p>
+          <ul class="book-list">
+            <li>1. McGuffey's Primer</li>
+            <li>2. McGuffey's First Reader</li>
+            <li>3. McGuffey's Second Reader</li>
+            <li>4. McGuffey's Third Reader</li>
+            <li>5. McGuffey's Fourth Reader</li>
+            <li>6. McGuffey's Fifth Reader</li>
+            <li>7. McGuffey's Sixth Reader</li>
+          </ul>
+          <p>Each book contains carefully selected passages that build vocabulary, reading fluency, and comprehension step by step. Every passage is broken into individual sentences for pronunciation practice and scoring.</p>
+          <p><strong>Text correction:</strong> The McGuffey texts are sourced from <a href="https://www.gutenberg.org" target="_blank" rel="noopener">Project Gutenberg</a>. Because older editions may contain archaic spellings (e.g., <em>o'er</em>&rarr;<em>over</em>, <em>'tis</em>&rarr;<em>it's</em>), OCR errors, or inconsistent punctuation, we run them through an LLM-based proofreading pipeline. Grammar and punctuation are corrected, and Chinese translations are generated to be clear and easy to understand. A modification log is kept for manual review.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="article-test" class="feature-section">
+    <h2>6. Article Test</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/ArticleTest.png" alt="Article Test" /></div>
+      <div class="content">
+        <p>Test your article reading fluency with timed assessments. Read through entire passages sentence by sentence and receive detailed scoring for each sentence.</p>
+
+        <div class="card">
+          <h3>Article Test Mode</h3>
+          <p>Select any article from the library and take a timed reading test. The app tracks your score for each sentence and provides an overall assessment. Great for measuring progress over time and identifying areas that need more practice.</p>
+        </div>
+
+        <div class="card">
+          <h3>Bilingual Display Toggle</h3>
+          <p>Same as in Dialogue Test: switch between <strong>English-only</strong>, <strong>Chinese-only</strong>, or <strong>both</strong>. Read in immersion mode, check translations when needed, or keep both visible for side-by-side learning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <h2 id="data-sources">Data Sources &amp; Attribution</h2>
+  <p>SoundsRight uses the following data sources. All are attributed and used in accordance with their respective licenses.</p>
+
+  <div class="card">
+    <h3>Word Leveling (CEFR-J + CET + GRE / TOEFL)</h3>
+    <p><strong>CEFR-J</strong> provides A1, A2, B1, and B2 vocabulary bands. <strong>CET-4 / CET-6</strong> and <strong>GRE / TOEFL</strong> markings used in Levels 3&ndash;1 come from <strong>ECDICT</strong> (not from MOE official exams); they group words for practice alongside the CEFR-J ladder.</p>
+    <ul>
+      <li><a href="https://www.cefr-j.org" target="_blank" rel="noopener">CEFR-J</a> — The CEFR-J project (Tokyo University of Foreign Studies, Tono Laboratory)</li>
+      <li><a href="https://github.com/openlanguageprofiles/olp-en-cefrj" target="_blank" rel="noopener">Open Language Profiles — olp-en-cefrj</a> — CEFR-J vocabulary and grammar profile datasets</li>
+    </ul>
+    <p>CEFR-J vocabulary and grammar profiles can be used for research and commercial purposes with proper citation. Copyright: Tono Laboratory, TUFS.</p>
+  </div>
+
+  <div class="card">
+    <h3>Word Data: Dictionary &amp; Phonetics</h3>
+    <p><strong>ECDICT</strong> (<a href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noopener">github.com/skywind3000/ECDICT</a>) — MIT licensed:</p>
+    <ul>
+      <li>Chinese translations</li>
+      <li>Phonetic pronunciation</li>
+      <li>CET-4 / CET-6 tags (used in Levels 3&ndash;2 with CEFR-J B1/B2)</li>
+      <li>GRE and TOEFL tags (for Level 1 vocabulary)</li>
+    </ul>
+    <p><strong>Webster&apos;s Unabridged Dictionary</strong> (Project Gutenberg):</p>
+    <ul>
+      <li><a href="https://www.gutenberg.org/ebooks/29765" target="_blank" rel="noopener">Project Gutenberg</a> — Webster&apos;s Unabridged Dictionary (public domain)</li>
+      <li><a href="https://github.com/matthewreagan/WebstersEnglishDictionary" target="_blank" rel="noopener">WebstersEnglishDictionary</a> — JSON format</li>
+    </ul>
+    <p>English definitions are sourced from Webster. Definitions not in Webster, as well as example sentences, dialogue translations, and article translations, are generated by <strong>Google Gemini 3</strong> LLM.</p>
+  </div>
+
+  <div class="card">
+    <h3>Articles</h3>
+    <p>English articles come from <strong>public domain</strong> works that are free for commercial use, including the McGuffey Eclectic Readers and other classic literature. McGuffey texts are proofread via an LLM pipeline to fix archaic spellings and punctuation (see the McGuffey section above).</p>
+  </div>
+
+  </div>
+
+  <footer>
+    <div class="copy">粤ICP备2026028389号-1</div>
+    <div class="copy footer-site"><a href="https://soundsright.cn">soundsright.cn</a></div>
+    <div class="copy">&copy; 2026 SoundsRight. All rights reserved.</div>
+  </footer>
+</body>
+</html>
