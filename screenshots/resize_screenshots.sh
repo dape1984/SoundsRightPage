@@ -11,8 +11,13 @@ OUT_1284_2778="1284x2778"
 OUT_2778_1284="2778x1284"
 
 for img in ArticlePractice.png ArticlePracticeList.png ArticleTest.png DialoguePractice.png \
-  DialoguePracticeList.png DialogueTest.png Home.png HomeProMax.png WordPractice.png \
-  WordPracticeList.png WordTest.png; do
+  DialoguePracticeList.png DialogueTest.png Home.png HomeProMax.png wordsoftheday.png WordPractice.png \
+  WordPracticeList.png WordTest.png \
+  soundsrightcn_home.png soundsrightcn_char_practice.png soundsrightcn_char_test.png \
+  soundsrightcn_word_practice.png soundsrightcn_word_test.png \
+  soundsrightcn_dialogue_practice.png soundsrightcn_dialogue_practice_2.png \
+  soundsrightcn_dialogue_test.png soundsrightcn_article_list.png \
+  soundsrightcn_article_practice.png soundsrightcn_article_test.png; do
   [ ! -f "$img" ] && continue
   echo "Processing $img ..."
   # Portrait 1242×2688

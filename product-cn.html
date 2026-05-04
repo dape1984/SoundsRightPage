@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SoundsRightCN 耳顺汉语 - Product Features &amp; Highlights</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fafafa;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #5c5c5c;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: rgba(37, 99, 235, 0.06);
+      --accent-tag: rgba(37, 99, 235, 0.1);
+      --accent-tag-text: rgba(37, 99, 235, 0.08);
+      --border: #e5e7eb;
+      --border-light: #f0f0f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Charter', 'Georgia', serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .top-nav {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      font-family: 'Poppins', sans-serif;
+    }
+    .top-nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .top-nav a:hover { color: var(--accent); text-decoration: none; }
+    .top-nav .nav-divider {
+      width: 1px;
+      height: 1.2rem;
+      background: var(--border);
+    }
+    .top-nav .nav-group { display: flex; gap: 1rem; }
+    .top-nav a.active { color: var(--accent); font-weight: 600; }
+
+    .page { max-width: 900px; margin: 0 auto; padding: 0 2rem 3rem; }
+
+    .hero {
+      background: var(--bg-card);
+      color: var(--text);
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .hero p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .overview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+      transition: box-shadow 0.2s;
+    }
+    .overview-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .overview-card .num { font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+    .overview-card .label { font-size: 0.85rem; font-weight: 600; color: var(--text); margin-top: 0.2rem; }
+    .overview-card p { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.4; }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h2:first-of-type { margin-top: 0; }
+    h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.25rem 0 0.5rem;
+      color: var(--accent);
+    }
+    p, ul { margin: 0.5rem 0 1rem; }
+    ul { padding-left: 1.25rem; }
+
+    .feature-section { margin-bottom: 2rem; }
+    .feature-row {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .feature-row .screenshot { flex: 0 0 200px; }
+    .feature-row .screenshot img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .feature-row .screenshot .placeholder {
+      width: 100%;
+      aspect-ratio: 9/19.5;
+      border-radius: 10px;
+      border: 2px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--bg);
+    }
+    .feature-row .content { flex: 1; min-width: 280px; }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+    .card h3 { margin-top: 0; }
+    .highlight {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .category-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding-left: 0; }
+    .category-grid li { background: var(--accent-tag-text); padding: 0.3rem 0.7rem; border-radius: 5px; font-size: 0.88rem; }
+    .book-list { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding-left: 0; }
+    .book-list li { background: var(--accent-tag); padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.9rem; }
+    .test-mode { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .test-mode .num {
+      background: var(--accent);
+      color: white;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .toc h3 { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
+    .toc a { display: block; padding: 0.25rem 0; font-size: 0.9rem; color: var(--text-muted); }
+    .toc a:hover { color: var(--accent); }
+
+    .free-badge {
+      display: inline-block;
+      background: rgba(13, 148, 136, 0.1);
+      color: #0d9488;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-left: 0.35rem;
+      vertical-align: middle;
+    }
+    .pro-badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.1);
+      color: #d97706;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-left: 0.35rem;
+      vertical-align: middle;
+    }
+
+    footer {
+      background: var(--bg-card);
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+    footer .copy { font-size: 0.8rem; color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .overview { grid-template-columns: repeat(2, 1fr); }
+      .feature-row { flex-direction: column; align-items: center; }
+      .feature-row .screenshot { flex: 0 0 auto; max-width: 220px; }
+    }
+    @media (max-width: 640px) {
+      .top-nav { flex-wrap: wrap; gap: 0.5rem 1rem; }
+      .top-nav .nav-divider { display: none; }
+      .overview { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="index.html" style="font-weight:600; color:var(--text);">Home</a>
+    <div class="nav-divider"></div>
+    <a href="product.html">SoundsRight</a>
+    <a href="product-cn.html" class="active">SoundsRightCN</a>
+    <div class="nav-divider"></div>
+    <a href="support.html">Support</a>
+  </nav>
+
+  <div class="hero">
+    <h1>SoundsRightCN 耳顺汉语 &middot; Product</h1>
+    <p class="subtitle">Learn Chinese pronunciation, characters, and culture — designed for non-native speakers</p>
+    <p>Fully offline Chinese learning with on-device AI. <strong>3,000 Hanzi characters</strong> (HSK 1&ndash;7), <strong>9,443 words</strong> (including idioms and proverbs), <strong>5,000+ dialogues</strong> across 20 categories, and <strong>1,291 classical and modern articles</strong> — Tang poetry, Song ci, Four Great Novels, and more. Paraformer Chinese ASR. No internet required.</p>
+  </div>
+
+  <div class="page">
+    <div class="overview">
+      <div class="overview-card">
+        <div class="num">3,000</div>
+        <div class="label">Hanzi</div>
+        <p>HSK 1&ndash;7 characters with strokes, radicals, pinyin</p>
+      </div>
+      <div class="overview-card">
+        <div class="num">9,443</div>
+        <div class="label">Words &amp; Phrases</div>
+        <p>Common words, idioms (成语), and proverbs (谚语)</p>
+      </div>
+      <div class="overview-card">
+        <div class="num">5,000+</div>
+        <div class="label">Dialogues</div>
+        <p>20 categories &times; 3 levels &mdash; daily life &amp; Chinese culture</p>
+      </div>
+      <div class="overview-card">
+        <div class="num">1,291</div>
+        <div class="label">Articles</div>
+        <p>Classical poetry, novels, philosophy, and modern prose</p>
+      </div>
+    </div>
+
+    <div class="toc">
+      <h3>Jump to</h3>
+      <a href="#hanzi-learning">1. Hanzi (汉字) Learning</a>
+      <a href="#ci-vocabulary">2. Ci (词语) Vocabulary</a>
+      <a href="#dialogue-practice">3. Dialogue Practice</a>
+      <a href="#article-reading">4. Article Reading</a>
+      <a href="#hanzi-test">5. Hanzi Test (汉字测试)</a>
+      <a href="#ci-test">6. Ci Test (词语测试)</a>
+      <a href="#dialogue-test">7. Dialogue Test (对话测试)</a>
+      <a href="#article-test">8. Article Test (文章测试)</a>
+    </div>
+
+  <section id="hanzi-learning" class="feature-section">
+    <h2>1. Hanzi (汉字) Learning</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/soundsrightcn_char_practice.png" alt="Hanzi Learning" /></div>
+      <div class="content">
+        <p>Master Chinese characters with comprehensive details and structured practice. <strong>3,000 characters</strong> organized by official HSK levels 1&ndash;7, covering the complete character set from China's merged proficiency standard.</p>
+
+        <div class="card">
+          <h3>HSK 1&ndash;7 Progressive Levels</h3>
+          <p>Characters are grouped by HSK level, providing a clear learning path from beginner to advanced:</p>
+          <ul>
+            <li><strong>HSK 1</strong> — 300 foundational characters for basic communication <span class="free-badge">Free</span></li>
+            <li><strong>HSK 2</strong> — 300 characters for simple daily interactions <span class="free-badge">Free</span></li>
+            <li><strong>HSK 3</strong> — 300 characters for intermediate conversation <span class="free-badge">Free</span></li>
+            <li><strong>HSK 4</strong> — 300 characters for complex topics and discussions <span class="pro-badge">Pro</span></li>
+            <li><strong>HSK 5</strong> — 300 characters for reading newspapers and academic texts <span class="pro-badge">Pro</span></li>
+            <li><strong>HSK 6</strong> — 300 characters for advanced proficiency <span class="pro-badge">Pro</span></li>
+            <li><strong>HSK 7</strong> — 1,200 characters for near-native mastery <span class="pro-badge">Pro</span></li>
+          </ul>
+          <p>Each level is self-contained, so you can start at any level that matches your ability.</p>
+        </div>
+
+        <div class="card">
+          <h3>Rich Character Details</h3>
+          <p>Every character entry includes:</p>
+          <ul>
+            <li><strong>Stroke count</strong> — precise count from the Unihan database</li>
+            <li><strong>Radical</strong> — the root component for dictionary lookup</li>
+            <li><strong>Pinyin</strong> — with tone marks for accurate pronunciation</li>
+            <li><strong>Definitions</strong> — in both Chinese and English</li>
+            <li><strong>Example words</strong> — compound words containing the character</li>
+            <li><strong>Example sentences</strong> — with pinyin and English translation</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Practice &amp; Test Modes</h3>
+          <p>Practice with customizable session sizes (1&ndash;300 characters). Test your recognition and recall. Handwriting bands are grouped into elementary, intermediate, and advanced tiers for character writing practice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ci-vocabulary" class="feature-section">
+    <h2>2. Ci (词语) Vocabulary</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/soundsrightcn_word_practice.png" alt="Ci Vocabulary" /></div>
+      <div class="content">
+        <p>Build your Chinese vocabulary with <strong>9,443 words and phrases</strong> organized by HSK level and character groups. Words are connected to the characters you're learning, reinforcing both simultaneously.</p>
+
+        <div class="card">
+          <h3>Three Vocabulary Types</h3>
+          <ul>
+            <li><strong>Common Words (常用词)</strong> — everyday vocabulary essential for daily communication</li>
+            <li><strong>Idioms (成语)</strong> — four-character Chinese idioms with rich cultural meaning</li>
+            <li><strong>Proverbs (谚语)</strong> — traditional Chinese sayings passed down through generations</li>
+          </ul>
+          <p>Each word includes detailed definitions in both Chinese and English, part of speech, and related word suggestions.</p>
+        </div>
+
+        <div class="card">
+          <h3>Character-Grouped Organization</h3>
+          <p>Words are organized by the characters they contain, so as you learn a new character, you simultaneously discover all the words built from it. This approach mirrors how native speakers build vocabulary — through character combinations rather than isolated word lists.</p>
+        </div>
+
+        <div class="card">
+          <h3>Practice &amp; Test</h3>
+          <p>Customizable practice sessions with adjustable word counts. Test mode assesses your grasp of meaning, pronunciation, and usage. Performance is tracked across all HSK levels.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dialogue-practice" class="feature-section">
+    <h2>3. Dialogue Practice</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/soundsrightcn_dialogue_practice.png" alt="Dialogue Practice" /></div>
+      <div class="content">
+        <p>Practice real-world Chinese conversations with <strong>5,000+ dialogues</strong> across <strong>20 categories</strong> and <strong>3 difficulty levels</strong>. Role-play as Speaker A or B with per-line pronunciation scoring.</p>
+
+        <div class="card">
+          <h3>20 Conversation Categories</h3>
+          <p><strong>Daily Life (10 subcategories):</strong></p>
+          <ul class="category-grid">
+            <li>Greetings &amp; Introductions</li>
+            <li>Shopping &amp; Bargaining</li>
+            <li>Transportation &amp; Directions</li>
+            <li>Dining &amp; Ordering</li>
+            <li>Housing &amp; Renting</li>
+            <li>Banking &amp; Services</li>
+            <li>Healthcare &amp; Hospital</li>
+            <li>Work &amp; Office</li>
+            <li>Socializing &amp; Friends</li>
+            <li>Phone &amp; Internet</li>
+          </ul>
+          <p><strong>Chinese Culture (10 subcategories):</strong></p>
+          <ul class="category-grid">
+            <li>History &amp; Dynasties</li>
+            <li>Classical Literature</li>
+            <li>Festivals &amp; Customs</li>
+            <li>Traditional Arts</li>
+            <li>Philosophy &amp; Thought</li>
+            <li>Cuisine &amp; Tea Culture</li>
+            <li>Geography &amp; Travel</li>
+            <li>Modern China</li>
+            <li>Education &amp; Exams</li>
+            <li>Business &amp; Etiquette</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>3 Difficulty Levels</h3>
+          <ul>
+            <li><strong>Easy</strong> — Short exchanges with basic vocabulary and common sentence patterns <span class="free-badge">Free</span></li>
+            <li><strong>Medium</strong> — Longer conversations with richer vocabulary and varied grammar <span class="pro-badge">Pro</span></li>
+            <li><strong>Hard</strong> — Complex dialogues with idiomatic expressions and cultural nuances <span class="pro-badge">Pro</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Dual-Role Practice with Pinyin &amp; Translation</h3>
+          <p>Every dialogue line displays <strong>Chinese characters, pinyin, and English translation</strong> side by side. Practice as either speaker with independent pronunciation scoring on accuracy and fluency. Cultural notes provide context for culturally specific terms and customs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="article-reading" class="feature-section">
+    <h2>4. Article Reading</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/soundsrightcn_article_practice.png" alt="Article Reading" /></div>
+      <div class="content">
+        <p>Read authentic Chinese texts from classical to modern — <strong>1,291 articles</strong> across <strong>7 major categories</strong>, with full pinyin annotation and English translations.</p>
+
+        <div class="card">
+          <h3>Pre-Qin Masters &amp; Classics (先秦诸子与典籍) — 146 Works</h3>
+          <p>The foundational texts of Chinese civilization:</p>
+          <ul class="book-list">
+            <li>Laozi 老子 — Dao De Jing (道德经) complete, 81 chapters</li>
+            <li>Sun Wu 孙武 — The Art of War (孙子兵法) complete, 13 chapters</li>
+            <li>Confucius 孔子 — The Analects (论语) selected passages</li>
+            <li>Mencius 孟子 — selected passages</li>
+            <li>Zhuangzi 庄子 — selected passages</li>
+            <li>Shi Jing 诗经 — selected passages</li>
+          </ul>
+          <p>The first 3 works per author are free. Unlock the complete texts with Pro.</p>
+        </div>
+
+        <div class="highlight">
+          <h3>Featured: Four Great Classical Novels (四大名著) — 460 Chapters</h3>
+          <p>The cornerstones of Chinese literary tradition, included in full:</p>
+          <ul class="book-list">
+            <li>Dream of the Red Chamber 红楼梦 — 120 chapters</li>
+            <li>Romance of the Three Kingdoms 三国演义 — 120 chapters</li>
+            <li>Water Margin 水浒传 — 120 chapters</li>
+            <li>Journey to the West 西游记 — 100 chapters</li>
+          </ul>
+          <p>The first 10 chapters of each novel are free. Unlock the complete texts with Pro. Each chapter is broken into individual sentences for pronunciation practice with pinyin support.</p>
+        </div>
+
+        <div class="card">
+          <h3>Classical Poetry (古典诗歌) — 256 Poems</h3>
+          <p>Works by celebrated poets from the Tang dynasty and beyond:</p>
+          <ul class="book-list">
+            <li>Li Bai 李白 — 37 poems</li>
+            <li>Du Fu 杜甫 — 28 poems</li>
+            <li>Li Shangyin 李商隐 — 16 poems</li>
+            <li>Wang Wei 王维 — 15 poems</li>
+            <li>Liu Yuxi 刘禹锡 — 14 poems</li>
+            <li>Bai Juyi 白居易 — 14 poems</li>
+            <li>Du Mu 杜牧 — 14 poems</li>
+            <li>Meng Haoran 孟浩然 — 7 poems</li>
+            <li>+ many more poets</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Ci Lyrics (宋词) — 146 Lyrics</h3>
+          <p>Masterpieces of Song dynasty lyric poetry:</p>
+          <ul class="book-list">
+            <li>Xin Qiji 辛弃疾 — 22 lyrics</li>
+            <li>Su Shi 苏轼 — 19 lyrics</li>
+            <li>Li Qingzhao 李清照 — 19 lyrics</li>
+            <li>Liu Yong 柳永 — 13 lyrics</li>
+            <li>Ouyang Xiu 欧阳修 — 12 lyrics</li>
+            <li>Yan Jidao 晏几道 — 9 lyrics</li>
+            <li>Yan Shu 晏殊 — 8 lyrics</li>
+            <li>+ more lyricists</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Classical Prose 古文观止 — 222 Articles</h3>
+          <p>Selected masterworks from the Guwen Guanzhi anthology by authors including Su Shi (苏轼), Han Yu (韩愈), Fan Zhongyan (范仲淹), Tao Yuanming (陶渊明), Liu Zongyuan (柳宗元), Ouyang Xiu (欧阳修), Wang Xizhi (王羲之), Sima Qian (司马迁) and more.</p>
+        </div>
+
+        <div class="card">
+          <h3>Modern Prose (近代文章) — 25 Works</h3>
+          <p>Modern Chinese literary works by Lu Xun (鲁迅), Zhu Ziqing (朱自清), Liang Qichao (梁启超), Lao She (老舍), Feng Zikai (丰子恺), Hu Shi (胡适), Yu Dafu (郁达夫), and others.</p>
+        </div>
+
+        <div class="card">
+          <h3>Progressive Reading with Pinyin</h3>
+          <p>Every article comes with <strong>complete pinyin annotation</strong> and <strong>English translation</strong>. Toggle pinyin and translations on or off to match your reading level. Sentence-by-sentence TTS playback with auto mode lets you practice reading along hands-free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hanzi-test" class="feature-section">
+    <h2>5. Hanzi Test (汉字测试)</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/soundsrightcn_char_test.png" alt="Hanzi Test" /></div>
+      <div class="content">
+        <p>Reinforce character recognition and recall with three timed test modes. Each question has a <strong>10-second timer</strong> and auto-advances after answering.</p>
+
+        <div class="card">
+          <h3>4 Test Modes</h3>
+          <div class="test-mode"><span class="num">1</span> <span><strong>Listen &amp; Choose Character (听句选字)</strong> — Hear a sentence, then choose the correct character from options</span></div>
+          <div class="test-mode"><span class="num">2</span> <span><strong>Fill in the Blank (填空)</strong> — Read a sentence with a missing character and select the right one</span></div>
+          <div class="test-mode"><span class="num">3</span> <span><strong>Listen &amp; Choose Meaning (听音选义)</strong> — Hear a character and pick its correct definition</span></div>
+          <div class="test-mode"><span class="num">4</span> <span><strong>Listen &amp; Identify (听句辨字)</strong> — Hear a sentence and identify the target character within it</span></div>
+        </div>
+
+        <div class="card">
+          <h3>Auto-Advance &amp; Wordbook Integration</h3>
+          <p>After selecting an answer, feedback is shown for 1.2 seconds before automatically moving to the next question. Characters you answer incorrectly are <strong>automatically added</strong> to your Wordbook for later review. A score of 60% or higher counts as passed.</p>
+        </div>
+
+        <div class="card">
+          <h3>Customizable Sessions</h3>
+          <p>Choose which HSK levels to test, enable or disable individual test modes, and set the number of questions per session. Track your accuracy and per-mode statistics after each test.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ci-test" class="feature-section">
+    <h2>6. Ci Test (词语测试)</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/soundsrightcn_word_test.png" alt="Ci Test" /></div>
+      <div class="content">
+        <p>Test your vocabulary knowledge with the same structured approach as Hanzi Test, adapted for words and phrases. <strong>10-second timer</strong> per question with auto-advance.</p>
+
+        <div class="card">
+          <h3>4 Test Modes</h3>
+          <div class="test-mode"><span class="num">1</span> <span><strong>Listen &amp; Choose Word (听句选词)</strong> — Hear a sentence, then choose the correct word from options</span></div>
+          <div class="test-mode"><span class="num">2</span> <span><strong>Fill in the Blank (填空)</strong> — Read a sentence with a missing word and select the right one</span></div>
+          <div class="test-mode"><span class="num">3</span> <span><strong>Listen &amp; Choose Meaning (听音选义)</strong> — Hear a word and pick its correct definition</span></div>
+          <div class="test-mode"><span class="num">4</span> <span><strong>Listen &amp; Identify (听句辨词)</strong> — Hear a sentence and identify the target word within it</span></div>
+        </div>
+
+        <div class="card">
+          <h3>Auto-Advance &amp; Wordbook Integration</h3>
+          <p>Same smooth experience as Hanzi Test: 1.2-second feedback display, then auto-advance. Missed words are automatically collected into your Wordbook. Track per-mode accuracy and overall performance.</p>
+        </div>
+
+        <div class="card">
+          <h3>Vocabulary Type Selection</h3>
+          <p>Choose to test on <strong>common words (常用词)</strong>, <strong>idioms (成语)</strong>, <strong>proverbs (谚语)</strong>, or all combined. Filter by HSK level to match your current learning stage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dialogue-test" class="feature-section">
+    <h2>7. Dialogue Test (对话测试)</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/soundsrightcn_dialogue_test.png" alt="Dialogue Test" /></div>
+      <div class="content">
+        <p>Test your spoken Chinese under time pressure. Record your part in real dialogues and receive multi-dimensional pronunciation scoring for each line.</p>
+
+        <div class="card">
+          <h3>A/B Speaker Recording</h3>
+          <p>Play the role of <strong>Speaker A, Speaker B, or both</strong>. TTS plays the other speaker's lines, and you record yours. Each recording is automatically scored with a timeout based on line length.</p>
+        </div>
+
+        <div class="card">
+          <h3>Multi-Dimensional Scoring</h3>
+          <p>Every line is evaluated on four dimensions:</p>
+          <ul>
+            <li><strong>Accuracy</strong> — correctness of individual character pronunciation and tones</li>
+            <li><strong>Fluency</strong> — natural rhythm, pacing, and connected speech</li>
+            <li><strong>Pronunciation</strong> — tonal precision for Mandarin's four tones plus neutral tone</li>
+            <li><strong>Completeness</strong> — whether all characters in the target line were spoken</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Character-Level Color Feedback</h3>
+          <p>After each attempt, recognized characters are <strong>color-coded</strong> — green for correct, red for wrong — so you can see exactly which characters need more practice.</p>
+        </div>
+
+        <div class="card">
+          <h3>Detailed Results</h3>
+          <p>After completing a dialogue, swipe through a <strong>line-by-line breakdown</strong> showing scores for each exchange. Compare your recording against the target to identify specific weaknesses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="article-test" class="feature-section">
+    <h2>8. Article Test (文章测试)</h2>
+    <div class="feature-row">
+      <div class="screenshot"><img src="screenshots/soundsrightcn_article_test.png" alt="Article Test" /></div>
+      <div class="content">
+        <p>Reading comprehension tests based on classical and modern Chinese literature. Choose texts from any category and test your understanding.</p>
+
+        <div class="card">
+          <h3>3 Test Modes</h3>
+          <div class="test-mode"><span class="num">1</span> <span><strong>Classical → Vernacular</strong> — Read a line of classical Chinese and choose the correct modern translation</span></div>
+          <div class="test-mode"><span class="num">2</span> <span><strong>Vernacular → Classical</strong> — Read a modern translation and identify the original classical Chinese line</span></div>
+          <div class="test-mode"><span class="num">3</span> <span><strong>Fill in the Blank</strong> — Read a passage with a missing line and select the correct one from options</span></div>
+        </div>
+
+        <div class="card">
+          <h3>Category &amp; Author Selection</h3>
+          <p>Choose from all literary categories:</p>
+          <ul class="category-grid">
+            <li>Pre-Qin Masters (先秦诸子与典籍)</li>
+            <li>Classical Poetry (古典诗歌)</li>
+            <li>Ci Lyrics (宋词)</li>
+            <li>Ming-Qing Fiction (四大名著)</li>
+            <li>Classical Prose (古文观止)</li>
+            <li>Modern Prose (近代文章)</li>
+          </ul>
+          <p>Within each category, select specific authors or books to focus your test.</p>
+        </div>
+
+        <div class="card">
+          <h3>Auto-Advance &amp; Scoring</h3>
+          <p>After selecting an answer, the correct response is highlighted for 1 second before automatically advancing. Track your accuracy across categories and test modes. Wrong answers are added to your Wordbook.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <footer>
+    <div style="margin-bottom:0.75rem;"><a href="privacy-cn.html" style="color:var(--accent); font-family:'Poppins',sans-serif; font-size:0.85rem; font-weight:500;">Privacy Policy</a></div>
+    <div class="copy"><img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" alt="">粤公网安备44030002011542号 &nbsp;&nbsp; <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2026028389号-1</a></div>
+    <div class="copy">&copy; 2026 SoundsRight. All rights reserved.</div>
+  </footer>
+</body>
+</html>
