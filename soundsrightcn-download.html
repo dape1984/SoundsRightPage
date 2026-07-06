@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Download SoundsRightCN — Offline Chinese Learning App</title>
+  <meta name="description" content="SoundsRightCN (耳顺汉语): 100% offline Chinese learning with on-device AI pronunciation scoring. Download on iOS and Google Play." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fafafa;
+      --bg-card: #ffffff;
+      --bg-tint: #f8faff;
+      --text: #1a1a1a;
+      --text-muted: #5c5c5c;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: rgba(37, 99, 235, 0.06);
+      --accent-tag: rgba(37, 99, 235, 0.1);
+      --promo: #0d9488;
+      --promo-light: rgba(13, 148, 136, 0.08);
+      --border: #e5e7eb;
+      --border-light: #f0f0f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Charter', 'Georgia', serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .top-nav {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      font-family: 'Poppins', sans-serif;
+    }
+    .top-nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .top-nav a:hover { color: var(--accent); text-decoration: none; }
+    .top-nav .nav-divider {
+      width: 1px;
+      height: 1.2rem;
+      background: var(--border);
+    }
+    .top-nav a.active { color: var(--accent); font-weight: 600; }
+
+    .hero {
+      background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-tint) 100%);
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background: var(--accent-tag);
+      padding: 0.3rem 0.85rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.35rem;
+      line-height: 1.15;
+    }
+    .hero .cn-name {
+      font-size: 0.95em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .hero .tagline {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0.75rem auto 0;
+      line-height: 1.65;
+    }
+
+    .store-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0 0.5rem;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.5rem;
+      min-width: 220px;
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+    .store-btn:hover {
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+      background: #000;
+    }
+    .store-btn svg {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+    .store-btn .label-small {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 400;
+      opacity: 0.85;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .store-btn .label-main {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .store-btn.play {
+      background: var(--accent);
+    }
+    .store-btn.play:hover {
+      background: var(--accent-hover);
+    }
+
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+
+    /* Promo banner */
+    .promo {
+      margin: 2.5rem 0;
+      background: linear-gradient(135deg, var(--promo-light) 0%, rgba(37, 99, 235, 0.06) 100%);
+      border: 1px solid rgba(13, 148, 136, 0.25);
+      border-radius: 14px;
+      padding: 1.75rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .promo::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 140px;
+      height: 140px;
+      background: rgba(13, 148, 136, 0.08);
+      border-radius: 50%;
+    }
+    .promo-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+    .promo-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    .promo h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--promo);
+      margin: 0;
+      border: none;
+      padding: 0;
+    }
+    .promo > p {
+      font-size: 0.98rem;
+      color: var(--text);
+      margin: 0 0 1rem;
+      position: relative;
+    }
+    .promo-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.25rem;
+      position: relative;
+    }
+    .promo-steps li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      margin-bottom: 0.65rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .promo-steps .step-num {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--promo);
+      color: white;
+      border-radius: 50%;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.15rem;
+    }
+    .promo-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    .promo-option {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .promo-option .opt-icon {
+      font-size: 1.35rem;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+    .promo-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem 1.1rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: box-shadow 0.2s;
+      position: relative;
+    }
+    .promo-email:hover {
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(37, 99, 235, 0.12);
+    }
+    .promo-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.85rem;
+      position: relative;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 2.5rem 0;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem 0.75rem;
+      text-align: center;
+      transition: box-shadow 0.2s;
+    }
+    .stat-card:hover { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); }
+    .stat-card .num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .stat-card .label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 0.25rem;
+    }
+    .stat-card p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin: 0.3rem 0 0;
+      line-height: 1.35;
+    }
+
+    /* Features */
+    h2.section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin: 2.5rem 0 1rem;
+      color: var(--text);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      transition: box-shadow 0.2s;
+    }
+    .feature-card:hover { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04); }
+    .feature-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0 0 0.4rem;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .highlight {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 1.1rem 1.35rem;
+      margin: 2rem 0;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+    .highlight strong { color: var(--text); }
+
+    footer {
+      background: var(--bg-card);
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+    footer .links {
+      margin-bottom: 0.75rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+    }
+    footer .links a {
+      margin: 0 0.75rem;
+      font-weight: 500;
+    }
+    footer .copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 720px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .features { grid-template-columns: 1fr; }
+      .promo-options { grid-template-columns: 1fr; }
+      .store-btn { width: 100%; justify-content: center; }
+      .top-nav { flex-wrap: wrap; gap: 0.5rem 1rem; }
+      .top-nav .nav-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="index.html">Home</a>
+    <div class="nav-divider"></div>
+    <a href="product-cn.html">Features</a>
+    <a href="soundsrightcn-download.html" class="active">Download</a>
+    <div class="nav-divider"></div>
+    <a href="support.html">Support</a>
+  </nav>
+
+  <header class="hero">
+    <span class="hero-badge">Now on iOS &amp; Google Play</span>
+    <h1>SoundsRightCN <span class="cn-name">耳顺汉语</span></h1>
+    <p class="tagline">Your ultimate <strong>offline</strong> Chinese pronunciation coach — on-device AI scoring, no internet required, 100% private.</p>
+
+    <div class="store-buttons">
+      <a class="store-btn" href="https://apps.apple.com/us/app/soundsrightcn/id6761544029" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span>
+          <span class="label-small">Download on the</span>
+          <span class="label-main">App Store</span>
+        </span>
+      </a>
+      <a class="store-btn play" href="https://play.google.com/store/apps/details?id=com.soundsright.chinese" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a1.003 1.003 0 0 1-.61-.92V2.734a1.003 1.003 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+        <span>
+          <span class="label-small">Get it on</span>
+          <span class="label-main">Google Play</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="promo" aria-labelledby="promo-title">
+      <div class="promo-header">
+        <span class="promo-icon" aria-hidden="true">🎁</span>
+        <h2 id="promo-title">Free 1-Year Pro — Limited Offer</h2>
+      </div>
+      <p>Love SoundsRightCN? Share your experience and get a <strong>free 1-year Pro redemption code</strong> (worth $19.99).</p>
+
+      <div class="promo-options" role="list">
+        <div class="promo-option" role="listitem">
+          <span class="opt-icon" aria-hidden="true">⭐</span>
+          Rate or review on the App Store or Google Play
+        </div>
+        <div class="promo-option" role="listitem">
+          <span class="opt-icon" aria-hidden="true">💬</span>
+          Send us your feedback or suggestions
+        </div>
+        <div class="promo-option" role="listitem">
+          <span class="opt-icon" aria-hidden="true">📱</span>
+          Share on social media with a screenshot of your review or app usage
+        </div>
+      </div>
+
+      <ol class="promo-steps">
+        <li>
+          <span class="step-num">1</span>
+          <span>Download the app and try it out — practice Hanzi, dialogues, or read a poem aloud.</span>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <span>Leave a review, send feedback, or post on Reddit / X / Facebook / Instagram with a screenshot.</span>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <span>Email your screenshot to us — we'll reply with your free 1-year Pro code.</span>
+        </li>
+      </ol>
+
+      <a class="promo-email" href="mailto:soundsrightcn@gmail.com?subject=SoundsRightCN%20Free%201-Year%20Pro%20Request&amp;body=Hi%20SoundsRightCN%20team%2C%0A%0AI%20would%20like%20to%20claim%20my%20free%201-year%20Pro%20code.%0A%0APlatform%3A%20(iOS%20%2F%20Android)%0A%0A(Attach%20your%20review%20or%20social%20media%20screenshot%20here)%0A%0AThank%20you!">
+        ✉️ soundsrightcn@gmail.com
+      </a>
+      <p class="promo-note">Limited codes available — first come, first served. One code per person. Please attach your screenshot when emailing.</p>
+    </section>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="num">3,000</div>
+        <div class="label">Hanzi</div>
+        <p>HSK 1–7 characters</p>
+      </div>
+      <div class="stat-card">
+        <div class="num">9,443</div>
+        <div class="label">Words</div>
+        <p>Idioms &amp; proverbs</p>
+      </div>
+      <div class="stat-card">
+        <div class="num">5,000+</div>
+        <div class="label">Dialogues</div>
+        <p>20 real-life categories</p>
+      </div>
+      <div class="stat-card">
+        <div class="num">1,291</div>
+        <div class="label">Articles</div>
+        <p>Poetry, classics &amp; prose</p>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>100% offline &amp; private.</strong> All speech recognition and text-to-speech run entirely on your device. No cloud uploads — practice anywhere, anytime.
+    </div>
+
+    <h2 class="section-title">Why learners choose SoundsRightCN</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>On-Device AI Scoring</h3>
+        <p>Real-time pronunciation feedback on accuracy, fluency, tones, and completeness — powered by Paraformer Chinese ASR.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Natural Chinese TTS</h3>
+        <p>Fine-tuned Kokoro voices with 10 male &amp; female speakers for clearer, more natural Mandarin pronunciation.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Dialogue Role-Play</h3>
+        <p>Practice as Speaker A or B in 5,000+ dialogues — travel, dining, work, culture, and more.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Classical Literature</h3>
+        <p>Read Tang poetry, Song ci, the Four Great Novels, and Guwen Guanzhi with full pinyin and English translations.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Smart Wordbook</h3>
+        <p>Characters and words you miss in tests are automatically saved for targeted review.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Timed Quiz Modes</h3>
+        <p>Listen-and-choose, fill-in-the-blank, and comprehension tests with 10-second timers to sharpen recall.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="links">
+      <a href="product-cn.html">Product Features</a>
+      <a href="privacy-cn.html">Privacy Policy</a>
+      <a href="support.html">Support</a>
+    </div>
+    <div class="copy">
+      <img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" alt="">
+      粤公网安备44030002011542号 &nbsp;&nbsp;
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2026028389号-1</a>
+    </div>
+    <div class="copy">&copy; 2026 SoundsRight. All rights reserved.</div>
+  </footer>
+</body>
+</html>
