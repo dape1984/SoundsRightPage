@@ -6,7 +6,7 @@
   <title>SoundsRight 耳顺英语 - Product Features &amp; Highlights</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #fafafa;
@@ -25,8 +25,14 @@
       color: var(--text);
       background: var(--bg);
     }
+    html.lang-zh body { font-family: 'Noto Sans SC', 'Charter', 'Georgia', serif; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
+
+    /* i18n dual-block */
+    .i18n-zh { display: none; }
+    html.lang-zh .i18n-zh { display: revert; }
+    html.lang-zh .i18n-en { display: none; }
 
     .top-nav {
       display: flex;
@@ -41,6 +47,7 @@
       z-index: 100;
       font-family: 'Poppins', sans-serif;
     }
+    html.lang-zh .top-nav { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
     .top-nav a {
       font-size: 0.9rem;
       font-weight: 500;
@@ -49,6 +56,30 @@
     }
     .top-nav a:hover { color: var(--accent); text-decoration: none; }
     .top-nav a.product { color: var(--accent); font-weight: 600; }
+    .top-nav .nav-divider {
+      width: 1px;
+      height: 1.2rem;
+      background: var(--border);
+    }
+    .lang-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.65rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      line-height: 1.4;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-toggle .lang-sep { color: var(--border); }
+    .lang-toggle [data-lang-label] { padding: 0 0.1rem; color: var(--text-muted); }
+    .lang-toggle [data-lang-label].active { color: var(--accent); font-weight: 600; }
 
     .page { max-width: 900px; margin: 0 auto; padding: 0 2rem 3rem; }
 
@@ -70,29 +101,29 @@
     .hero p {
       font-size: 1rem;
       color: var(--text-muted);
-      max-width: 560px;
+      max-width: 620px;
       margin: 0 auto;
       line-height: 1.65;
     }
 
     .overview {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
       margin: 2rem 0 2.5rem;
     }
     .overview-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 1.5rem;
+      padding: 1.25rem;
       text-align: center;
       transition: box-shadow 0.2s;
     }
     .overview-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-    .overview-card .num { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--accent); }
-    .overview-card .label { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-top: 0.25rem; }
-    .overview-card p { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.4; }
+    .overview-card .num { font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+    .overview-card .label { font-size: 0.85rem; font-weight: 600; color: var(--text); margin-top: 0.2rem; }
+    .overview-card p { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.4; }
 
     h2 {
       font-family: 'Poppins', sans-serif;
@@ -104,6 +135,7 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border);
     }
+    html.lang-zh h2 { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
     h2:first-of-type { margin-top: 0; }
     h3 {
       font-family: 'Poppins', sans-serif;
@@ -112,6 +144,7 @@
       margin: 1.25rem 0 0.5rem;
       color: var(--accent);
     }
+    html.lang-zh h3 { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
     p, ul { margin: 0.5rem 0 1rem; }
     ul { padding-left: 1.25rem; }
 
@@ -152,34 +185,6 @@
     .book-list, .category-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding-left: 0; }
     .book-list li { background: rgba(13, 148, 136, 0.1); padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.9rem; }
     .category-grid li { background: rgba(13, 148, 136, 0.08); padding: 0.3rem 0.7rem; border-radius: 5px; font-size: 0.88rem; }
-    .scenario-catalog-intro { font-size: 0.85rem; color: var(--text-muted); margin: 0 0 0.75rem 0; line-height: 1.5; }
-    .scenario-catalog { margin-top: 0.5rem; }
-    .scenario-category {
-      background: rgba(13, 148, 136, 0.04);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 1rem;
-    }
-    .scenario-category h4 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.98rem;
-      font-weight: 600;
-      color: var(--text);
-      margin: 0 0 0.6rem 0;
-      padding-bottom: 0.35rem;
-      border-bottom: 1px solid var(--border-light);
-    }
-    .scenario-list { margin: 0; padding-left: 1.2rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
-    .scenario-list li { margin-bottom: 0.2rem; }
-    .scenario-id {
-      display: inline-block;
-      min-width: 1.85rem;
-      font-weight: 600;
-      color: var(--accent);
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.72rem;
-    }
     .test-mode { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem; }
     .test-mode .num {
       background: var(--accent);
@@ -194,16 +199,84 @@
       flex-shrink: 0;
     }
 
-    .toc {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 2rem;
+    .section-tabs {
+      display: flex;
+      gap: 0.25rem;
+      border-bottom: 1px solid var(--border);
+      margin: 1.5rem 0 2rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      font-family: 'Poppins', sans-serif;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+      padding: 0.5rem 0 0;
     }
-    .toc h3 { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
-    .toc a { display: block; padding: 0.25rem 0; font-size: 0.9rem; color: var(--text-muted); }
-    .toc a:hover { color: var(--accent); }
+    html.lang-zh .section-tabs { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
+    .section-tab {
+      appearance: none;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 0.65rem 0.95rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+    .section-tab:hover { color: var(--accent); }
+    .section-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 600;
+    }
+    .feature-section { display: none; }
+    .feature-section.active { display: block; }
+    .section-hero {
+      display: flex;
+      gap: 1.75rem;
+      align-items: flex-start;
+      margin: 1.25rem 0 1.5rem;
+      flex-wrap: wrap;
+    }
+    .section-hero .section-screenshot {
+      flex: 0 0 260px;
+      max-width: 260px;
+      margin: 0;
+    }
+    .section-hero .section-screenshot img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      display: block;
+    }
+    .section-hero .section-intro {
+      flex: 1 1 280px;
+      min-width: 0;
+      padding-top: 0.25rem;
+    }
+    .section-hero .section-intro > p:first-child { margin-top: 0; }
+    .section-hero .section-intro > p:last-child { margin-bottom: 0; }
+    .panel-screenshot {
+      max-width: 260px;
+      margin: 1.25rem auto;
+    }
+    .panel-screenshot img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      display: block;
+    }
 
     footer {
       background: var(--bg-card);
@@ -218,216 +291,629 @@
     footer .footer-site a:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
-      .overview { grid-template-columns: 1fr; }
+      .overview { grid-template-columns: repeat(2, 1fr); }
       .feature-row { flex-direction: column; align-items: center; }
       .feature-row .screenshot { flex: 0 0 auto; max-width: 220px; }
+      .section-hero { flex-direction: column; align-items: center; }
+      .section-hero .section-screenshot { flex: 0 0 auto; max-width: 240px; }
+      .section-hero .section-intro { text-align: left; }
+    }
+    @media (max-width: 640px) {
+      .top-nav { flex-wrap: wrap; gap: 0.5rem 1rem; }
+      .top-nav .nav-divider { display: none; }
+      .overview { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
   <nav class="top-nav">
-    <a href="index.html" style="font-weight:600; color:var(--text);">Home</a>
-    <span style="width:1px;height:1.2rem;background:var(--border);"></span>
+    <a href="index.html" style="font-weight:600; color:var(--text);">
+      <span class="i18n-en" lang="en">Home</span>
+      <span class="i18n-zh" lang="zh">首页</span>
+    </a>
+    <div class="nav-divider"></div>
     <a href="product.html" class="product">SoundsRight</a>
     <a href="product-cn.html">SoundsRightCN</a>
-    <span style="width:1px;height:1.2rem;background:var(--border);"></span>
-    <a href="support.html">Support</a>
+    <div class="nav-divider"></div>
+    <a href="support.html">
+      <span class="i18n-en" lang="en">Support</span>
+      <span class="i18n-zh" lang="zh">帮助</span>
+    </a>
+    <button class="lang-toggle" type="button" aria-label="Switch language">
+      <span data-lang-label="en">EN</span>
+      <span class="lang-sep">|</span>
+      <span data-lang-label="zh">中文</span>
+    </button>
   </nav>
 
   <div class="hero">
-    <h1>SoundsRight 耳顺英语 &middot; Product</h1>
-    <p>Fully offline English read-aloud and pronunciation scoring. 14,829 words; <strong>109 mini-scenarios</strong> in <strong>11 topic areas</strong> (3 levels &times; 50 exchanges each &rarr; 17,751 dialogue lines including 800+ common phrases and idioms); 7 McGuffey Readers. Kokoro TTS + Whisper ASR. No internet required.</p>
+    <h1>
+      <span class="i18n-en" lang="en">SoundsRight 耳顺英语 &middot; Product</span>
+      <span class="i18n-zh" lang="zh">SoundsRight 耳顺英语 &middot; 产品介绍</span>
+    </h1>
+    <p>
+      <span class="i18n-en" lang="en">Fully offline English read-aloud and pronunciation scoring. <strong>14,829 words</strong>; thematic <strong>word groups</strong> with optional <strong>Quip image practice</strong>; a dedicated <strong>Pronunciation module</strong> drilling all <strong>44 IPA phonemes</strong> (US &amp; UK); <strong>119 mini-scenarios</strong> across <strong>12 topic areas</strong> (3 levels &times; 50 exchanges &rarr; <strong>19,083 dialogue lines</strong> including 800+ phrases and idioms); 7 McGuffey Readers and <strong>700+ articles</strong>. Kokoro TTS + Whisper ASR. No internet required.</span>
+      <span class="i18n-zh" lang="zh">完全离线的英文朗读与发音评分。<strong>14,829 个单词</strong>；按主题分组的<strong>词组练习</strong>，可选 <strong>Quip 配图模式</strong>；独立的 <strong>发音模块</strong>覆盖全部 <strong>44 个 IPA 音素</strong>（美音 + 英音）；<strong>12 大主题场景下的 119 个迷你情景</strong>（3 个难度 &times; 50 轮对话 &rarr; <strong>19,083 句对话</strong>，含 800+ 常用短语与习语）；7 本 McGuffey 读物与 <strong>700+ 篇文章</strong>。Kokoro TTS + Whisper ASR。无需联网。</span>
+    </p>
   </div>
 
   <div class="page">
     <div class="overview">
       <div class="overview-card">
         <div class="num">14,829</div>
-        <div class="label">Words</div>
-        <p>CEFR-J five bands + CET-4/CET-6 + GRE/TOEFL tags · Word Link · phonetics &amp; Chinese</p>
+        <div class="label">
+          <span class="i18n-en" lang="en">Words</span>
+          <span class="i18n-zh" lang="zh">单词</span>
+        </div>
+        <p>
+          <span class="i18n-en" lang="en">CEFR-J five bands + CET-4/CET-6 + GRE/TOEFL tags · Word Link · phonetics &amp; Chinese</span>
+          <span class="i18n-zh" lang="zh">CEFR-J 五级 + 四六级 / GRE / TOEFL 标签 · Word Link · 音标 + 中文</span>
+        </p>
       </div>
       <div class="overview-card">
-        <div class="num">17,751</div>
-        <div class="label">Dialogue Lines</div>
-        <p>109 scenes &times; 3 levels &times; 50 exchanges &mdash; 17,751 lines</p>
+        <div class="num">19,083</div>
+        <div class="label">
+          <span class="i18n-en" lang="en">Dialogue Lines</span>
+          <span class="i18n-zh" lang="zh">对话句</span>
+        </div>
+        <p>
+          <span class="i18n-en" lang="en">119 scenarios &times; 3 levels &times; 50 exchanges &mdash; 19,083 lines</span>
+          <span class="i18n-zh" lang="zh">119 个场景 &times; 3 个难度 &times; 50 轮对话 &mdash; 共 19,083 句</span>
+        </p>
+      </div>
+      <div class="overview-card">
+        <div class="num">44</div>
+        <div class="label">
+          <span class="i18n-en" lang="en">IPA Phonemes</span>
+          <span class="i18n-zh" lang="zh">IPA 音素</span>
+        </div>
+        <p>
+          <span class="i18n-en" lang="en">20 vowels + 24 consonants · US (GA) &amp; UK (RP)</span>
+          <span class="i18n-zh" lang="zh">20 元音 + 24 辅音 · 美音 GA + 英音 RP</span>
+        </p>
       </div>
       <div class="overview-card">
         <div class="num">7 + 10</div>
-        <div class="label">McGuffey &amp; Genres</div>
-        <p>Classic readers + literary collections, all with Chinese</p>
+        <div class="label">
+          <span class="i18n-en" lang="en">McGuffey &amp; Genres</span>
+          <span class="i18n-zh" lang="zh">McGuffey 与文体</span>
+        </div>
+        <p>
+          <span class="i18n-en" lang="en">Classic readers + literary collections, all with Chinese</span>
+          <span class="i18n-zh" lang="zh">经典读物 + 文学合集，全部附中文翻译</span>
+        </p>
       </div>
     </div>
 
-    <div class="toc">
-      <h3>Jump to</h3>
-      <a href="#word-practice">1. Word Practice</a>
-      <a href="#word-test">2. Word Test</a>
-      <a href="#dialogue-practice">3. Dialogue Practice</a>
-      <a href="#dialogue-test">4. Dialogue Test</a>
-      <a href="#article-practice">5. Article Practice</a>
-      <a href="#article-test">6. Article Test</a>
-      <a href="#data-sources">Data Sources</a>
-    </div>
+    <div class="section-tabs">
+  <button class="section-tab active" type="button" data-target="pronunciation"><span class="i18n-en" lang="en">0. Pronunciation (Phonemes)</span>
+        <span class="i18n-zh" lang="zh">0. 发音模块（音素）</span></button>
+  <button class="section-tab" type="button" data-target="word-practice"><span class="i18n-en" lang="en">1. Word Practice</span>
+        <span class="i18n-zh" lang="zh">1. 单词练习</span></button>
+  <button class="section-tab" type="button" data-target="word-test"><span class="i18n-en" lang="en">2. Word Test</span>
+        <span class="i18n-zh" lang="zh">2. 单词测试</span></button>
+  <button class="section-tab" type="button" data-target="dialogue-practice"><span class="i18n-en" lang="en">3. Dialogue Practice</span>
+        <span class="i18n-zh" lang="zh">3. 对话练习</span></button>
+  <button class="section-tab" type="button" data-target="dialogue-test"><span class="i18n-en" lang="en">4. Dialogue Test</span>
+        <span class="i18n-zh" lang="zh">4. 对话测试</span></button>
+  <button class="section-tab" type="button" data-target="article-practice"><span class="i18n-en" lang="en">5. Article Practice</span>
+        <span class="i18n-zh" lang="zh">5. 文章练习</span></button>
+  <button class="section-tab" type="button" data-target="article-test"><span class="i18n-en" lang="en">6. Article Test</span>
+        <span class="i18n-zh" lang="zh">6. 文章测试</span></button>
+  <button class="section-tab" type="button" data-target="data-sources"><span class="i18n-en" lang="en">Data Sources</span>
+        <span class="i18n-zh" lang="zh">数据来源</span></button>
+</div>
+
+  <section id="pronunciation" class="feature-section active">
+    <h2>
+      <span class="i18n-en" lang="en">0. Pronunciation &mdash; Phoneme Practice</span>
+      <span class="i18n-zh" lang="zh">0. 发音 &mdash; 音素练习</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/soundsright_pronunciation.png" alt="Pronunciation / Phoneme Practice" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">A dedicated module for nailing English sounds at the phoneme level &mdash; the foundation every other practice builds on. Master the sound inventory once, then everything else gets easier.</span>
+          <span class="i18n-zh" lang="zh">一个独立的音素级发音模块 &mdash; 它是其他所有练习的基础。先把 44 个音素掌握好，后续学习事半功倍。</span>
+        </p></div></div>
+      
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">44 IPA Phonemes</span>
+            <span class="i18n-zh" lang="zh">44 个 IPA 音素</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">All <strong>20 vowels</strong> and <strong>24 consonants</strong> of English, presented as a clean color-coded chart (vowels in orange, consonants in blue). Phonemes that are notoriously hard &mdash; especially for Chinese-speaking learners &mdash; get a <strong>🔥 badge</strong>, so you know where to focus.</span>
+            <span class="i18n-zh" lang="zh">英语全部 <strong>20 个元音</strong>与 <strong>24 个辅音</strong>，以色彩分明的图表呈现（元音橙色，辅音蓝色）。对中文母语者特别困难的音素会标上 <strong>🔥 徽章</strong>，提示你重点关注。</span>
+          </p>
+        </div>
+      
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">US &amp; UK Accents &mdash; GA and RP</span>
+            <span class="i18n-zh" lang="zh">美音与英音 &mdash; GA 与 RP</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">One tap switches between <strong>General American (GA)</strong> and <strong>Received Pronunciation (RP)</strong>. IPA notation updates accordingly &mdash; for example <code>/oʊ/</code> in GA becomes <code>/əʊ/</code> in RP, and the British <code>/ɒ/</code> appears for words like <em>hot</em>.</span>
+            <span class="i18n-zh" lang="zh">一键切换 <strong>美音 GA</strong> 与 <strong>英音 RP</strong>，IPA 标注随之更新 &mdash; 例如美音 <code>/oʊ/</code> 在英音中写作 <code>/əʊ/</code>，<em>hot</em> 这类词在英音中会显示 <code>/ɒ/</code>。</span>
+          </p>
+        </div>
+      
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">Per-Phoneme Drill &mdash; 10 Sentences Each</span>
+            <span class="i18n-zh" lang="zh">逐音素训练 &mdash; 每个 10 句</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Tap any phoneme to enter a focused practice: <strong>10 carefully chosen sentences</strong> heavy in that sound. For each sentence: read the tip, listen to TTS, record yourself, and get scored on two dimensions &mdash; <strong>Accuracy</strong> (did you produce the target sound?) and <strong>Pronunciation</strong> (overall delivery). Tips can be shown in Chinese or English.</span>
+            <span class="i18n-zh" lang="zh">点击任意音素进入专项练习：<strong>10 句精选例句</strong>，重点强化该音素。每句流程：阅读提示 &rarr; 听 TTS &rarr; 录音 &rarr; 双维度评分 &mdash; <strong>Accuracy（准确度）</strong> 与 <strong>Pronunciation（发音）</strong>。提示语可在中英文之间切换。</span>
+          </p>
+        </div>
+      
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">Tip Layer for Each Phoneme</span>
+            <span class="i18n-zh" lang="zh">每个音素都有提示</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Each phoneme comes with example words, an L1-interference warning (the typical mistake your native language pushes you toward), and actionable articulation tips. Tips toggle between Chinese and English so you can study in either language.</span>
+            <span class="i18n-zh" lang="zh">每个音素都附带：示例单词、母语干扰提示（你的母语最容易犯的错），以及可执行的发音技巧。提示语支持中英切换。</span>
+          </p>
+        </div>
+      
+    
+  </section>
 
   <section id="word-practice" class="feature-section">
-    <h2>1. Word Practice</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/WordPractice.png" alt="Word Practice" /></div>
-      <div class="content">
-        <p>Build vocabulary and perfect pronunciation with <strong>14,829 words</strong> organized into <strong>five levels</strong>. The ladder is anchored in <strong>CEFR-J</strong> (A1&ndash;B2) for global proficiency bands, and the upper bands also incorporate <strong>China CET-4 / CET-6</strong> and <strong>GRE / TOEFL</strong> vocabulary tags from the dictionary — so you can drill pronunciation in the same buckets that many learners use for CET-4/6 and exam prep for studying abroad.</p>
+    <h2>
+      <span class="i18n-en" lang="en">1. Word Practice</span>
+      <span class="i18n-zh" lang="zh">1. 单词练习</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/WordPractice.png" alt="Word Practice" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Build vocabulary and perfect pronunciation with <strong>14,829 words</strong> organized into <strong>five levels</strong>. The ladder is anchored in <strong>CEFR-J</strong> (A1&ndash;B2) for global proficiency bands, and the upper bands also incorporate <strong>China CET-4 / CET-6</strong> and <strong>GRE / TOEFL</strong> vocabulary tags from the dictionary &mdash; so you can drill pronunciation in the same buckets that many learners use for CET-4/6 and exam prep for studying abroad.</span>
+          <span class="i18n-zh" lang="zh">通过 <strong>14,829 个单词</strong>积累词汇、打磨发音，按<strong>五个等级</strong>组织。整体框架基于 <strong>CEFR-J</strong>（A1&ndash;B2），中高等级额外整合了词典中的<strong>四六级 CET-4 / CET-6</strong> 与 <strong>GRE / TOEFL</strong> 标签 &mdash; 让你在常用的备考词表里练习发音。</span>
+        </p></div></div>
+      
 
-        <div class="card">
-          <h3>CEFR-J five bands + CET-4 / CET-6 + GRE / TOEFL</h3>
-          <p><strong>CEFR-J</strong> (Common European Framework &mdash; Japanese profile, TUFS) supplies the A1&rarr;B2 progression. <strong>CET-4</strong> and <strong>CET-6</strong> lists, plus <strong>GRE</strong> and <strong>TOEFL</strong> tags, come from the open <strong>ECDICT</strong> dataset and are merged into the levels below. Together they give a single practice path from everyday English to exam-heavy vocabulary:</p>
+      
+        <div class="highlight">
+          <h3>
+            <span class="i18n-en" lang="en">By Group Practice &amp; Quip Image Mode</span>
+            <span class="i18n-zh" lang="zh">按组练习与 Quip 配图模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">In addition to the classic <strong>By Link</strong> word sequence, Word Practice offers <strong>By Group</strong> &mdash; thematic vocabulary sets organized by category within each level (e.g. food, travel, emotions). When you start a group session, choose:</span>
+            <span class="i18n-zh" lang="zh">除了经典的 <strong>By Link</strong> 单词顺序，单词练习新增 <strong>By Group</strong> &mdash; 在每个等级内按主题分组（如食物、旅行、情感）。进入某个分组练习时，可任选：</span>
+          </p>
           <ul>
-            <li><strong>Level 5 (CEFR-J A1)</strong> — Beginner: most common words for basic communication (free)</li>
-            <li><strong>Level 4 (CEFR-J A2)</strong> — Elementary: high-frequency words for everyday use (partially free)</li>
-            <li><strong>Level 3 (CEFR-J B1 + CET-4)</strong> — Intermediate: B1 band plus <strong>CET-4</strong> (College English Test Band 4) vocabulary (Pro)</li>
-            <li><strong>Level 2 (CEFR-J B2 + CET-6)</strong> — Upper-intermediate: B2 band plus <strong>CET-6</strong> (College English Test Band 6) vocabulary (Pro)</li>
-            <li><strong>Level 1 (GRE + TOEFL)</strong> — Advanced: words tagged <strong>GRE</strong> and/or <strong>TOEFL</strong> for academic and test prep (Pro)</li>
+            <li>
+              <span class="i18n-en" lang="en"><strong>Text mode</strong> &mdash; the familiar word-card layout with TTS, recording, and scoring</span>
+              <span class="i18n-zh" lang="zh"><strong>文本模式</strong> &mdash; 经典词卡界面，TTS、录音、评分一应俱全</span>
+            </li>
+            <li>
+              <span class="i18n-en" lang="en"><strong>Image mode</strong> &mdash; vertical <strong>Quip</strong> scene images for each word, with <strong>English and Chinese</strong> overlaid on the picture (word, definitions, and example lines)</span>
+              <span class="i18n-zh" lang="zh"><strong>图片模式</strong> &mdash; 每个单词一张纵向 <strong>Quip</strong> 场景图，图上叠加 <strong>中英双语</strong>（词形、释义、例句）</span>
+            </li>
           </ul>
-          <p>CEFR-J from <a href="https://www.cefr-j.org" target="_blank" rel="noopener">cefr-j.org</a> and <a href="https://github.com/openlanguageprofiles/olp-en-cefrj" target="_blank" rel="noopener">Open Language Profiles</a>. CET / GRE / TOEFL tags and Chinese glosses from <a href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noopener">ECDICT</a> (see Data Sources).</p>
+          <p>
+            <span class="i18n-en" lang="en">Image mode supports the same practice flow: TTS playback, speech scoring, auto or manual recording, and options for example source and display. Image packs are <strong>downloaded on demand by category</strong> and can be used offline after download.</span>
+            <span class="i18n-zh" lang="zh">图片模式支持相同的练习流程：TTS 播放、语音评分、自动或手动录音，以及例句来源与显示选项。图片包<strong>按分类按需下载</strong>，下载后可离线使用。</span>
+          </p>
         </div>
+      
 
+      
         <div class="card">
-          <h3>Word Link — Smart Grouping for Better Retention</h3>
-          <p>Words are <strong>not</strong> presented in random or alphabetical order. Instead, SoundsRight uses an intelligent <strong>Word Link</strong> system powered by deep learning word embeddings to group and order words in your practice sequence:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Quip &mdash; Both a Sentence Source and an Image Mode</span>
+            <span class="i18n-zh" lang="zh">Quip &mdash; 既是例句来源，也是图片模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">"Quip" shows up in two related places. In <strong>Text mode</strong>, it's the default <strong>example-sentence source</strong>: each word has a short, witty line (<em>quipEn</em>) with its Chinese translation (<em>quipZh</em>) &mdash; "humorous line + Chinese", as opposed to the plain original dictionary sentence. Toggle between <em>Quip</em> and <em>Sentence</em> from the Options panel. In <strong>Image mode</strong>, Quip refers to the full-screen vertical scene images described above.</span>
+            <span class="i18n-zh" lang="zh">"Quip" 在两处出现。在 <strong>文本模式</strong>中，它是默认的 <strong>例句来源</strong>：每个单词配一句简短诙谐的英文（<em>quipEn</em>）和中文翻译（<em>quipZh</em>）&mdash; 即"诙谐例句 + 中文"，区别于词典原句。在 Options 面板中可切换 <em>Quip</em> 与 <em>Sentence</em>。在 <strong>图片模式</strong>中，Quip 指上文提到的全屏纵向场景图。</span>
+          </p>
+        </div>
+      
+
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">By Group &mdash; Thematic Word Sets</span>
+            <span class="i18n-zh" lang="zh">按组 &mdash; 主题词集</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Browse <strong>By Group</strong> from Word Practice: pick a level, open a parent category, then choose a specific group. Each group is a curated list of related words &mdash; a focused alternative to the embedding-based <strong>Word Link</strong> order. Group practice and group tests share the same vocabulary sets.</span>
+            <span class="i18n-zh" lang="zh">在单词练习中浏览 <strong>按组</strong>：选定等级 &rarr; 进入父分类 &rarr; 选择具体分组。每组都是一组主题相关的单词 &mdash; 是基于词向的 <strong>Word Link</strong> 顺序之外、更聚焦的替代方案。分组练习与分组测试共用同一批词汇。</span>
+          </p>
+        </div>
+      
+
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">Quip Image Mode</span>
+            <span class="i18n-zh" lang="zh">Quip 图片模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Each word in a group can be practiced with a <strong>scene illustration</strong>. English and Chinese text appear on the image &mdash; the headword, definitions, and quip or sentence examples &mdash; so you learn in context at a glance. Swipe between words, tap for TTS, record for a score, or run <strong>Auto</strong> for hands-free rounds. Switch back to text mode anytime from Options.</span>
+            <span class="i18n-zh" lang="zh">分组中的每个单词都配有 <strong>场景插图</strong>。图上叠加中英文 &mdash; 词条、释义、Quip 或原句例句 &mdash; 一眼即可在语境中学习。可滑动切换、点击 TTS、录音评分，或开启 <strong>Auto</strong> 进行免手操作。随时可在 Options 中切回文本模式。</span>
+          </p>
+        </div>
+      
+
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">CEFR-J five bands + CET-4 / CET-6 + GRE / TOEFL</span>
+            <span class="i18n-zh" lang="zh">CEFR-J 五级 + 四六级 / GRE / TOEFL</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en"><strong>CEFR-J</strong> (Common European Framework &mdash; Japanese profile, TUFS) supplies the A1&rarr;B2 progression. <strong>CET-4</strong> and <strong>CET-6</strong> lists, plus <strong>GRE</strong> and <strong>TOEFL</strong> tags, come from the open <strong>ECDICT</strong> dataset and are merged into the levels below. Together they give a single practice path from everyday English to exam-heavy vocabulary:</span>
+            <span class="i18n-zh" lang="zh"><strong>CEFR-J</strong>（欧洲共同语文参考框架的日本 profile，TUFS）提供 A1&rarr;B2 的进阶。<strong>四六级 CET-4 / CET-6</strong> 词表与 <strong>GRE / TOEFL</strong> 标签来自开源的 <strong>ECDICT</strong> 数据集，并合并到下列等级中。两者结合，形成一条从日常英语到备考词汇的完整路径：</span>
+          </p>
           <ul>
-            <li><strong>Related by meaning</strong> — e.g. <em>apple</em>, <em>orange</em>, <em>banana</em> (fruits together)</li>
-            <li><strong>Same word class</strong> — e.g. <em>I</em>, <em>you</em>, <em>he</em>, <em>she</em> (pronouns together)</li>
-            <li><strong>Shared prefix or suffix</strong> — words with the same root, e.g. <em>un-</em> (unhappy, unfair), <em>-tion</em> (action, decision)</li>
+            <li><strong>Level 5 (CEFR-J A1)</strong> &mdash;
+              <span class="i18n-en" lang="en">Beginner: most common words for basic communication (free)</span>
+              <span class="i18n-zh" lang="zh">入门：日常交流必备的高频词（免费）</span>
+            </li>
+            <li><strong>Level 4 (CEFR-J A2)</strong> &mdash;
+              <span class="i18n-en" lang="en">Elementary: high-frequency words for everyday use (partially free)</span>
+              <span class="i18n-zh" lang="zh">初级：日常使用的高频词（部分免费）</span>
+            </li>
+            <li><strong>Level 3 (CEFR-J B1 + CET-4)</strong> &mdash;
+              <span class="i18n-en" lang="en">Intermediate: B1 band plus <strong>CET-4</strong> (College English Test Band 4) vocabulary (Pro)</span>
+              <span class="i18n-zh" lang="zh">中级：B1 等级叠加 <strong>CET-4</strong>（大学英语四级）词汇（Pro）</span>
+            </li>
+            <li><strong>Level 2 (CEFR-J B2 + CET-6)</strong> &mdash;
+              <span class="i18n-en" lang="en">Upper-intermediate: B2 band plus <strong>CET-6</strong> (College English Test Band 6) vocabulary (Pro)</span>
+              <span class="i18n-zh" lang="zh">中高级：B2 等级叠加 <strong>CET-6</strong>（大学英语六级）词汇（Pro）</span>
+            </li>
+            <li><strong>Level 1 (GRE + TOEFL)</strong> &mdash;
+              <span class="i18n-en" lang="en">Advanced: words tagged <strong>GRE</strong> and/or <strong>TOEFL</strong> for academic and test prep (Pro)</span>
+              <span class="i18n-zh" lang="zh">高级：标注 <strong>GRE</strong> 或 <strong>TOEFL</strong> 的学术与备考词汇（Pro）</span>
+            </li>
           </ul>
-          <p>Deep learning word embeddings group related words together for better retention.</p>
+          <p>
+            <span class="i18n-en" lang="en">CEFR-J from <a href="https://www.cefr-j.org" target="_blank" rel="noopener">cefr-j.org</a> and <a href="https://github.com/openlanguageprofiles/olp-en-cefrj" target="_blank" rel="noopener">Open Language Profiles</a>. CET / GRE / TOEFL tags and Chinese glosses from <a href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noopener">ECDICT</a> (see Data Sources).</span>
+            <span class="i18n-zh" lang="zh">CEFR-J 来自 <a href="https://www.cefr-j.org" target="_blank" rel="noopener">cefr-j.org</a> 与 <a href="https://github.com/openlanguageprofiles/olp-en-cefrj" target="_blank" rel="noopener">Open Language Profiles</a>。CET / GRE / TOEFL 标签与中文释义来自 <a href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noopener">ECDICT</a>（见数据来源）。</span>
+          </p>
         </div>
+      
 
+      
         <div class="card">
-          <h3>Auto Mode</h3>
-          <p>Hands-free: TTS plays, you record, get scored, next word — no touching.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Word Link &mdash; Smart Grouping for Better Retention</span>
+            <span class="i18n-zh" lang="zh">Word Link &mdash; 智能分组提升记忆</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Words are <strong>not</strong> presented in random or alphabetical order. Instead, SoundsRight uses an intelligent <strong>Word Link</strong> system powered by deep learning word embeddings to group and order words in your practice sequence:</span>
+            <span class="i18n-zh" lang="zh">单词的练习顺序 <strong>既不是</strong> 随机，也 <strong>不是</strong> 字母序。SoundsRight 使用基于深度学习词向量的 <strong>Word Link</strong> 系统对单词进行智能分组与排序：</span>
+          </p>
+          <ul>
+            <li>
+              <span class="i18n-en" lang="en"><strong>Related by meaning</strong> &mdash; e.g. <em>apple</em>, <em>orange</em>, <em>banana</em> (fruits together)</span>
+              <span class="i18n-zh" lang="zh"><strong>语义相关</strong> &mdash; 如 <em>apple</em>、<em>orange</em>、<em>banana</em>（水果放一起）</span>
+            </li>
+            <li>
+              <span class="i18n-en" lang="en"><strong>Same word class</strong> &mdash; e.g. <em>I</em>, <em>you</em>, <em>he</em>, <em>she</em> (pronouns together)</span>
+              <span class="i18n-zh" lang="zh"><strong>同词类</strong> &mdash; 如 <em>I</em>、<em>you</em>、<em>he</em>、<em>she</em>（代词放一起）</span>
+            </li>
+            <li>
+              <span class="i18n-en" lang="en"><strong>Shared prefix or suffix</strong> &mdash; words with the same root, e.g. <em>un-</em> (unhappy, unfair), <em>-tion</em> (action, decision)</span>
+              <span class="i18n-zh" lang="zh"><strong>同前缀 / 后缀</strong> &mdash; 同词根的词，如 <em>un-</em>（unhappy、unfair）、<em>-tion</em>（action、decision）</span>
+            </li>
+          </ul>
+          <p>
+            <span class="i18n-en" lang="en">Deep learning word embeddings group related words together for better retention.</span>
+            <span class="i18n-zh" lang="zh">基于深度学习词向量的相关词聚合，帮助加深记忆。</span>
+          </p>
         </div>
+      
 
+      
         <div class="card">
-          <h3>Listen Mode</h3>
-          <p><strong>Background TTS only</strong> — no recording. Tap 🎧 to play all words in the stage. Works when locked or in background. Configurable silence between words for you to repeat. <strong>Listen mode does not record in the background</strong>; it only plays audio.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Auto Mode</span>
+            <span class="i18n-zh" lang="zh">自动模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Hands-free: TTS plays, you record, get scored, next word &mdash; no touching.</span>
+            <span class="i18n-zh" lang="zh">免手操作：TTS 播放 &rarr; 你录音 &rarr; 出分 &rarr; 自动进入下一词。</span>
+          </p>
         </div>
-
-        <div class="card">
-          <h3>Instant Word Lookup</h3>
-          <p>Search any word by spelling or partial match. Phonetics, definitions, Chinese on demand.</p>
-        </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="word-test" class="feature-section">
-    <h2>2. Word Test</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/WordTest.png" alt="Word Test" /></div>
-      <div class="content">
-        <p>Reinforce what you've learned with <strong>6 different test modes</strong> covering listening, reading, translation, and spelling:</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">2. Word Test</span>
+      <span class="i18n-zh" lang="zh">2. 单词测试</span>
+    </h2>
+        
+      
+        <p>
+          <span class="i18n-en" lang="en">Reinforce what you've learned with <strong>two presentation modes</strong>, each built to drive recall from a different angle so words actually stick:</span>
+          <span class="i18n-zh" lang="zh">用 <strong>两种呈现模式</strong>巩固所学 &mdash; 从不同角度反复唤起回忆，单词才真正记得住：</span>
+        </p>
+        <ul>
+          <li>
+            <span class="i18n-en" lang="en"><strong>Text Mode</strong> &mdash; the classic 6-mode quiz on listening, reading, translation, and spelling</span>
+            <span class="i18n-zh" lang="zh"><strong>文本模式</strong> &mdash; 经典 6 题型：听力、阅读、翻译、拼写</span>
+          </li>
+          <li>
+            <span class="i18n-en" lang="en"><strong>Image Mode (图片消除)</strong> &mdash; a board-clearing scavenger hunt over word icons, new in 2.4.0</span>
+            <span class="i18n-zh" lang="zh"><strong>图片消除模式</strong> &mdash; 在单词图标阵中"消格子"，2.4.0 新增</span>
+          </li>
+        </ul>
+      
+      
+        <div class="panel-screenshot"><img src="screenshots/WordTest.png" alt="Word Test (Text Mode)" /></div>
         <div class="card">
-          <h3>6 Test Modes</h3>
-          <div class="test-mode"><span class="num">1</span> <span>Listen to a sentence &rarr; choose the correct Chinese translation</span></div>
-          <div class="test-mode"><span class="num">2</span> <span>Listen to a word &rarr; choose the matching English word</span></div>
-          <div class="test-mode"><span class="num">3</span> <span>Listen to a word &rarr; choose the correct Chinese meaning</span></div>
-          <div class="test-mode"><span class="num">4</span> <span>Listen to a word &rarr; choose the correct English definition</span></div>
-          <div class="test-mode"><span class="num">5</span> <span>See a Chinese definition &rarr; type the English word</span></div>
-          <div class="test-mode"><span class="num">6</span> <span>See an English definition &rarr; type the English word</span></div>
-          <p>Each mode can be enabled or disabled individually. Set the number of questions per mode, or let the app distribute them automatically. Track your accuracy and per-mode statistics after each test.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Text Mode &mdash; 6 Question Styles</span>
+            <span class="i18n-zh" lang="zh">文本模式 &mdash; 6 种题型</span>
+          </h3>
+          <div class="test-mode"><span class="num">1</span> <span>
+            <span class="i18n-en" lang="en">Listen to a sentence &rarr; choose the correct Chinese translation</span>
+            <span class="i18n-zh" lang="zh">听一句子 &rarr; 选出正确的中文翻译</span>
+          </span></div>
+          <div class="test-mode"><span class="num">2</span> <span>
+            <span class="i18n-en" lang="en">Listen to a word &rarr; choose the matching English word</span>
+            <span class="i18n-zh" lang="zh">听一单词 &rarr; 选出对应的英文词</span>
+          </span></div>
+          <div class="test-mode"><span class="num">3</span> <span>
+            <span class="i18n-en" lang="en">Listen to a word &rarr; choose the correct Chinese meaning</span>
+            <span class="i18n-zh" lang="zh">听一单词 &rarr; 选出正确的中文释义</span>
+          </span></div>
+          <div class="test-mode"><span class="num">4</span> <span>
+            <span class="i18n-en" lang="en">Listen to a word &rarr; choose the correct English definition</span>
+            <span class="i18n-zh" lang="zh">听一单词 &rarr; 选出正确的英文释义</span>
+          </span></div>
+          <div class="test-mode"><span class="num">5</span> <span>
+            <span class="i18n-en" lang="en">See a Chinese definition &rarr; type the English word</span>
+            <span class="i18n-zh" lang="zh">看中文释义 &rarr; 拼写英文单词</span>
+          </span></div>
+          <div class="test-mode"><span class="num">6</span> <span>
+            <span class="i18n-en" lang="en">See an English definition &rarr; type the English word</span>
+            <span class="i18n-zh" lang="zh">看英文释义 &rarr; 拼写英文单词</span>
+          </span></div>
+          <p>
+            <span class="i18n-en" lang="en">Each mode can be enabled or disabled individually. Set the number of questions per mode, or let the app distribute them automatically. Track your accuracy and per-mode statistics after each test.</span>
+            <span class="i18n-zh" lang="zh">每个模式可单独开关。可手动设置各模式题数，或交给 App 自动分配。每次测试后可查看正确率与分模式统计。</span>
+          </p>
         </div>
-
+      
+      
+        <div class="panel-screenshot"><img src="screenshots/soundsright_clearing.PNG" alt="Word Test — Image Mode (图片消除)" /></div>
+        <div class="highlight">
+          <h3>
+            <span class="i18n-en" lang="en">Image Mode (图片消除) &mdash; Board-Clearing Quiz</span>
+            <span class="i18n-zh" lang="zh">图片消除模式 &mdash; 消格子测试</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">A scavenger-hunt style quiz that fills the screen with a grid of word icons &mdash; you get a prompt, tap the matching tile, and the board shrinks as you clear words one by one. Designed to push <strong>active recall through visual + textual cues together</strong>, which is what makes words actually stick.</span>
+            <span class="i18n-zh" lang="zh">寻物游戏式的测试：屏幕上铺满单词图标方阵 &mdash; 给出题目，你点中对应的格子，答对的词从盘面上消失，逐步把整盘清空。<strong>视觉 + 文字双线索触发主动回忆</strong>，正是记得住的关键。</span>
+          </p>
+          <p>
+            <span class="i18n-en" lang="en"><strong>Four prompt styles</strong> mix and match in a single session:</span>
+            <span class="i18n-zh" lang="zh"><strong>四种题型</strong>可在同一场测试中混用：</span>
+          </p>
+          <div class="test-mode"><span class="num">1</span> <span>
+            <span class="i18n-en" lang="en">See Chinese meaning &rarr; tap the matching word</span>
+            <span class="i18n-zh" lang="zh">看中文释义 &rarr; 在格子中点中对应单词</span>
+          </span></div>
+          <div class="test-mode"><span class="num">2</span> <span>
+            <span class="i18n-en" lang="en">See English definition &rarr; tap the matching word</span>
+            <span class="i18n-zh" lang="zh">看英文释义 &rarr; 在格子中点中对应单词</span>
+          </span></div>
+          <div class="test-mode"><span class="num">3</span> <span>
+            <span class="i18n-en" lang="en">Listen to "The word is X" &rarr; tap the matching word</span>
+            <span class="i18n-zh" lang="zh">听 "The word is X" &rarr; 点中对应单词</span>
+          </span></div>
+          <div class="test-mode"><span class="num">4</span> <span>
+            <span class="i18n-en" lang="en">Listen to a sentence &rarr; tap any word from the sentence that's on the board (multiple may count)</span>
+            <span class="i18n-zh" lang="zh">听一句英文 &rarr; 点中句子里任意一个出现在格子上的词（多答案均可）</span>
+          </span></div>
+          <p>
+            <span class="i18n-en" lang="en">Per-question rules: <strong>60-second timer</strong>, <strong>3 wrong taps allowed</strong> before the question fails, and tiles disappear as you clear them &mdash; so the board physically shrinks toward empty as you work through the question list. Toggle freely between Text Mode and Image Mode from the test config screen.</span>
+            <span class="i18n-zh" lang="zh">每题规则：<strong>60 秒计时</strong>、最多 <strong>3 次错点</strong>（用完即判错），答对的格子从盘面消失 &mdash; 随着题目推进，整个方阵会肉眼可见地被你"消空"。在测试配置页可随时在文本模式与图片模式之间切换。</span>
+          </p>
+        </div>
+      
+      
         <div class="card">
-          <h3>Word Book — Auto-Collect Weak Words</h3>
-          <p>Words you miss in tests are <strong>automatically added</strong> to your personal Word Book. No manual saving needed. Practice your weak spots anytime, or remove words once you&apos;ve mastered them. You can also choose Word Book as a practice source to focus exclusively on your collected vocabulary.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Word Book &mdash; Auto-Collect Weak Words</span>
+            <span class="i18n-zh" lang="zh">生词本 &mdash; 自动收集错词</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Words you miss in tests are <strong>automatically added</strong> to your personal Word Book. No manual saving needed. Practice your weak spots anytime, or remove words once you've mastered them. You can also choose Word Book as a practice source to focus exclusively on your collected vocabulary.</span>
+            <span class="i18n-zh" lang="zh">测试中答错的词会被 <strong>自动加入</strong> 你的个人生词本，无需手动保存。可随时练习薄弱点，掌握后即可移除。也可将"生词本"选为练习来源，专门针对已收集的词汇练习。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="dialogue-practice" class="feature-section">
-    <h2>3. Dialogue Practice</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/DialoguePractice.png" alt="Dialogue Practice" /></div>
-      <div class="content">
-        <p>Practice real-world conversations with <strong>17,751 dialogue lines</strong> (including <strong>800+ common phrases and idioms</strong>) across <strong>109 scenarios</strong> organized into <strong>11 thematic categories</strong>. Role-play as Speaker A or Speaker B, each with independently scored pronunciation.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">3. Dialogue Practice</span>
+      <span class="i18n-zh" lang="zh">3. 对话练习</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/DialoguePractice.png" alt="Dialogue Practice" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Practice real-world conversations with <strong>19,083 dialogue lines</strong> (including <strong>800+ common phrases and idioms</strong>) across <strong>119 scenarios</strong> organized into <strong>12 thematic categories</strong>. Role-play as Speaker A or Speaker B, each with independently scored pronunciation.</span>
+          <span class="i18n-zh" lang="zh">练习真实场景对话：<strong>19,083 句对话</strong>（含 <strong>800+ 常用短语与习语</strong>），分布在 <strong>12 大主题</strong>下的 <strong>119 个场景</strong>中。可选 A 角或 B 角，每一句都独立评分。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>11 Conversation Categories</h3>
+          <h3>
+            <span class="i18n-en" lang="en">12 Conversation Categories</span>
+            <span class="i18n-zh" lang="zh">12 大对话分类</span>
+          </h3>
           <ul class="category-grid">
-            <li>Travel &amp; Arrival</li>
-            <li>Campus &amp; Academic Life</li>
-            <li>Workplace &amp; Career</li>
-            <li>Housing &amp; Settlement</li>
-            <li>Dining &amp; Groceries</li>
-            <li>Shopping &amp; Services</li>
-            <li>Transportation &amp; Driving</li>
-            <li>Healthcare &amp; Emergencies</li>
-            <li>Socializing &amp; Culture</li>
-            <li>Oral Exams &amp; Formal Speaking</li>
-            <li>Phrases &amp; Idioms</li>
+            <li><span class="i18n-en" lang="en">Travel &amp; Arrival</span><span class="i18n-zh" lang="zh">出行与抵达</span></li>
+            <li><span class="i18n-en" lang="en">Campus &amp; Academic Life</span><span class="i18n-zh" lang="zh">校园与学业</span></li>
+            <li><span class="i18n-en" lang="en">Workplace &amp; Career</span><span class="i18n-zh" lang="zh">职场与工作</span></li>
+            <li><span class="i18n-en" lang="en">Housing &amp; Settlement</span><span class="i18n-zh" lang="zh">租房与安家</span></li>
+            <li><span class="i18n-en" lang="en">Dining &amp; Groceries</span><span class="i18n-zh" lang="zh">餐饮与采买</span></li>
+            <li><span class="i18n-en" lang="en">Shopping &amp; Services</span><span class="i18n-zh" lang="zh">购物与服务</span></li>
+            <li><span class="i18n-en" lang="en">Transportation &amp; Driving</span><span class="i18n-zh" lang="zh">交通与驾车</span></li>
+            <li><span class="i18n-en" lang="en">Healthcare &amp; Emergencies</span><span class="i18n-zh" lang="zh">医疗与应急</span></li>
+            <li><span class="i18n-en" lang="en">Socializing &amp; Culture</span><span class="i18n-zh" lang="zh">社交与文化</span></li>
+            <li><span class="i18n-en" lang="en">Oral Exams &amp; Formal Speaking</span><span class="i18n-zh" lang="zh">口语考试与正式表达</span></li>
+            <li><span class="i18n-en" lang="en">Children</span><span class="i18n-zh" lang="zh">儿童</span></li>
+            <li><span class="i18n-en" lang="en">Phrases &amp; Idioms</span><span class="i18n-zh" lang="zh">短语与习语</span></li>
           </ul>
         </div>
-
+      
+      
         <div class="card">
-          <h3>3 Difficulty Levels</h3>
+          <h3>
+            <span class="i18n-en" lang="en">3 Difficulty Levels</span>
+            <span class="i18n-zh" lang="zh">3 个难度等级</span>
+          </h3>
           <ul>
-            <li><strong>Easy</strong> — Short, simple exchanges with basic vocabulary (free)</li>
-            <li><strong>Medium</strong> — Longer conversations with richer vocabulary (Pro)</li>
-            <li><strong>Hard</strong> — Complex dialogues with nuanced expressions and idioms (Pro)</li>
+            <li><strong>Easy</strong> &mdash;
+              <span class="i18n-en" lang="en">Short, simple exchanges with basic vocabulary (free)</span>
+              <span class="i18n-zh" lang="zh">简短、简单的对话，基础词汇（免费）</span>
+            </li>
+            <li><strong>Medium</strong> &mdash;
+              <span class="i18n-en" lang="en">Longer conversations with richer vocabulary (Pro)</span>
+              <span class="i18n-zh" lang="zh">更长、词汇更丰富的对话（Pro）</span>
+            </li>
+            <li><strong>Hard</strong> &mdash;
+              <span class="i18n-en" lang="en">Complex dialogues with nuanced expressions and idioms (Pro)</span>
+              <span class="i18n-zh" lang="zh">含细微表达与习语的复杂对话（Pro）</span>
+            </li>
           </ul>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Dual-Role Scoring</h3>
-          <p>Choose to practice as Speaker A, Speaker B, or both. Every line is individually scored on <strong>Accuracy</strong> and <strong>Fluency</strong>. Assign different TTS voices to each speaker for a natural dialogue experience.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Dual-Role Scoring</span>
+            <span class="i18n-zh" lang="zh">双角色评分</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Choose to practice as Speaker A, Speaker B, or both. Every line is individually scored on <strong>Accuracy</strong> and <strong>Fluency</strong>. Assign different TTS voices to each speaker for a natural dialogue experience.</span>
+            <span class="i18n-zh" lang="zh">可选 A、B 或双角练习。每一句单独评分，维度包括 <strong>Accuracy（准确度）</strong> 与 <strong>Fluency（流利度）</strong>。可为两位说话人分配不同 TTS 嗓音，呈现自然对话。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="dialogue-test" class="feature-section">
-    <h2>4. Dialogue Test</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/DialogueTest.png" alt="Dialogue Test" /></div>
-      <div class="content">
-        <p>Timed dialogue tests challenge you to maintain fluency under pressure.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">4. Dialogue Test</span>
+      <span class="i18n-zh" lang="zh">4. 对话测试</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/DialogueTest.png" alt="Dialogue Test" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Timed dialogue tests challenge you to maintain fluency under pressure.</span>
+          <span class="i18n-zh" lang="zh">限时对话测试，挑战在压力下保持流利。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>Dialogue Test Mode</h3>
-          <p>Complete a full conversation within a <strong>5-minute time limit</strong>. Receive a comprehensive score report with per-line breakdowns — perfect for simulating real conversation pace.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Dialogue Test Mode</span>
+            <span class="i18n-zh" lang="zh">对话测试模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Complete a full conversation within a <strong>5-minute time limit</strong>. Receive a comprehensive score report with per-line breakdowns &mdash; perfect for simulating real conversation pace.</span>
+            <span class="i18n-zh" lang="zh">在 <strong>5 分钟时限</strong>内完成整段对话。完成后给出综合分数与逐句明细 &mdash; 适合模拟真实语速。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Bilingual Display Toggle — 4 Modes</h3>
-          <p>Switch freely among four display modes:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Bilingual Display Toggle &mdash; 4 Modes</span>
+            <span class="i18n-zh" lang="zh">双语显示切换 &mdash; 4 种模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Switch freely among four display modes:</span>
+            <span class="i18n-zh" lang="zh">四种显示模式自由切换：</span>
+          </p>
           <ul>
-            <li><strong>English</strong> — English only for full immersion</li>
-            <li><strong>Chinese</strong> — Chinese only for comprehension check</li>
-            <li><strong>Both</strong> — Side-by-side English and Chinese for quick reference</li>
-            <li><strong>Random</strong> — Each line randomly shows either English or Chinese, great for mixed practice</li>
+            <li><strong>English</strong> &mdash;
+              <span class="i18n-en" lang="en">English only for full immersion</span>
+              <span class="i18n-zh" lang="zh">仅英文，完全沉浸</span>
+            </li>
+            <li><strong>Chinese</strong> &mdash;
+              <span class="i18n-en" lang="en">Chinese only for comprehension check</span>
+              <span class="i18n-zh" lang="zh">仅中文，检查理解</span>
+            </li>
+            <li><strong>Both</strong> &mdash;
+              <span class="i18n-en" lang="en">Side-by-side English and Chinese for quick reference</span>
+              <span class="i18n-zh" lang="zh">中英并排，便于对照</span>
+            </li>
+            <li><strong>Random</strong> &mdash;
+              <span class="i18n-en" lang="en">Each line randomly shows either English or Chinese, great for mixed practice</span>
+              <span class="i18n-zh" lang="zh">每句随机显示中或英，适合混合训练</span>
+            </li>
           </ul>
-          <p>Your preference is remembered for the next session.</p>
+          <p>
+            <span class="i18n-en" lang="en">Your preference is remembered for the next session.</span>
+            <span class="i18n-zh" lang="zh">设置会被自动记住，下次继续使用。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="article-practice" class="feature-section">
-    <h2>5. Article Practice</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/ArticlePractice.PNG" alt="Article Practice" /></div>
-      <div class="content">
-        <p>Read and speak along with full-length English passages — sentence by sentence. Each sentence is played via TTS, you read it aloud, and get instant pronunciation feedback.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">5. Article Practice</span>
+      <span class="i18n-zh" lang="zh">5. 文章练习</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/ArticlePractice.PNG" alt="Article Practice" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Read and speak along with full-length English passages &mdash; sentence by sentence. Each sentence is played via TTS, you read it aloud, and get instant pronunciation feedback.</span>
+          <span class="i18n-zh" lang="zh">朗读完整英文文章 &mdash; 逐句进行。每句先由 TTS 播放，你跟读，立刻获得发音反馈。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>Auto Mode for Articles</h3>
-          <p>In auto mode, the app handles everything: play TTS for the current sentence, record your voice, display your score, then advance to the next sentence. Audio is cached so playback is instant after the first listen. Chinese translations can be shown or hidden.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Auto Mode for Articles</span>
+            <span class="i18n-zh" lang="zh">文章自动模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">In auto mode, the app handles everything: play TTS for the current sentence, record your voice, display your score, then advance to the next sentence. Audio is cached so playback is instant after the first listen. Chinese translations can be shown or hidden.</span>
+            <span class="i18n-zh" lang="zh">自动模式下，App 全程接管：播放当前句 TTS &rarr; 录音 &rarr; 出分 &rarr; 自动进入下一句。音频会缓存，首次播放后即时播放。中文翻译可显示或隐藏。</span>
+          </p>
         </div>
-
+      
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">Your Own Articles &mdash; Paste Any Text</span>
+            <span class="i18n-zh" lang="zh">你的自定义文章 &mdash; 粘贴任意文本</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Beyond the built-in library, you can <strong>paste or type any English text</strong> &mdash; an essay, a news article, a chapter from a book &mdash; and the app splits it into practice segments (up to 20 words each, breaking at punctuation). Practice your own content the same way you'd practice a McGuffey reader: TTS, recording, scoring, Chinese translation on demand. <em>Pro feature.</em></span>
+            <span class="i18n-zh" lang="zh">除了内置文库，你还可以 <strong>粘贴或输入任意英文文本</strong> &mdash; 一篇随笔、一则新闻、书中的一个章节 &mdash; App 会自动切分为练习片段（每段最多 20 词，在标点处断开）。用练习 McGuffey 读物相同的方式练习自定义内容：TTS、录音、评分、中文翻译按需呈现。<em>Pro 功能。</em></span>
+          </p>
+        </div>
+      
+      
         <div class="highlight">
-          <h3>Featured: McGuffey Readers — 7 Classic Books</h3>
-          <p>SoundsRight includes the complete <strong>McGuffey Eclectic Readers</strong> series — one of the most influential English reading curricula in American history. First published in 1836 by William Holmes McGuffey, these readers have sold over <strong>130 million copies</strong> and remain a gold standard for structured, progressive English reading education.</p>
-          <p>The seven volumes are arranged from easiest to most advanced:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Featured: McGuffey Readers &mdash; 7 Classic Books</span>
+            <span class="i18n-zh" lang="zh">精选：McGuffey 读物 &mdash; 7 本经典</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">SoundsRight includes the complete <strong>McGuffey Eclectic Readers</strong> series &mdash; one of the most influential English reading curricula in American history. First published in 1836 by William Holmes McGuffey, these readers have sold over <strong>130 million copies</strong> and remain a gold standard for structured, progressive English reading education.</span>
+            <span class="i18n-zh" lang="zh">SoundsRight 收录了完整的 <strong>McGuffey Eclectic Readers</strong> 系列 &mdash; 美国历史上最具影响力的英语阅读教材之一。该系列由 William Holmes McGuffey 于 1836 年首次出版，累计销量超过 <strong>1.3 亿册</strong>，至今仍是循序渐进英语阅读教学的标杆。</span>
+          </p>
+          <p>
+            <span class="i18n-en" lang="en">The seven volumes are arranged from easiest to most advanced:</span>
+            <span class="i18n-zh" lang="zh">七册由易到难排列：</span>
+          </p>
           <ul class="book-list">
             <li>1. McGuffey's Primer</li>
             <li>2. McGuffey's First Reader</li>
@@ -437,74 +923,204 @@
             <li>6. McGuffey's Fifth Reader</li>
             <li>7. McGuffey's Sixth Reader</li>
           </ul>
-          <p>Each book contains carefully selected passages that build vocabulary, reading fluency, and comprehension step by step. Every passage is broken into individual sentences for pronunciation practice and scoring.</p>
-          <p><strong>Text correction:</strong> The McGuffey texts are sourced from <a href="https://www.gutenberg.org" target="_blank" rel="noopener">Project Gutenberg</a>. Because older editions may contain archaic spellings (e.g., <em>o'er</em>&rarr;<em>over</em>, <em>'tis</em>&rarr;<em>it's</em>), OCR errors, or inconsistent punctuation, we run them through an LLM-based proofreading pipeline. Grammar and punctuation are corrected, and Chinese translations are generated to be clear and easy to understand.</p>
+          <p>
+            <span class="i18n-en" lang="en">Each book contains carefully selected passages that build vocabulary, reading fluency, and comprehension step by step. Every passage is broken into individual sentences for pronunciation practice and scoring.</span>
+            <span class="i18n-zh" lang="zh">每册精选文章，循序渐进地构建词汇、阅读流利度与理解力。每篇文章切分为单句，便于发音练习与评分。</span>
+          </p>
+          <p>
+            <span class="i18n-en" lang="en"><strong>Text correction:</strong> The McGuffey texts are sourced from <a href="https://www.gutenberg.org" target="_blank" rel="noopener">Project Gutenberg</a>. Because older editions may contain archaic spellings (e.g., <em>o'er</em>&rarr;<em>over</em>, <em>'tis</em>&rarr;<em>it's</em>), OCR errors, or inconsistent punctuation, we run them through an LLM-based proofreading pipeline. Grammar and punctuation are corrected, and Chinese translations are generated to be clear and easy to understand.</span>
+            <span class="i18n-zh" lang="zh"><strong>文本校正：</strong>McGuffey 文本取自 <a href="https://www.gutenberg.org" target="_blank" rel="noopener">Project Gutenberg</a>。由于旧版可能存在古旧拼写（如 <em>o'er</em> &rarr; <em>over</em>、<em>'tis</em> &rarr; <em>it's</em>）、OCR 错误或标点不一致，我们用 LLM 流水线做了一次校对：修正语法与标点，并生成清晰易懂的中文翻译。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="article-test" class="feature-section">
-    <h2>6. Article Test</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/ArticleTest.png" alt="Article Test" /></div>
-      <div class="content">
-        <p>Test your article reading fluency with timed assessments. Read through entire passages sentence by sentence and receive detailed scoring for each sentence.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">6. Article Test</span>
+      <span class="i18n-zh" lang="zh">6. 文章测试</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/ArticleTest.png" alt="Article Test" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Test your article reading fluency with timed assessments. Read through entire passages sentence by sentence and receive detailed scoring for each sentence.</span>
+          <span class="i18n-zh" lang="zh">通过限时测试检验朗读流利度。逐句读完整篇文章，并获得每句详细评分。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>Article Test Mode</h3>
-          <p>Select any article from the library and take a timed reading test. The app tracks your score for each sentence and provides an overall assessment. Great for measuring progress over time and identifying areas that need more practice.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Article Test Mode</span>
+            <span class="i18n-zh" lang="zh">文章测试模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Select any article from the library and take a timed reading test. The app tracks your score for each sentence and provides an overall assessment. Great for measuring progress over time and identifying areas that need more practice.</span>
+            <span class="i18n-zh" lang="zh">从文库中选择任意文章进行限时朗读测试。App 记录每句得分并给出综合评估。适合长期跟踪进步、找出薄弱环节。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Bilingual Display Toggle</h3>
-          <p>Same as in Dialogue Test: switch between <strong>English-only</strong>, <strong>Chinese-only</strong>, or <strong>both</strong>. Read in immersion mode, check translations when needed, or keep both visible for side-by-side learning.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Bilingual Display Toggle</span>
+            <span class="i18n-zh" lang="zh">双语显示切换</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Same as in Dialogue Test: switch between <strong>English-only</strong>, <strong>Chinese-only</strong>, or <strong>both</strong>. Read in immersion mode, check translations when needed, or keep both visible for side-by-side learning.</span>
+            <span class="i18n-zh" lang="zh">与对话测试相同：可在 <strong>仅英文</strong>、<strong>仅中文</strong>、<strong>双语</strong> 间切换。沉浸阅读、需要时再查翻译，或双语并排学习。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
-  <h2 id="data-sources">Data Sources &amp; Attribution</h2>
-  <p>SoundsRight uses the following data sources. All are attributed and used in accordance with their respective licenses.</p>
+  <section id="data-sources" class="feature-section">
+    <h2>
+      <span class="i18n-en" lang="en">Data Sources &amp; Attribution</span>
+      <span class="i18n-zh" lang="zh">数据来源与致谢</span>
+    </h2>
+  <p>
+    <span class="i18n-en" lang="en">SoundsRight uses the following data sources. All are attributed and used in accordance with their respective licenses.</span>
+    <span class="i18n-zh" lang="zh">SoundsRight 使用以下数据源。所有数据均按各自许可证使用并标注致谢。</span>
+  </p>
 
   <div class="card">
-    <h3>Word Leveling (CEFR-J + CET + GRE / TOEFL)</h3>
-    <p><strong>CEFR-J</strong> provides A1, A2, B1, and B2 vocabulary bands. <strong>CET-4 / CET-6</strong> and <strong>GRE / TOEFL</strong> markings used in Levels 3&ndash;1 come from <strong>ECDICT</strong> (not from MOE official exams); they group words for practice alongside the CEFR-J ladder.</p>
+    <h3>
+      <span class="i18n-en" lang="en">Word Leveling (CEFR-J + CET + GRE / TOEFL)</span>
+      <span class="i18n-zh" lang="zh">词汇分级（CEFR-J + CET + GRE / TOEFL）</span>
+    </h3>
+    <p>
+      <span class="i18n-en" lang="en"><strong>CEFR-J</strong> provides A1, A2, B1, and B2 vocabulary bands. <strong>CET-4 / CET-6</strong> and <strong>GRE / TOEFL</strong> markings used in Levels 3&ndash;1 come from <strong>ECDICT</strong> (not from MOE official exams); they group words for practice alongside the CEFR-J ladder.</span>
+      <span class="i18n-zh" lang="zh"><strong>CEFR-J</strong> 提供 A1、A2、B1、B2 词汇分级。<strong>四六级 CET-4 / CET-6</strong> 与 <strong>GRE / TOEFL</strong> 标签（用于 3&ndash;1 级）来自 <strong>ECDICT</strong>（并非教育部官方考试标签）；它们与 CEFR-J 阶梯合并，便于分组练习。</span>
+    </p>
     <ul>
-      <li><a href="https://www.cefr-j.org" target="_blank" rel="noopener">CEFR-J</a> — The CEFR-J project (Tokyo University of Foreign Studies, Tono Laboratory)</li>
-      <li><a href="https://github.com/openlanguageprofiles/olp-en-cefrj" target="_blank" rel="noopener">Open Language Profiles — olp-en-cefrj</a> — CEFR-J vocabulary and grammar profile datasets</li>
+      <li><a href="https://www.cefr-j.org" target="_blank" rel="noopener">CEFR-J</a> &mdash;
+        <span class="i18n-en" lang="en">The CEFR-J project (Tokyo University of Foreign Studies, Tono Laboratory)</span>
+        <span class="i18n-zh" lang="zh">CEFR-J 项目（东京外国语大学 Tono 实验室）</span>
+      </li>
+      <li><a href="https://github.com/openlanguageprofiles/olp-en-cefrj" target="_blank" rel="noopener">Open Language Profiles &mdash; olp-en-cefrj</a> &mdash;
+        <span class="i18n-en" lang="en">CEFR-J vocabulary and grammar profile datasets</span>
+        <span class="i18n-zh" lang="zh">CEFR-J 词汇与语法 profile 数据集</span>
+      </li>
     </ul>
-    <p>CEFR-J vocabulary and grammar profiles can be used for research and commercial purposes with proper citation. Copyright: Tono Laboratory, TUFS.</p>
+    <p>
+      <span class="i18n-en" lang="en">CEFR-J vocabulary and grammar profiles can be used for research and commercial purposes with proper citation. Copyright: Tono Laboratory, TUFS.</span>
+      <span class="i18n-zh" lang="zh">CEFR-J 词汇与语法 profile 数据集可在注明出处的情况下用于研究与商业用途。版权：TUFS Tono 实验室。</span>
+    </p>
   </div>
 
   <div class="card">
-    <h3>Word Data: Dictionary &amp; Phonetics</h3>
-    <p><strong>ECDICT</strong> (<a href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noopener">github.com/skywind3000/ECDICT</a>) — MIT licensed:</p>
+    <h3>
+      <span class="i18n-en" lang="en">Word Data: Dictionary &amp; Phonetics</span>
+      <span class="i18n-zh" lang="zh">词数据：词典与音标</span>
+    </h3>
+    <p>
+      <span class="i18n-en" lang="en"><strong>ECDICT</strong> (<a href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noopener">github.com/skywind3000/ECDICT</a>) &mdash; MIT licensed:</span>
+      <span class="i18n-zh" lang="zh"><strong>ECDICT</strong>（<a href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noopener">github.com/skywind3000/ECDICT</a>）&mdash; MIT 许可证：</span>
+    </p>
     <ul>
-      <li>Chinese translations</li>
-      <li>Phonetic pronunciation</li>
-      <li>CET-4 / CET-6 tags (used in Levels 3&ndash;2 with CEFR-J B1/B2)</li>
-      <li>GRE and TOEFL tags (for Level 1 vocabulary)</li>
+      <li><span class="i18n-en" lang="en">Chinese translations</span><span class="i18n-zh" lang="zh">中文翻译</span></li>
+      <li><span class="i18n-en" lang="en">Phonetic pronunciation</span><span class="i18n-zh" lang="zh">音标</span></li>
+      <li><span class="i18n-en" lang="en">CET-4 / CET-6 tags (used in Levels 3&ndash;2 with CEFR-J B1/B2)</span><span class="i18n-zh" lang="zh">CET-4 / CET-6 标签（用于 3&ndash;2 级，搭配 CEFR-J B1/B2）</span></li>
+      <li><span class="i18n-en" lang="en">GRE and TOEFL tags (for Level 1 vocabulary)</span><span class="i18n-zh" lang="zh">GRE 与 TOEFL 标签（用于 1 级词汇）</span></li>
     </ul>
-    <p><strong>Webster&apos;s Unabridged Dictionary</strong> (Project Gutenberg):</p>
+    <p>
+      <span class="i18n-en" lang="en"><strong>Webster's Unabridged Dictionary</strong> (Project Gutenberg):</span>
+      <span class="i18n-zh" lang="zh"><strong>Webster's Unabridged Dictionary</strong>（Project Gutenberg）：</span>
+    </p>
     <ul>
-      <li><a href="https://www.gutenberg.org/ebooks/29765" target="_blank" rel="noopener">Project Gutenberg</a> — Webster&apos;s Unabridged Dictionary (public domain)</li>
-      <li><a href="https://github.com/matthewreagan/WebstersEnglishDictionary" target="_blank" rel="noopener">WebstersEnglishDictionary</a> — JSON format</li>
+      <li><a href="https://www.gutenberg.org/ebooks/29765" target="_blank" rel="noopener">Project Gutenberg</a> &mdash;
+        <span class="i18n-en" lang="en">Webster's Unabridged Dictionary (public domain)</span>
+        <span class="i18n-zh" lang="zh">Webster's Unabridged Dictionary（公共领域）</span>
+      </li>
+      <li><a href="https://github.com/matthewreagan/WebstersEnglishDictionary" target="_blank" rel="noopener">WebstersEnglishDictionary</a> &mdash;
+        <span class="i18n-en" lang="en">JSON format</span>
+        <span class="i18n-zh" lang="zh">JSON 格式</span>
+      </li>
     </ul>
-    <p>English definitions are sourced from Webster. Definitions not in Webster, as well as example sentences, dialogue translations, and article translations, are generated by <strong>Google Gemini 3</strong> LLM.</p>
+    <p>
+      <span class="i18n-en" lang="en">English definitions are sourced from Webster. Definitions not in Webster, as well as example sentences, dialogue translations, and article translations, are generated by <strong>Google Gemini 3</strong> LLM.</span>
+      <span class="i18n-zh" lang="zh">英文释义取自 Webster。Webster 未收录的释义、例句、对话翻译与文章翻译由 <strong>Google Gemini 3</strong> LLM 生成。</span>
+    </p>
   </div>
 
   <div class="card">
-    <h3>Articles</h3>
-    <p>English articles come from <strong>public domain</strong> works that are free for commercial use, including the McGuffey Eclectic Readers and other classic literature. McGuffey texts are proofread via an LLM pipeline to fix archaic spellings and punctuation (see the McGuffey section above).</p>
+    <h3>
+      <span class="i18n-en" lang="en">Articles</span>
+      <span class="i18n-zh" lang="zh">文章</span>
+    </h3>
+    <p>
+      <span class="i18n-en" lang="en">English articles come from <strong>public domain</strong> works that are free for commercial use, including the McGuffey Eclectic Readers and other classic literature. McGuffey texts are proofread via an LLM pipeline to fix archaic spellings and punctuation (see the McGuffey section above).</span>
+      <span class="i18n-zh" lang="zh">英文文章来自可商用的 <strong>公共领域</strong> 作品，包括 McGuffey Eclectic Readers 及其他经典文学。McGuffey 文本经 LLM 流水线校对，修正了古旧拼写与标点（见上文 McGuffey 章节）。</span>
+    </p>
   </div>
+  </section>
 
   </div>
 
   <footer>
-    <div style="margin-bottom:0.75rem;"><a href="privacy.html" style="color:var(--accent); font-family:'Poppins',sans-serif; font-size:0.85rem; font-weight:500;">Privacy Policy</a></div>
-    <div class="copy"><img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" alt="">粤公网安备44030002011542号 &nbsp;&nbsp; <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2026028389号-1</a></div>
-    <div class="copy">&copy; 2026 SoundsRight. All rights reserved.</div>
+    <div style="margin-bottom:0.75rem;"><a href="privacy.html" style="color:var(--accent); font-family:'Poppins',sans-serif; font-size:0.85rem; font-weight:500;">
+      <span class="i18n-en" lang="en">Privacy Policy</span>
+      <span class="i18n-zh" lang="zh">隐私政策</span>
+    </a></div>
+    <div class="copy"><img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" alt="">粤公网安备 44030002011542 号 &nbsp;&nbsp; <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2026028389号-1</a></div>
+    <div class="copy">
+      <span class="i18n-en" lang="en">&copy; 2026 SoundsRight. All rights reserved.</span>
+      <span class="i18n-zh" lang="zh">&copy; 2026 SoundsRight. 保留所有权利。</span>
+    </div>
   </footer>
+
+  <script src="i18n.js" defer></script>
+  <script>
+    (function () {
+      function initSectionTabs() {
+        var strip = document.querySelector(".section-tabs");
+        if (!strip) return;
+        var tabs = strip.querySelectorAll(".section-tab");
+        var sections = document.querySelectorAll(".feature-section");
+
+        function activate(id) {
+          for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+          for (var i = 0; i < sections.length; i++) sections[i].classList.remove("active");
+          for (var i = 0; i < tabs.length; i++) {
+            if (tabs[i].getAttribute("data-target") === id) {
+              tabs[i].classList.add("active");
+              tabs[i].scrollIntoView({ block: "nearest", inline: "center" });
+              break;
+            }
+          }
+          var target = document.getElementById(id);
+          if (target) target.classList.add("active");
+        }
+
+        for (var i = 0; i < tabs.length; i++) {
+          (function (tab) {
+            tab.addEventListener("click", function (e) {
+              e.preventDefault();
+              var id = tab.getAttribute("data-target");
+              activate(id);
+              if (history.replaceState) history.replaceState(null, "", "#" + id);
+            });
+          })(tabs[i]);
+        }
+
+        var hash = window.location.hash.replace("#", "");
+        if (hash && document.getElementById(hash)) {
+          activate(hash);
+        } else if (tabs.length) {
+          activate(tabs[0].getAttribute("data-target"));
+        }
+
+        window.addEventListener("hashchange", function () {
+          var h = window.location.hash.replace("#", "");
+          if (h && document.getElementById(h)) activate(h);
+        });
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initSectionTabs);
+      } else {
+        initSectionTabs();
+      }
+    })();
+  </script>
 </body>
 </html>

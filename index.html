@@ -6,7 +6,7 @@
   <title>SoundsRight — Language Learning Apps: English &amp; Chinese</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #fafafa;
@@ -27,8 +27,14 @@
       line-height: 1.7;
       background: var(--bg);
     }
+    html.lang-zh body { font-family: 'Noto Sans SC', 'Charter', 'Georgia', serif; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
+
+    /* === i18n dual-block === */
+    .i18n-zh { display: none; }
+    html.lang-zh .i18n-zh { display: revert; }
+    html.lang-zh .i18n-en { display: none; }
 
     /* === TOP NAV === */
     .top-nav {
@@ -44,6 +50,7 @@
       z-index: 100;
       font-family: 'Poppins', sans-serif;
     }
+    html.lang-zh .top-nav { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
     .top-nav a {
       font-size: 0.9rem;
       font-weight: 500;
@@ -58,6 +65,25 @@
       background: var(--border);
       margin: 0 0.5rem;
     }
+    .lang-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.65rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      line-height: 1.4;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-toggle .lang-sep { color: var(--border); }
+    .lang-toggle [data-lang-label] { padding: 0 0.1rem; color: var(--text-muted); }
+    .lang-toggle [data-lang-label].active { color: var(--accent); font-weight: 600; }
 
     /* === SITE HERO === */
     .site-hero {
@@ -122,6 +148,7 @@
       margin-bottom: 1rem;
       display: inline-block;
     }
+    html.lang-zh .product-panel .panel-badge { font-family: 'Noto Sans SC', 'Poppins', sans-serif; letter-spacing: 0.05em; }
     .product-panel.en .panel-badge {
       background: rgba(13, 148, 136, 0.1);
       color: var(--accent);
@@ -250,6 +277,7 @@
       transition: background 0.2s, transform 0.1s;
       text-decoration: none;
     }
+    html.lang-zh .panel-cta { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
     .panel-cta:hover { text-decoration: none; transform: translateY(-1px); }
     .product-panel.en .panel-cta { background: var(--accent); }
     .product-panel.en .panel-cta:hover { background: var(--accent-hover); }
@@ -318,6 +346,53 @@
     }
     .devices p { color: var(--text-muted); font-size: 0.95rem; }
 
+    /* === VIDEO === */
+    .video-section {
+      max-width: 960px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+    }
+    .video-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .video-section .video-sub {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      max-height: min(85vh, 540px);
+      margin: 0 auto;
+      background: #0a0a0a;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-fallback {
+      text-align: center;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
     /* === FOOTER === */
     footer {
       background: var(--bg-card);
@@ -353,106 +428,205 @@
 <body>
 
   <nav class="top-nav">
-    <a href="index.html" style="font-weight:600; color:var(--text);">Home</a>
+    <a href="index.html" style="font-weight:600; color:var(--text);">
+      <span class="i18n-en" lang="en">Home</span>
+      <span class="i18n-zh" lang="zh">首页</span>
+    </a>
     <div class="nav-divider"></div>
     <a href="product.html">SoundsRight</a>
     <a href="product-cn.html">SoundsRightCN</a>
     <div class="nav-divider"></div>
-    <a href="support.html">Support</a>
+    <a href="support.html">
+      <span class="i18n-en" lang="en">Support</span>
+      <span class="i18n-zh" lang="zh">帮助</span>
+    </a>
+    <button class="lang-toggle" type="button" aria-label="Switch language">
+      <span data-lang-label="en">EN</span>
+      <span class="lang-sep">|</span>
+      <span data-lang-label="zh">中文</span>
+    </button>
   </nav>
 
   <section class="site-hero">
     <h1>SoundsRight</h1>
-    <p class="logo-sub">Language learning, perfected.</p>
-    <p class="tagline">Two powerful apps for mastering pronunciation — one for English, one for Chinese. Both 100% offline, powered by on-device AI.</p>
+    <p class="logo-sub">
+      <span class="i18n-en" lang="en">Language learning, perfected.</span>
+      <span class="i18n-zh" lang="zh">语言学习，臻于完善</span>
+    </p>
+    <p class="tagline">
+      <span class="i18n-en" lang="en">Two powerful apps for mastering pronunciation — one for English, one for Chinese. Both 100% offline, powered by on-device AI.</span>
+      <span class="i18n-zh" lang="zh">两款强大的发音 App——一款学英语，一款学汉语。100% 离线运行，全部由端侧 AI 驱动。</span>
+    </p>
   </section>
 
   <div class="products">
 
     <!-- LEFT: SoundsRight English -->
     <div class="product-panel en">
-      <span class="panel-badge">Learn English</span>
+      <span class="panel-badge">
+        <span class="i18n-en" lang="en">Learn English</span>
+        <span class="i18n-zh" lang="zh">学英语</span>
+      </span>
       <h2>SoundsRight</h2>
       <p class="subtitle">耳顺英语</p>
       <div class="product-screenshot">
         <img src="screenshots/Home.png" alt="SoundsRight English Home Screen" />
       </div>
-      <p class="desc">Comprehensive English read-aloud and pronunciation scoring. Practice words, dialogues, and classic articles — all with Chinese translations. Powered by Kokoro TTS and OpenAI Whisper.</p>
+      <p class="desc">
+        <span class="i18n-en" lang="en">Comprehensive English read-aloud and pronunciation scoring. Practice words, dialogues, and classic articles — all with Chinese translations. Powered by Kokoro TTS and OpenAI Whisper.</span>
+        <span class="i18n-zh" lang="zh">全面的英文朗读与发音评分。练习单词、对话与经典文章——全部附带中文翻译。基于 Kokoro TTS 与 OpenAI Whisper。</span>
+      </p>
       <div class="panel-stats">
         <div class="panel-stat">
           <div class="num">14,829</div>
-          <div class="label">Words</div>
+          <div class="label">
+            <span class="i18n-en" lang="en">Words</span>
+            <span class="i18n-zh" lang="zh">单词</span>
+          </div>
         </div>
         <div class="panel-stat">
-          <div class="num">17,751</div>
-          <div class="label">Dialogue Lines</div>
+          <div class="num">19,083</div>
+          <div class="label">
+            <span class="i18n-en" lang="en">Dialogue Lines</span>
+            <span class="i18n-zh" lang="zh">对话句</span>
+          </div>
         </div>
         <div class="panel-stat">
-          <div class="num">109</div>
-          <div class="label">Scenarios</div>
+          <div class="num">119</div>
+          <div class="label">
+            <span class="i18n-en" lang="en">Scenarios</span>
+            <span class="i18n-zh" lang="zh">场景</span>
+          </div>
         </div>
         <div class="panel-stat">
           <div class="num">7</div>
-          <div class="label">McGuffey Readers</div>
+          <div class="label">
+            <span class="i18n-en" lang="en">McGuffey Readers</span>
+            <span class="i18n-zh" lang="zh">McGuffey 读物</span>
+          </div>
         </div>
       </div>
       <div class="panel-features">
-        <div class="panel-feature"><span class="dot"></span> CEFR-J A1&ndash;B2 + CET/GRE/TOEFL words</div>
-        <div class="panel-feature"><span class="dot"></span> 11 conversation categories, 3 difficulty levels</div>
-        <div class="panel-feature"><span class="dot"></span> Word Link smart grouping</div>
-        <div class="panel-feature"><span class="dot"></span> McGuffey Readers + literary genres</div>
-        <div class="panel-feature"><span class="dot"></span> 6 test modes + Word Book</div>
-        <div class="panel-feature"><span class="dot"></span> Dual-role dialogue scoring</div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">CEFR-J A1&ndash;B2 + CET/GRE/TOEFL words</span>
+          <span class="i18n-zh" lang="zh">CEFR-J A1&ndash;B2 + 四六级 / GRE / TOEFL 词汇</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">44-phoneme IPA pronunciation trainer (US/UK)</span>
+          <span class="i18n-zh" lang="zh">44 音素 IPA 发音训练（美音 / 英音）</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">12 conversation categories, 3 difficulty levels</span>
+          <span class="i18n-zh" lang="zh">12 大对话分类，3 个难度等级</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">Word Link + By Group + Quip image practice</span>
+          <span class="i18n-zh" lang="zh">Word Link + 主题分组 + Quip 配图练习</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">McGuffey Readers + literary collections</span>
+          <span class="i18n-zh" lang="zh">McGuffey 读物 + 文学合集</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">Text + Image (图片消除) test modes</span>
+          <span class="i18n-zh" lang="zh">文本 + 图片消除双测试模式</span>
+        </div>
       </div>
-      <a href="product.html" class="panel-cta">Explore SoundsRight</a>
+      <a href="product.html" class="panel-cta">
+        <span class="i18n-en" lang="en">Explore SoundsRight</span>
+        <span class="i18n-zh" lang="zh">探索 SoundsRight</span>
+      </a>
     </div>
 
     <!-- RIGHT: SoundsRightCN Chinese -->
     <div class="product-panel cn">
-      <span class="panel-badge">Learn Chinese</span>
+      <span class="panel-badge">
+        <span class="i18n-en" lang="en">Learn Chinese</span>
+        <span class="i18n-zh" lang="zh">学汉语</span>
+      </span>
       <h2>SoundsRightCN</h2>
       <p class="subtitle">耳顺汉语</p>
       <div class="product-screenshot">
         <img src="screenshots/soundsrightcn_home.png" alt="SoundsRightCN Home Screen" />
       </div>
-      <p class="desc">Immersive Chinese learning for non-native speakers. Master Hanzi, vocabulary, real-life dialogues, and classical literature — from HSK 1 through HSK 7, with pinyin and English translations throughout.</p>
+      <p class="desc">
+        <span class="i18n-en" lang="en">Immersive Chinese learning for non-native speakers. Master Hanzi, vocabulary, real-life dialogues, and classical literature — from HSK 1 through HSK 7, with pinyin and English translations throughout.</span>
+        <span class="i18n-zh" lang="zh">为非母语者打造的沉浸式汉语学习。掌握汉字、词汇、真实对话与古典文学——覆盖 HSK 1 至 HSK 7，全篇标注拼音与英文翻译。</span>
+      </p>
       <div class="panel-stats">
         <div class="panel-stat">
           <div class="num">3,000</div>
-          <div class="label">Hanzi Characters</div>
+          <div class="label">
+            <span class="i18n-en" lang="en">Hanzi Characters</span>
+            <span class="i18n-zh" lang="zh">汉字</span>
+          </div>
         </div>
         <div class="panel-stat">
           <div class="num">9,443</div>
-          <div class="label">Words &amp; Phrases</div>
+          <div class="label">
+            <span class="i18n-en" lang="en">Words &amp; Phrases</span>
+            <span class="i18n-zh" lang="zh">词语</span>
+          </div>
         </div>
         <div class="panel-stat">
-          <div class="num">5,000+</div>
-          <div class="label">Dialogues</div>
+          <div class="num">6,000+</div>
+          <div class="label">
+            <span class="i18n-en" lang="en">Dialogues</span>
+            <span class="i18n-zh" lang="zh">对话</span>
+          </div>
         </div>
         <div class="panel-stat">
           <div class="num">1,291</div>
-          <div class="label">Classical Articles</div>
+          <div class="label">
+            <span class="i18n-en" lang="en">Classical Articles</span>
+            <span class="i18n-zh" lang="zh">古文篇</span>
+          </div>
         </div>
       </div>
       <div class="panel-features">
-        <div class="panel-feature"><span class="dot"></span> 3,000 characters across HSK 1&ndash;7</div>
-        <div class="panel-feature"><span class="dot"></span> 20 dialogue categories, 3 difficulty levels</div>
-        <div class="panel-feature"><span class="dot"></span> Idioms, proverbs &amp; colloquialisms</div>
-        <div class="panel-feature"><span class="dot"></span> Tang poetry, Song ci, Four Great Novels</div>
-        <div class="panel-feature"><span class="dot"></span> Hanzi, Ci, Dialogue &amp; Article tests</div>
-        <div class="panel-feature"><span class="dot"></span> Paraformer Chinese speech recognition</div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">3,000 characters across HSK 1&ndash;7</span>
+          <span class="i18n-zh" lang="zh">3,000 汉字，覆盖 HSK 1&ndash;7</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">By HSK &amp; By Radical (127 部首) browse</span>
+          <span class="i18n-zh" lang="zh">按 HSK 与按部首（127 部首）浏览</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">20 dialogue categories, 3 difficulty levels</span>
+          <span class="i18n-zh" lang="zh">20 大对话分类，3 个难度等级</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">Idioms, proverbs &amp; colloquialisms</span>
+          <span class="i18n-zh" lang="zh">成语、谚语与口语</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">Tang poetry, Song ci, Four Great Novels</span>
+          <span class="i18n-zh" lang="zh">唐诗、宋词、四大名著</span>
+        </div>
+        <div class="panel-feature"><span class="dot"></span>
+          <span class="i18n-en" lang="en">Hanzi/Ci/Dialogue/Article tests + Wordbook</span>
+          <span class="i18n-zh" lang="zh">汉字 / 词语 / 对话 / 文章测试 + 生词本</span>
+        </div>
       </div>
-      <a href="product-cn.html" class="panel-cta">Explore SoundsRightCN</a>
+      <a href="product-cn.html" class="panel-cta">
+        <span class="i18n-en" lang="en">Explore SoundsRightCN</span>
+        <span class="i18n-zh" lang="zh">探索 SoundsRightCN</span>
+      </a>
     </div>
 
   </div>
 
-  <section style="max-width:960px; margin:0 auto 3rem; padding:0 2rem;" aria-label="杨振宁先生分享英语学习方法">
-    <h2 style="font-family:'Poppins',sans-serif; font-size:1.5rem; font-weight:600; text-align:center; margin-bottom:0.5rem; color:var(--text);">杨振宁先生谈英语学习方法</h2>
-    <p style="text-align:center; color:var(--text-muted); margin-bottom:1.25rem; font-size:0.95rem; line-height:1.55;">
-      与大师学习语言之道 · 视频托管于哔哩哔哩，<strong>需联网播放</strong>。
+  <section class="video-section" aria-label="杨振宁先生分享英语学习方法">
+    <h2>
+      <span class="i18n-en" lang="en">C.N. Yang on Learning English</span>
+      <span class="i18n-zh" lang="zh">杨振宁先生谈英语学习方法</span>
+    </h2>
+    <p class="video-sub">
+      <span class="i18n-en" lang="en">A master physicist shares his philosophy on language learning. Hosted on Bilibili — internet required to play.</span>
+      <span class="i18n-zh" lang="zh">与大师学习语言之道 · 视频托管于哔哩哔哩，<strong>需联网播放</strong>。</span>
     </p>
-    <div style="position:relative; width:100%; aspect-ratio:16/9; max-height:min(85vh,540px); margin:0 auto; background:#0a0a0a; border-radius:10px; overflow:hidden; border:1px solid var(--border); box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+    <div class="video-frame">
       <iframe
         src="https://player.bilibili.com/player.html?bvid=BV1qRs1zzEg9&amp;page=1&amp;high_quality=1&amp;danmaku=0"
         title="杨振宁先生分享英语学习方法"
@@ -460,51 +634,85 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        style="position:absolute; inset:0; width:100%; height:100%; border:0;"
       ></iframe>
     </div>
-    <p style="text-align:center; margin-top:0.75rem; font-size:0.85rem; color:var(--text-muted);">
-      若嵌入无法加载，请<a href="https://www.bilibili.com/video/BV1qRs1zzEg9/" target="_blank" rel="noopener noreferrer">在哔哩哔哩打开</a>。
+    <p class="video-fallback">
+      <span class="i18n-en" lang="en">If the embed does not load, <a href="https://www.bilibili.com/video/BV1qRs1zzEg9/" target="_blank" rel="noopener noreferrer">open on Bilibili</a>.</span>
+      <span class="i18n-zh" lang="zh">若嵌入无法加载，请<a href="https://www.bilibili.com/video/BV1qRs1zzEg9/" target="_blank" rel="noopener noreferrer">在哔哩哔哩打开</a>。</span>
     </p>
   </section>
 
   <div class="devices">
-    <h2>Supported Devices</h2>
-    <p>Both apps available on <strong>iOS and iPad</strong>. Google Play Store and Chinese app stores (e.g. Huawei AppGallery, Xiaomi, OPPO, vivo) are planned.</p>
+    <h2>
+      <span class="i18n-en" lang="en">Supported Devices</span>
+      <span class="i18n-zh" lang="zh">支持设备</span>
+    </h2>
+    <p>
+      <span class="i18n-en" lang="en">Both apps available on <strong>iOS and iPad</strong>. Now live on <strong>Google Play</strong> and <strong>Huawei AppGallery</strong> &mdash; search &ldquo;SoundsRight&rdquo; or &ldquo;耳顺英语&rdquo;. On other Chinese Android phones (Xiaomi, OPPO, vivo, etc.), install <strong>HMS Core</strong> first, then <strong>Huawei AppGallery</strong>, and you can install SoundsRight from there.</span>
+      <span class="i18n-zh" lang="zh">两款 App 均支持 <strong>iPhone 与 iPad</strong>。<strong>Google Play</strong> 与 <strong>华为应用市场</strong> 均已上线，搜索 SoundsRight 或耳顺英语即可下载。其他国内安卓手机（小米、OPPO、vivo 等）可先安装 <strong>华为 HMS Core</strong>，再安装 <strong>华为应用市场</strong>，即可在其中安装 SoundsRight。</span>
+    </p>
   </div>
 
   <div class="tech">
-    <h2>On-Device AI Technology</h2>
-    <p class="sub">No internet. No cloud. No audio uploaded. Everything runs locally on your phone.</p>
+    <h2>
+      <span class="i18n-en" lang="en">On-Device AI Technology</span>
+      <span class="i18n-zh" lang="zh">端侧 AI 技术</span>
+    </h2>
+    <p class="sub">
+      <span class="i18n-en" lang="en">No internet. No cloud. No audio uploaded. Everything runs locally on your phone.</span>
+      <span class="i18n-zh" lang="zh">无需联网。无需云服务。不上传任何音频。所有计算都在手机本地完成。</span>
+    </p>
     <div class="tech-row">
       <div class="tech-card">
         <div class="tech-icon">T</div>
         <div class="tech-body">
-          <h3>Kokoro TTS (English)</h3>
-          <p>State-of-the-art English text-to-speech with 11 natural voices. Instant playback, zero cloud dependency, complete privacy.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Kokoro TTS (English)</span>
+            <span class="i18n-zh" lang="zh">Kokoro TTS（英语）</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">State-of-the-art English text-to-speech with 11 natural voices. Instant playback, zero cloud dependency, complete privacy.</span>
+            <span class="i18n-zh" lang="zh">业界领先的英文 TTS 引擎，11 种自然嗓音。即时播放，零云端依赖，完全隐私。</span>
+          </p>
         </div>
       </div>
       <div class="tech-card">
         <div class="tech-icon">W</div>
         <div class="tech-body">
-          <h3>OpenAI Whisper (English)</h3>
-          <p>Industry-leading English speech recognition for real-time pronunciation scoring. Dual-dimension feedback for every utterance.</p>
+          <h3>
+            <span class="i18n-en" lang="en">OpenAI Whisper (English)</span>
+            <span class="i18n-zh" lang="zh">OpenAI Whisper（英语）</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Industry-leading English speech recognition for real-time pronunciation scoring. Dual-dimension feedback for every utterance.</span>
+            <span class="i18n-zh" lang="zh">业界领先的英文语音识别，实时发音评分。每次开口都给出双维度反馈。</span>
+          </p>
         </div>
       </div>
       <div class="tech-card">
         <div class="tech-icon">S</div>
         <div class="tech-body">
-          <h3>Paraformer (Chinese)</h3>
-          <p>Advanced Chinese speech recognition model tuned for Mandarin pronunciation assessment. Character-level scoring with tonal accuracy feedback.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Paraformer (Chinese)</span>
+            <span class="i18n-zh" lang="zh">Paraformer（汉语）</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Advanced Chinese speech recognition model tuned for Mandarin pronunciation assessment. Character-level scoring with tonal accuracy feedback.</span>
+            <span class="i18n-zh" lang="zh">为普通话发音评估调优的中文语音识别模型。汉字级评分，含声调准确度反馈。</span>
+          </p>
         </div>
       </div>
     </div>
   </div>
 
   <footer>
-    <div class="copy"><img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" alt="">粤公网安备44030002011542号 &nbsp;&nbsp; <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2026028389号-1</a></div>
-    <div class="copy">&copy; 2026 SoundsRight. All rights reserved.</div>
+    <div class="copy"><img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" alt="">粤公网安备 44030002011542 号 &nbsp;&nbsp; <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2026028389号-1</a></div>
+    <div class="copy">
+      <span class="i18n-en" lang="en">&copy; 2026 SoundsRight. All rights reserved.</span>
+      <span class="i18n-zh" lang="zh">&copy; 2026 SoundsRight. 保留所有权利。</span>
+    </div>
   </footer>
 
+  <script src="i18n.js" defer></script>
 </body>
 </html>

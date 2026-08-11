@@ -6,7 +6,7 @@
   <title>SoundsRightCN 耳顺汉语 - Product Features &amp; Highlights</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #fafafa;
@@ -28,8 +28,14 @@
       color: var(--text);
       background: var(--bg);
     }
+    html.lang-zh body { font-family: 'Noto Sans SC', 'Charter', 'Georgia', serif; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
+
+    /* i18n dual-block */
+    .i18n-zh { display: none; }
+    html.lang-zh .i18n-zh { display: revert; }
+    html.lang-zh .i18n-en { display: none; }
 
     .top-nav {
       display: flex;
@@ -44,6 +50,7 @@
       z-index: 100;
       font-family: 'Poppins', sans-serif;
     }
+    html.lang-zh .top-nav { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
     .top-nav a {
       font-size: 0.9rem;
       font-weight: 500;
@@ -56,8 +63,26 @@
       height: 1.2rem;
       background: var(--border);
     }
-    .top-nav .nav-group { display: flex; gap: 1rem; }
     .top-nav a.active { color: var(--accent); font-weight: 600; }
+    .lang-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.65rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      line-height: 1.4;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-toggle .lang-sep { color: var(--border); }
+    .lang-toggle [data-lang-label] { padding: 0 0.1rem; color: var(--text-muted); }
+    .lang-toggle [data-lang-label].active { color: var(--accent); font-weight: 600; }
 
     .page { max-width: 900px; margin: 0 auto; padding: 0 2rem 3rem; }
 
@@ -118,6 +143,7 @@
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border);
     }
+    html.lang-zh h2 { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
     h2:first-of-type { margin-top: 0; }
     h3 {
       font-family: 'Poppins', sans-serif;
@@ -126,6 +152,7 @@
       margin: 1.25rem 0 0.5rem;
       color: var(--accent);
     }
+    html.lang-zh h3 { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
     p, ul { margin: 0.5rem 0 1rem; }
     ul { padding-left: 1.25rem; }
 
@@ -156,6 +183,8 @@
       font-size: 0.8rem;
       color: var(--text-muted);
       background: var(--bg);
+      text-align: center;
+      padding: 1rem;
     }
     .feature-row .content { flex: 1; min-width: 280px; }
 
@@ -194,16 +223,84 @@
       flex-shrink: 0;
     }
 
-    .toc {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 2rem;
+    .section-tabs {
+      display: flex;
+      gap: 0.25rem;
+      border-bottom: 1px solid var(--border);
+      margin: 1.5rem 0 2rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      font-family: 'Poppins', sans-serif;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+      padding: 0.5rem 0 0;
     }
-    .toc h3 { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
-    .toc a { display: block; padding: 0.25rem 0; font-size: 0.9rem; color: var(--text-muted); }
-    .toc a:hover { color: var(--accent); }
+    html.lang-zh .section-tabs { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
+    .section-tab {
+      appearance: none;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 0.65rem 0.95rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+    .section-tab:hover { color: var(--accent); }
+    .section-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 600;
+    }
+    .feature-section { display: none; }
+    .feature-section.active { display: block; }
+    .section-hero {
+      display: flex;
+      gap: 1.75rem;
+      align-items: flex-start;
+      margin: 1.25rem 0 1.5rem;
+      flex-wrap: wrap;
+    }
+    .section-hero .section-screenshot {
+      flex: 0 0 260px;
+      max-width: 260px;
+      margin: 0;
+    }
+    .section-hero .section-screenshot img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      display: block;
+    }
+    .section-hero .section-intro {
+      flex: 1 1 280px;
+      min-width: 0;
+      padding-top: 0.25rem;
+    }
+    .section-hero .section-intro > p:first-child { margin-top: 0; }
+    .section-hero .section-intro > p:last-child { margin-bottom: 0; }
+    .panel-screenshot {
+      max-width: 260px;
+      margin: 1.25rem auto;
+    }
+    .panel-screenshot img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      display: block;
+    }
 
     .free-badge {
       display: inline-block;
@@ -238,11 +335,16 @@
       margin-top: 2rem;
     }
     footer .copy { font-size: 0.8rem; color: var(--text-muted); }
+    footer .footer-site a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    footer .footer-site a:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
       .overview { grid-template-columns: repeat(2, 1fr); }
       .feature-row { flex-direction: column; align-items: center; }
       .feature-row .screenshot { flex: 0 0 auto; max-width: 220px; }
+      .section-hero { flex-direction: column; align-items: center; }
+      .section-hero .section-screenshot { flex: 0 0 auto; max-width: 240px; }
+      .section-hero .section-intro { text-align: left; }
     }
     @media (max-width: 640px) {
       .top-nav { flex-wrap: wrap; gap: 0.5rem 1rem; }
@@ -253,399 +355,873 @@
 </head>
 <body>
   <nav class="top-nav">
-    <a href="index.html" style="font-weight:600; color:var(--text);">Home</a>
+    <a href="index.html" style="font-weight:600; color:var(--text);">
+      <span class="i18n-en" lang="en">Home</span>
+      <span class="i18n-zh" lang="zh">首页</span>
+    </a>
     <div class="nav-divider"></div>
     <a href="product.html">SoundsRight</a>
     <a href="product-cn.html" class="active">SoundsRightCN</a>
     <div class="nav-divider"></div>
-    <a href="support.html">Support</a>
+    <a href="support.html">
+      <span class="i18n-en" lang="en">Support</span>
+      <span class="i18n-zh" lang="zh">帮助</span>
+    </a>
+    <button class="lang-toggle" type="button" aria-label="Switch language">
+      <span data-lang-label="en">EN</span>
+      <span class="lang-sep">|</span>
+      <span data-lang-label="zh">中文</span>
+    </button>
   </nav>
 
   <div class="hero">
-    <h1>SoundsRightCN 耳顺汉语 &middot; Product</h1>
-    <p class="subtitle">Learn Chinese pronunciation, characters, and culture — designed for non-native speakers</p>
-    <p>Fully offline Chinese learning with on-device AI. <strong>3,000 Hanzi characters</strong> (HSK 1&ndash;7), <strong>9,443 words</strong> (including idioms and proverbs), <strong>5,000+ dialogues</strong> across 20 categories, and <strong>1,291 classical and modern articles</strong> — Tang poetry, Song ci, Four Great Novels, and more. Paraformer Chinese ASR. No internet required.</p>
+    <h1>
+      <span class="i18n-en" lang="en">SoundsRightCN 耳顺汉语 &middot; Product</span>
+      <span class="i18n-zh" lang="zh">SoundsRightCN 耳顺汉语 &middot; 产品介绍</span>
+    </h1>
+    <p class="subtitle">
+      <span class="i18n-en" lang="en">Learn Chinese pronunciation, characters, and culture &mdash; designed for non-native speakers</span>
+      <span class="i18n-zh" lang="zh">为非母语者打造的汉语发音、汉字与文化学习</span>
+    </p>
+    <p>
+      <span class="i18n-en" lang="en">Fully offline Chinese learning with on-device AI. <strong>3,000 Hanzi characters</strong> (HSK 1&ndash;7), <strong>9,443 words</strong> (including idioms and proverbs), <strong>6,000+ dialogues</strong> across 20 categories, and <strong>1,291 classical and modern articles</strong> &mdash; Tang poetry, Song ci, Four Great Novels, and more. Paraformer Chinese ASR. No internet required.</span>
+      <span class="i18n-zh" lang="zh">完全离线、端侧 AI 驱动的汉语学习。<strong>3,000 个汉字</strong>（HSK 1&ndash;7）、<strong>9,443 个词语</strong>（含成语与谚语）、<strong>6,000+ 段对话</strong>覆盖 20 大分类、<strong>1,291 篇古今文章</strong> &mdash; 唐诗、宋词、四大名著等。Paraformer 中文 ASR。无需联网。</span>
+    </p>
   </div>
 
   <div class="page">
     <div class="overview">
       <div class="overview-card">
         <div class="num">3,000</div>
-        <div class="label">Hanzi</div>
-        <p>HSK 1&ndash;7 characters with strokes, radicals, pinyin</p>
+        <div class="label">
+          <span class="i18n-en" lang="en">Hanzi</span>
+          <span class="i18n-zh" lang="zh">汉字</span>
+        </div>
+        <p>
+          <span class="i18n-en" lang="en">HSK 1&ndash;7 characters with strokes, radicals, pinyin</span>
+          <span class="i18n-zh" lang="zh">HSK 1&ndash;7，含笔画、部首、拼音</span>
+        </p>
       </div>
       <div class="overview-card">
         <div class="num">9,443</div>
-        <div class="label">Words &amp; Phrases</div>
-        <p>Common words, idioms (成语), and proverbs (谚语)</p>
+        <div class="label">
+          <span class="i18n-en" lang="en">Words &amp; Phrases</span>
+          <span class="i18n-zh" lang="zh">词语</span>
+        </div>
+        <p>
+          <span class="i18n-en" lang="en">Common words, idioms (成语), and proverbs (谚语)</span>
+          <span class="i18n-zh" lang="zh">常用词、成语、谚语</span>
+        </p>
       </div>
       <div class="overview-card">
-        <div class="num">5,000+</div>
-        <div class="label">Dialogues</div>
-        <p>20 categories &times; 3 levels &mdash; daily life &amp; Chinese culture</p>
+        <div class="num">6,000+</div>
+        <div class="label">
+          <span class="i18n-en" lang="en">Dialogues</span>
+          <span class="i18n-zh" lang="zh">对话</span>
+        </div>
+        <p>
+          <span class="i18n-en" lang="en">20 categories &times; 3 levels &mdash; daily life &amp; Chinese culture</span>
+          <span class="i18n-zh" lang="zh">20 大分类 &times; 3 个难度 &mdash; 涵盖生活与中国文化</span>
+        </p>
       </div>
       <div class="overview-card">
         <div class="num">1,291</div>
-        <div class="label">Articles</div>
-        <p>Classical poetry, novels, philosophy, and modern prose</p>
+        <div class="label">
+          <span class="i18n-en" lang="en">Articles</span>
+          <span class="i18n-zh" lang="zh">文章</span>
+        </div>
+        <p>
+          <span class="i18n-en" lang="en">Classical poetry, novels, philosophy, and modern prose</span>
+          <span class="i18n-zh" lang="zh">诗歌、小说、子书与现代散文</span>
+        </p>
       </div>
     </div>
 
-    <div class="toc">
-      <h3>Jump to</h3>
-      <a href="#hanzi-learning">1. Hanzi (汉字) Learning</a>
-      <a href="#ci-vocabulary">2. Ci (词语) Vocabulary</a>
-      <a href="#dialogue-practice">3. Dialogue Practice</a>
-      <a href="#article-reading">4. Article Reading</a>
-      <a href="#hanzi-test">5. Hanzi Test (汉字测试)</a>
-      <a href="#ci-test">6. Ci Test (词语测试)</a>
-      <a href="#dialogue-test">7. Dialogue Test (对话测试)</a>
-      <a href="#article-test">8. Article Test (文章测试)</a>
-    </div>
+    <div class="section-tabs">
+  <button class="section-tab active" type="button" data-target="hanzi-learning"><span class="i18n-en" lang="en">1. Hanzi (汉字) Learning</span>
+        <span class="i18n-zh" lang="zh">1. 汉字学习</span></button>
+  <button class="section-tab" type="button" data-target="ci-vocabulary"><span class="i18n-en" lang="en">2. Ci (词语) Vocabulary</span>
+        <span class="i18n-zh" lang="zh">2. 词语学习</span></button>
+  <button class="section-tab" type="button" data-target="dialogue-practice"><span class="i18n-en" lang="en">3. Dialogue Practice</span>
+        <span class="i18n-zh" lang="zh">3. 对话练习</span></button>
+  <button class="section-tab" type="button" data-target="article-reading"><span class="i18n-en" lang="en">4. Article Reading</span>
+        <span class="i18n-zh" lang="zh">4. 文章阅读</span></button>
+  <button class="section-tab" type="button" data-target="hanzi-test"><span class="i18n-en" lang="en">5. Hanzi Test (汉字测试)</span>
+        <span class="i18n-zh" lang="zh">5. 汉字测试</span></button>
+  <button class="section-tab" type="button" data-target="ci-test"><span class="i18n-en" lang="en">6. Ci Test (词语测试)</span>
+        <span class="i18n-zh" lang="zh">6. 词语测试</span></button>
+  <button class="section-tab" type="button" data-target="dialogue-test"><span class="i18n-en" lang="en">7. Dialogue Test (对话测试)</span>
+        <span class="i18n-zh" lang="zh">7. 对话测试</span></button>
+  <button class="section-tab" type="button" data-target="article-test"><span class="i18n-en" lang="en">8. Article Test (文章测试)</span>
+        <span class="i18n-zh" lang="zh">8. 文章测试</span></button>
+</div>
 
-  <section id="hanzi-learning" class="feature-section">
-    <h2>1. Hanzi (汉字) Learning</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/soundsrightcn_char_practice.png" alt="Hanzi Learning" /></div>
-      <div class="content">
-        <p>Master Chinese characters with comprehensive details and structured practice. <strong>3,000 characters</strong> organized by official HSK levels 1&ndash;7, covering the complete character set from China's merged proficiency standard.</p>
-
+  <section id="hanzi-learning" class="feature-section active">
+    <h2>
+      <span class="i18n-en" lang="en">1. Hanzi (汉字) Learning</span>
+      <span class="i18n-zh" lang="zh">1. 汉字学习</span>
+    </h2>
+        
+      
+        <p>
+          <span class="i18n-en" lang="en">Master Chinese characters with comprehensive details and structured practice. <strong>3,000 characters</strong> organized by official HSK levels 1&ndash;7, covering the complete character set from China's merged proficiency standard.</span>
+          <span class="i18n-zh" lang="zh">系统掌握汉字：完整信息 + 结构化练习。<strong>3,000 个汉字</strong>按官方 HSK 1&ndash;7 分级，覆盖中国合并标准全部字集。</span>
+        </p>
+      
+      
+        <div class="panel-screenshot"><img src="screenshots/soundsrightcn_char_practice.png" alt="Hanzi Learning" /></div>
         <div class="card">
-          <h3>HSK 1&ndash;7 Progressive Levels</h3>
-          <p>Characters are grouped by HSK level, providing a clear learning path from beginner to advanced:</p>
+          <h3>
+            <span class="i18n-en" lang="en">HSK 1&ndash;7 Progressive Levels</span>
+            <span class="i18n-zh" lang="zh">HSK 1&ndash;7 渐进等级</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Characters are grouped by HSK level, providing a clear learning path from beginner to advanced:</span>
+            <span class="i18n-zh" lang="zh">按 HSK 等级分组，提供从入门到精通的清晰路径：</span>
+          </p>
           <ul>
-            <li><strong>HSK 1</strong> — 300 foundational characters for basic communication <span class="free-badge">Free</span></li>
-            <li><strong>HSK 2</strong> — 300 characters for simple daily interactions <span class="free-badge">Free</span></li>
-            <li><strong>HSK 3</strong> — 300 characters for intermediate conversation <span class="free-badge">Free</span></li>
-            <li><strong>HSK 4</strong> — 300 characters for complex topics and discussions <span class="pro-badge">Pro</span></li>
-            <li><strong>HSK 5</strong> — 300 characters for reading newspapers and academic texts <span class="pro-badge">Pro</span></li>
-            <li><strong>HSK 6</strong> — 300 characters for advanced proficiency <span class="pro-badge">Pro</span></li>
-            <li><strong>HSK 7</strong> — 1,200 characters for near-native mastery <span class="pro-badge">Pro</span></li>
+            <li><strong>HSK 1</strong> &mdash;
+              <span class="i18n-en" lang="en">300 foundational characters for basic communication <span class="free-badge">Free</span></span>
+              <span class="i18n-zh" lang="zh">300 个基础汉字，用于基本交流 <span class="free-badge">免费</span></span>
+            </li>
+            <li><strong>HSK 2</strong> &mdash;
+              <span class="i18n-en" lang="en">300 characters for simple daily interactions <span class="free-badge">Free</span></span>
+              <span class="i18n-zh" lang="zh">300 个汉字，用于简单日常互动 <span class="free-badge">免费</span></span>
+            </li>
+            <li><strong>HSK 3</strong> &mdash;
+              <span class="i18n-en" lang="en">300 characters for intermediate conversation <span class="free-badge">Free</span></span>
+              <span class="i18n-zh" lang="zh">300 个汉字，用于中级对话 <span class="free-badge">免费</span></span>
+            </li>
+            <li><strong>HSK 4</strong> &mdash;
+              <span class="i18n-en" lang="en">300 characters for complex topics and discussions <span class="pro-badge">Pro</span></span>
+              <span class="i18n-zh" lang="zh">300 个汉字，用于复杂话题与讨论 <span class="pro-badge">Pro</span></span>
+            </li>
+            <li><strong>HSK 5</strong> &mdash;
+              <span class="i18n-en" lang="en">300 characters for reading newspapers and academic texts <span class="pro-badge">Pro</span></span>
+              <span class="i18n-zh" lang="zh">300 个汉字，用于阅读报刊与学术文章 <span class="pro-badge">Pro</span></span>
+            </li>
+            <li><strong>HSK 6</strong> &mdash;
+              <span class="i18n-en" lang="en">300 characters for advanced proficiency <span class="pro-badge">Pro</span></span>
+              <span class="i18n-zh" lang="zh">300 个汉字，用于高级表达 <span class="pro-badge">Pro</span></span>
+            </li>
+            <li><strong>HSK 7</strong> &mdash;
+              <span class="i18n-en" lang="en">1,200 characters for near-native mastery <span class="pro-badge">Pro</span></span>
+              <span class="i18n-zh" lang="zh">1,200 个汉字，用于接近母语水平 <span class="pro-badge">Pro</span></span>
+            </li>
           </ul>
-          <p>Each level is self-contained, so you can start at any level that matches your ability.</p>
+          <p>
+            <span class="i18n-en" lang="en">Each level is self-contained, so you can start at any level that matches your ability.</span>
+            <span class="i18n-zh" lang="zh">每个等级自成一体，可从任何匹配自身水平的等级开始。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Rich Character Details</h3>
-          <p>Every character entry includes:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Browse By HSK or By Radical (部首)</span>
+            <span class="i18n-zh" lang="zh">按 HSK 或按部首浏览</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Pick the way that suits your study style. <strong>By HSK</strong> orders characters by proficiency level. <strong>By Radical</strong> groups them under <strong>127 Kangxi radical groups</strong> plus 1 独体字 (single-component) category, themselves organized into 5 thematic super-categories:</span>
+            <span class="i18n-zh" lang="zh">按你的学习风格选择。<strong>按 HSK</strong> 按等级排序。<strong>按部首</strong> 把汉字归到 <strong>127 个康熙部首组</strong> + 1 个独体字类下，并按 5 大主题分组：</span>
+          </p>
           <ul>
-            <li><strong>Stroke count</strong> — precise count from the Unihan database</li>
-            <li><strong>Radical</strong> — the root component for dictionary lookup</li>
-            <li><strong>Pinyin</strong> — with tone marks for accurate pronunciation</li>
-            <li><strong>Definitions</strong> — in both Chinese and English</li>
-            <li><strong>Example words</strong> — compound words containing the character</li>
-            <li><strong>Example sentences</strong> — with pinyin and English translation</li>
+            <li><span class="i18n-en" lang="en">人、人体及动作</span><span class="i18n-zh" lang="zh">人、人体及动作</span></li>
+            <li><span class="i18n-en" lang="en">自然、地理、天象</span><span class="i18n-zh" lang="zh">自然、地理、天象</span></li>
+            <li><span class="i18n-en" lang="en">动植物、食物</span><span class="i18n-zh" lang="zh">动植物、食物</span></li>
+            <li><span class="i18n-en" lang="en">器物、材料、衣行</span><span class="i18n-zh" lang="zh">器物、材料、衣行</span></li>
+            <li><span class="i18n-en" lang="en">独体字</span><span class="i18n-zh" lang="zh">独体字</span></li>
+          </ul>
+          <p>
+            <span class="i18n-en" lang="en">Radical-based browsing mirrors how Chinese dictionaries work and helps you see the structural family of each character &mdash; e.g. all characters sharing 水 / 氵 together.</span>
+            <span class="i18n-zh" lang="zh">按部首浏览与中文字典的查字方式一致，帮你看到每个字的结构家族 &mdash; 例如所有水 / 氵 旁的字放在一起。</span>
+          </p>
+        </div>
+      
+      
+        <div class="panel-screenshot"><img src="screenshots/soundsrightcn_char.png" alt="Hanzi Image Practice (汉字配图)" /></div>
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">Hanzi Image Practice &mdash; Visual Memory Mode</span>
+            <span class="i18n-zh" lang="zh">汉字配图练习 &mdash; 视觉记忆模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">An alternative to text practice: each character is shown with an AI-generated image and overlaid text &mdash; the big character itself, plus toggleable layers for <strong>pinyin</strong>, <strong>Chinese definition</strong>, <strong>English definition</strong>, and <strong>classical example sentence</strong> (with English translation). The same TTS / record / scoring flow as text mode applies; you can run hands-free auto rounds or tap-record each character. Image packs are downloaded per HSK level or per radical group and work offline after download. Switch back to text mode anytime from Options.</span>
+            <span class="i18n-zh" lang="zh">文本练习之外的另一种方式：每个字配一张 AI 生成的图片，图上叠加文字 &mdash; 大字本身，以及可切换的 <strong>拼音</strong>、<strong>中文释义</strong>、<strong>英文释义</strong>、<strong>古文例句</strong>（含英文翻译）。流程与文本模式相同：TTS / 录音 / 评分，支持免手自动连播或手动逐字录音。图片包按 HSK 等级或部首分组按需下载，下载后可离线使用。随时可在 Options 切回文本模式。</span>
+          </p>
+        </div>
+        <div class="card highlight">
+          <h3>
+            <span class="i18n-en" lang="en">Each Character Brings Its Own Scene</span>
+            <span class="i18n-zh" lang="zh">一个字，一幅场景</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">The character <strong>休 (xiū, "rest")</strong> sits over an AI-generated scene of a scholar reclining by a pine-clad river, with the classical couplet <em>"名岂文章著，官因老病休"</em> anchoring the meaning. Pinyin, Chinese/English definitions, and the example sentence can each be toggled on or off so the same image works for different study depths &mdash; from quick recognition to deep literary context.</span>
+            <span class="i18n-zh" lang="zh">字 <strong>休</strong> 叠加在 AI 生成的画面上：苍松河畔，一人在木屋中读书。"名岂文章著，官因老病休" 的古文例句点明字义。拼音、中英释义、例句可逐一开关 &mdash; 同一张图既可用于快速识记，也可深入到古文语境。</span>
+          </p>
+        </div>
+      
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">Rich Character Details</span>
+            <span class="i18n-zh" lang="zh">完整汉字信息</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Every character entry includes:</span>
+            <span class="i18n-zh" lang="zh">每个汉字都包含：</span>
+          </p>
+          <ul>
+            <li><span class="i18n-en" lang="en"><strong>Stroke count</strong> &mdash; precise count from the Unihan database</span><span class="i18n-zh" lang="zh"><strong>笔画数</strong> &mdash; 来自 Unihan 数据库的精确笔画数</span></li>
+            <li><span class="i18n-en" lang="en"><strong>Radical</strong> &mdash; the root component for dictionary lookup</span><span class="i18n-zh" lang="zh"><strong>部首</strong> &mdash; 用于查字典的根组件</span></li>
+            <li><span class="i18n-en" lang="en"><strong>Pinyin</strong> &mdash; with tone marks for accurate pronunciation</span><span class="i18n-zh" lang="zh"><strong>拼音</strong> &mdash; 带声调标注</span></li>
+            <li><span class="i18n-en" lang="en"><strong>Definitions</strong> &mdash; in both Chinese and English</span><span class="i18n-zh" lang="zh"><strong>释义</strong> &mdash; 中英文双语</span></li>
+            <li><span class="i18n-en" lang="en"><strong>Example words</strong> &mdash; compound words containing the character</span><span class="i18n-zh" lang="zh"><strong>例词</strong> &mdash; 含该字的复合词</span></li>
+            <li><span class="i18n-en" lang="en"><strong>Example sentences</strong> &mdash; with pinyin and English translation</span><span class="i18n-zh" lang="zh"><strong>例句</strong> &mdash; 含拼音与英文翻译</span></li>
           </ul>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Practice &amp; Test Modes</h3>
-          <p>Practice with customizable session sizes (1&ndash;300 characters). Test your recognition and recall. Handwriting bands are grouped into elementary, intermediate, and advanced tiers for character writing practice.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Practice &amp; Test Modes</span>
+            <span class="i18n-zh" lang="zh">练习与测试模式</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Practice with customizable session sizes (1&ndash;300 characters). Test your recognition and recall. Handwriting bands are grouped into elementary, intermediate, and advanced tiers for character writing practice.</span>
+            <span class="i18n-zh" lang="zh">自定义练习数量（1&ndash;300 字）。测试辨识与回忆。书写练习按初级、中级、高级三档分组。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="ci-vocabulary" class="feature-section">
-    <h2>2. Ci (词语) Vocabulary</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/soundsrightcn_word_practice.png" alt="Ci Vocabulary" /></div>
-      <div class="content">
-        <p>Build your Chinese vocabulary with <strong>9,443 words and phrases</strong> organized by HSK level and character groups. Words are connected to the characters you're learning, reinforcing both simultaneously.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">2. Ci (词语) Vocabulary</span>
+      <span class="i18n-zh" lang="zh">2. 词语学习</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/soundsrightcn_word_practice.png" alt="Ci Vocabulary" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Build your Chinese vocabulary with <strong>9,443 words and phrases</strong> organized by HSK level and character groups. Words are connected to the characters you're learning, reinforcing both simultaneously.</span>
+          <span class="i18n-zh" lang="zh">通过 <strong>9,443 个词语</strong>积累中文词汇，按 HSK 等级与汉字分组组织。词语与你正在学的汉字互相关联，双向巩固。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>Three Vocabulary Types</h3>
+          <h3>
+            <span class="i18n-en" lang="en">Three Vocabulary Types</span>
+            <span class="i18n-zh" lang="zh">三类词语</span>
+          </h3>
           <ul>
-            <li><strong>Common Words (常用词)</strong> — everyday vocabulary essential for daily communication</li>
-            <li><strong>Idioms (成语)</strong> — four-character Chinese idioms with rich cultural meaning</li>
-            <li><strong>Proverbs (谚语)</strong> — traditional Chinese sayings passed down through generations</li>
+            <li><strong>常用词 (Common Words)</strong> &mdash;
+              <span class="i18n-en" lang="en">everyday vocabulary essential for daily communication</span>
+              <span class="i18n-zh" lang="zh">日常交流必备的高频词</span>
+            </li>
+            <li><strong>成语 (Idioms)</strong> &mdash;
+              <span class="i18n-en" lang="en">four-character Chinese idioms with rich cultural meaning</span>
+              <span class="i18n-zh" lang="zh">四字中文成语，承载丰富文化含义</span>
+            </li>
+            <li><strong>谚语 (Proverbs)</strong> &mdash;
+              <span class="i18n-en" lang="en">traditional Chinese sayings passed down through generations</span>
+              <span class="i18n-zh" lang="zh">代代相传的传统中国谚语</span>
+            </li>
           </ul>
-          <p>Each word includes detailed definitions in both Chinese and English, part of speech, and related word suggestions.</p>
+          <p>
+            <span class="i18n-en" lang="en">Each word includes detailed definitions in both Chinese and English, part of speech, and related word suggestions.</span>
+            <span class="i18n-zh" lang="zh">每个词都包含中英文释义、词性，以及相关词推荐。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Character-Grouped Organization</h3>
-          <p>Words are organized by the characters they contain, so as you learn a new character, you simultaneously discover all the words built from it. This approach mirrors how native speakers build vocabulary — through character combinations rather than isolated word lists.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Character-Grouped Organization</span>
+            <span class="i18n-zh" lang="zh">按汉字聚合</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Words are organized by the characters they contain, so as you learn a new character, you simultaneously discover all the words built from it. This approach mirrors how native speakers build vocabulary &mdash; through character combinations rather than isolated word lists.</span>
+            <span class="i18n-zh" lang="zh">词语按所含汉字聚合 &mdash; 学一个新字，同时见到所有由它组成的词。这与母语者通过组字而非孤立词表积累词汇的方式一致。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Practice &amp; Test</h3>
-          <p>Customizable practice sessions with adjustable word counts. Test mode assesses your grasp of meaning, pronunciation, and usage. Performance is tracked across all HSK levels.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Practice &amp; Test</span>
+            <span class="i18n-zh" lang="zh">练习与测试</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Customizable practice sessions with adjustable word counts. Test mode assesses your grasp of meaning, pronunciation, and usage. Performance is tracked across all HSK levels.</span>
+            <span class="i18n-zh" lang="zh">可自定义练习的词数。测试模式评估你对词义、发音与用法的掌握。所有 HSK 等级的表现均有跟踪。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="dialogue-practice" class="feature-section">
-    <h2>3. Dialogue Practice</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/soundsrightcn_dialogue_practice.png" alt="Dialogue Practice" /></div>
-      <div class="content">
-        <p>Practice real-world Chinese conversations with <strong>5,000+ dialogues</strong> across <strong>20 categories</strong> and <strong>3 difficulty levels</strong>. Role-play as Speaker A or B with per-line pronunciation scoring.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">3. Dialogue Practice</span>
+      <span class="i18n-zh" lang="zh">3. 对话练习</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/soundsrightcn_dialogue_practice.png" alt="Dialogue Practice" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Practice real-world Chinese conversations with <strong>6,000+ dialogues</strong> across <strong>20 categories</strong> and <strong>3 difficulty levels</strong>. Role-play as Speaker A or B with per-line pronunciation scoring.</span>
+          <span class="i18n-zh" lang="zh">练习真实汉语对话：<strong>6,000+ 段对话</strong>覆盖 <strong>20 大分类</strong>与 <strong>3 个难度等级</strong>。可选 A 或 B 角色，逐句评分。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>20 Conversation Categories</h3>
-          <p><strong>Daily Life (10 subcategories):</strong></p>
+          <h3>
+            <span class="i18n-en" lang="en">20 Conversation Categories</span>
+            <span class="i18n-zh" lang="zh">20 大对话分类</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en"><strong>Daily Life (10 subcategories):</strong></span>
+            <span class="i18n-zh" lang="zh"><strong>日常生活（10 小类）：</strong></span>
+          </p>
           <ul class="category-grid">
-            <li>Greetings &amp; Introductions</li>
-            <li>Shopping &amp; Bargaining</li>
-            <li>Transportation &amp; Directions</li>
-            <li>Dining &amp; Ordering</li>
-            <li>Housing &amp; Renting</li>
-            <li>Banking &amp; Services</li>
-            <li>Healthcare &amp; Hospital</li>
-            <li>Work &amp; Office</li>
-            <li>Socializing &amp; Friends</li>
-            <li>Phone &amp; Internet</li>
+            <li><span class="i18n-en" lang="en">Greetings &amp; Introductions</span><span class="i18n-zh" lang="zh">问候与介绍</span></li>
+            <li><span class="i18n-en" lang="en">Shopping &amp; Bargaining</span><span class="i18n-zh" lang="zh">购物与砍价</span></li>
+            <li><span class="i18n-en" lang="en">Transportation &amp; Directions</span><span class="i18n-zh" lang="zh">交通与问路</span></li>
+            <li><span class="i18n-en" lang="en">Dining &amp; Ordering</span><span class="i18n-zh" lang="zh">用餐与点单</span></li>
+            <li><span class="i18n-en" lang="en">Housing &amp; Renting</span><span class="i18n-zh" lang="zh">住房与租房</span></li>
+            <li><span class="i18n-en" lang="en">Banking &amp; Services</span><span class="i18n-zh" lang="zh">银行与服务</span></li>
+            <li><span class="i18n-en" lang="en">Healthcare &amp; Hospital</span><span class="i18n-zh" lang="zh">医疗与就医</span></li>
+            <li><span class="i18n-en" lang="en">Work &amp; Office</span><span class="i18n-zh" lang="zh">工作与办公</span></li>
+            <li><span class="i18n-en" lang="en">Socializing &amp; Friends</span><span class="i18n-zh" lang="zh">社交与朋友</span></li>
+            <li><span class="i18n-en" lang="en">Phone &amp; Internet</span><span class="i18n-zh" lang="zh">电话与网络</span></li>
           </ul>
-          <p><strong>Chinese Culture (10 subcategories):</strong></p>
+          <p>
+            <span class="i18n-en" lang="en"><strong>Chinese Culture (10 subcategories):</strong></span>
+            <span class="i18n-zh" lang="zh"><strong>中国文化（10 小类）：</strong></span>
+          </p>
           <ul class="category-grid">
-            <li>History &amp; Dynasties</li>
-            <li>Classical Literature</li>
-            <li>Festivals &amp; Customs</li>
-            <li>Traditional Arts</li>
-            <li>Philosophy &amp; Thought</li>
-            <li>Cuisine &amp; Tea Culture</li>
-            <li>Geography &amp; Travel</li>
-            <li>Modern China</li>
-            <li>Education &amp; Exams</li>
-            <li>Business &amp; Etiquette</li>
+            <li><span class="i18n-en" lang="en">History &amp; Dynasties</span><span class="i18n-zh" lang="zh">历史与朝代</span></li>
+            <li><span class="i18n-en" lang="en">Classical Literature</span><span class="i18n-zh" lang="zh">古典文学</span></li>
+            <li><span class="i18n-en" lang="en">Festivals &amp; Customs</span><span class="i18n-zh" lang="zh">节日与习俗</span></li>
+            <li><span class="i18n-en" lang="en">Traditional Arts</span><span class="i18n-zh" lang="zh">传统艺术</span></li>
+            <li><span class="i18n-en" lang="en">Philosophy &amp; Thought</span><span class="i18n-zh" lang="zh">哲学与思想</span></li>
+            <li><span class="i18n-en" lang="en">Cuisine &amp; Tea Culture</span><span class="i18n-zh" lang="zh">饮食与茶文化</span></li>
+            <li><span class="i18n-en" lang="en">Geography &amp; Travel</span><span class="i18n-zh" lang="zh">地理与旅行</span></li>
+            <li><span class="i18n-en" lang="en">Modern China</span><span class="i18n-zh" lang="zh">现代中国</span></li>
+            <li><span class="i18n-en" lang="en">Education &amp; Exams</span><span class="i18n-zh" lang="zh">教育与考试</span></li>
+            <li><span class="i18n-en" lang="en">Business &amp; Etiquette</span><span class="i18n-zh" lang="zh">商务与礼仪</span></li>
           </ul>
         </div>
-
+      
+      
         <div class="card">
-          <h3>3 Difficulty Levels</h3>
+          <h3>
+            <span class="i18n-en" lang="en">3 Difficulty Levels</span>
+            <span class="i18n-zh" lang="zh">3 个难度等级</span>
+          </h3>
           <ul>
-            <li><strong>Easy</strong> — Short exchanges with basic vocabulary and common sentence patterns <span class="free-badge">Free</span></li>
-            <li><strong>Medium</strong> — Longer conversations with richer vocabulary and varied grammar <span class="pro-badge">Pro</span></li>
-            <li><strong>Hard</strong> — Complex dialogues with idiomatic expressions and cultural nuances <span class="pro-badge">Pro</span></li>
+            <li><strong>Easy</strong> &mdash;
+              <span class="i18n-en" lang="en">Short exchanges with basic vocabulary and common sentence patterns <span class="free-badge">Free</span></span>
+              <span class="i18n-zh" lang="zh">简短对话，基础词汇与常用句型 <span class="free-badge">免费</span></span>
+            </li>
+            <li><strong>Medium</strong> &mdash;
+              <span class="i18n-en" lang="en">Longer conversations with richer vocabulary and varied grammar <span class="pro-badge">Pro</span></span>
+              <span class="i18n-zh" lang="zh">更长对话，词汇更丰富、语法更多样 <span class="pro-badge">Pro</span></span>
+            </li>
+            <li><strong>Hard</strong> &mdash;
+              <span class="i18n-en" lang="en">Complex dialogues with idiomatic expressions and cultural nuances <span class="pro-badge">Pro</span></span>
+              <span class="i18n-zh" lang="zh">复杂对话，含习语表达与文化细节 <span class="pro-badge">Pro</span></span>
+            </li>
           </ul>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Dual-Role Practice with Pinyin &amp; Translation</h3>
-          <p>Every dialogue line displays <strong>Chinese characters, pinyin, and English translation</strong> side by side. Practice as either speaker with independent pronunciation scoring on accuracy and fluency. Cultural notes provide context for culturally specific terms and customs.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Dual-Role Practice with Pinyin &amp; Translation</span>
+            <span class="i18n-zh" lang="zh">双角色练习，含拼音与翻译</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Every dialogue line displays <strong>Chinese characters, pinyin, and English translation</strong> side by side. Practice as either speaker with independent pronunciation scoring on accuracy and fluency. Cultural notes provide context for culturally specific terms and customs.</span>
+            <span class="i18n-zh" lang="zh">每句对话同时显示 <strong>汉字、拼音、英文翻译</strong>。可选任一角色练习，独立评分（准确度 + 流利度）。文化注释为文化特色词与习俗提供背景。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+      
+        <div class="card">
+          <h3>
+            <span class="i18n-en" lang="en">Kokoro TTS Voice Picker &mdash; 13 Voices</span>
+            <span class="i18n-zh" lang="zh">Kokoro TTS 嗓音选择器 &mdash; 13 种声音</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Choose from <strong>3 English</strong> and <strong>10 Chinese</strong> Kokoro voices (5 female + 5 male for Chinese). Each module remembers its own voice pick, and voices can be paired with pinyin-based synthesis and a slow-speed hint for clearer articulation.</span>
+            <span class="i18n-zh" lang="zh">可选 <strong>3 种英文</strong>与 <strong>10 种中文</strong> Kokoro 嗓音（中文含 5 女 + 5 男）。每个模块单独记忆所选嗓音，并支持基于拼音的合成与慢速提示，发音更清晰。</span>
+          </p>
+        </div>
+      
+    
   </section>
 
   <section id="article-reading" class="feature-section">
-    <h2>4. Article Reading</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/soundsrightcn_article_practice.png" alt="Article Reading" /></div>
-      <div class="content">
-        <p>Read authentic Chinese texts from classical to modern — <strong>1,291 articles</strong> across <strong>7 major categories</strong>, with full pinyin annotation and English translations.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">4. Article Reading</span>
+      <span class="i18n-zh" lang="zh">4. 文章阅读</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/soundsrightcn_article_practice.png" alt="Article Reading" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Read authentic Chinese texts from classical to modern &mdash; <strong>1,291 articles</strong> across <strong>6 major categories</strong>, with full pinyin annotation and English translations.</span>
+          <span class="i18n-zh" lang="zh">阅读从古至今的纯正中文 &mdash; <strong>1,291 篇文章</strong>，分属 <strong>6 大类</strong>，全篇标注拼音与英文翻译。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>Pre-Qin Masters &amp; Classics (先秦诸子与典籍) — 146 Works</h3>
-          <p>The foundational texts of Chinese civilization:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Pre-Qin Masters &amp; Classics (先秦诸子与典籍) &mdash; 146 Works</span>
+            <span class="i18n-zh" lang="zh">先秦诸子与典籍 &mdash; 146 部</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">The foundational texts of Chinese civilization:</span>
+            <span class="i18n-zh" lang="zh">中华文明的奠基之作：</span>
+          </p>
           <ul class="book-list">
-            <li>Laozi 老子 — Dao De Jing (道德经) complete, 81 chapters</li>
-            <li>Sun Wu 孙武 — The Art of War (孙子兵法) complete, 13 chapters</li>
-            <li>Confucius 孔子 — The Analects (论语) selected passages</li>
-            <li>Mencius 孟子 — selected passages</li>
-            <li>Zhuangzi 庄子 — selected passages</li>
-            <li>Shi Jing 诗经 — selected passages</li>
+            <li><span class="i18n-en" lang="en">Laozi 老子 &mdash; Dao De Jing (道德经) complete, 81 chapters</span><span class="i18n-zh" lang="zh">老子 &mdash; 《道德经》全本 81 章</span></li>
+            <li><span class="i18n-en" lang="en">Sun Wu 孙武 &mdash; The Art of War (孙子兵法) complete, 13 chapters</span><span class="i18n-zh" lang="zh">孙武 &mdash; 《孙子兵法》全本 13 篇</span></li>
+            <li><span class="i18n-en" lang="en">Confucius 孔子 &mdash; The Analects (论语) selected passages</span><span class="i18n-zh" lang="zh">孔子 &mdash; 《论语》选段</span></li>
+            <li><span class="i18n-en" lang="en">Mencius 孟子 &mdash; selected passages</span><span class="i18n-zh" lang="zh">孟子 &mdash; 选段</span></li>
+            <li><span class="i18n-en" lang="en">Zhuangzi 庄子 &mdash; selected passages</span><span class="i18n-zh" lang="zh">庄子 &mdash; 选段</span></li>
+            <li><span class="i18n-en" lang="en">Shi Jing 诗经 &mdash; selected passages</span><span class="i18n-zh" lang="zh">《诗经》&mdash; 选段</span></li>
           </ul>
-          <p>The first 3 works per author are free. Unlock the complete texts with Pro.</p>
+          <p>
+            <span class="i18n-en" lang="en">The first 3 works per author are free. Unlock the complete texts with Pro.</span>
+            <span class="i18n-zh" lang="zh">每位作者前 3 篇免费。完整内容需 Pro 解锁。</span>
+          </p>
         </div>
-
+      
+      
         <div class="highlight">
-          <h3>Featured: Four Great Classical Novels (四大名著) — 460 Chapters</h3>
-          <p>The cornerstones of Chinese literary tradition, included in full:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Featured: Four Great Classical Novels (四大名著) &mdash; 460 Chapters</span>
+            <span class="i18n-zh" lang="zh">精选：四大名著 &mdash; 460 回</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">The cornerstones of Chinese literary tradition, included in full:</span>
+            <span class="i18n-zh" lang="zh">中国文学传统的基石，全部完整收录：</span>
+          </p>
           <ul class="book-list">
-            <li>Dream of the Red Chamber 红楼梦 — 120 chapters</li>
-            <li>Romance of the Three Kingdoms 三国演义 — 120 chapters</li>
-            <li>Water Margin 水浒传 — 120 chapters</li>
-            <li>Journey to the West 西游记 — 100 chapters</li>
+            <li><span class="i18n-en" lang="en">Dream of the Red Chamber 红楼梦 &mdash; 120 chapters</span><span class="i18n-zh" lang="zh">《红楼梦》&mdash; 120 回</span></li>
+            <li><span class="i18n-en" lang="en">Romance of the Three Kingdoms 三国演义 &mdash; 120 chapters</span><span class="i18n-zh" lang="zh">《三国演义》&mdash; 120 回</span></li>
+            <li><span class="i18n-en" lang="en">Water Margin 水浒传 &mdash; 120 chapters</span><span class="i18n-zh" lang="zh">《水浒传》&mdash; 120 回</span></li>
+            <li><span class="i18n-en" lang="en">Journey to the West 西游记 &mdash; 100 chapters</span><span class="i18n-zh" lang="zh">《西游记》&mdash; 100 回</span></li>
           </ul>
-          <p>The first 10 chapters of each novel are free. Unlock the complete texts with Pro. Each chapter is broken into individual sentences for pronunciation practice with pinyin support.</p>
+          <p>
+            <span class="i18n-en" lang="en">The first 10 chapters of each novel are free. Unlock the complete texts with Pro. Each chapter is broken into individual sentences for pronunciation practice with pinyin support.</span>
+            <span class="i18n-zh" lang="zh">每部名著前 10 回免费。完整内容需 Pro 解锁。每回切分为单句，便于带拼音的发音练习。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Classical Poetry (古典诗歌) — 256 Poems</h3>
-          <p>Works by celebrated poets from the Tang dynasty and beyond:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Classical Poetry (古典诗歌) &mdash; 256 Poems</span>
+            <span class="i18n-zh" lang="zh">古典诗歌 &mdash; 256 首</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Works by celebrated poets from the Tang dynasty and beyond:</span>
+            <span class="i18n-zh" lang="zh">出自唐代及后世的著名诗人：</span>
+          </p>
           <ul class="book-list">
-            <li>Li Bai 李白 — 37 poems</li>
-            <li>Du Fu 杜甫 — 28 poems</li>
-            <li>Li Shangyin 李商隐 — 16 poems</li>
-            <li>Wang Wei 王维 — 15 poems</li>
-            <li>Liu Yuxi 刘禹锡 — 14 poems</li>
-            <li>Bai Juyi 白居易 — 14 poems</li>
-            <li>Du Mu 杜牧 — 14 poems</li>
-            <li>Meng Haoran 孟浩然 — 7 poems</li>
-            <li>+ many more poets</li>
+            <li><span class="i18n-en" lang="en">Li Bai 李白 &mdash; 37 poems</span><span class="i18n-zh" lang="zh">李白 &mdash; 37 首</span></li>
+            <li><span class="i18n-en" lang="en">Du Fu 杜甫 &mdash; 28 poems</span><span class="i18n-zh" lang="zh">杜甫 &mdash; 28 首</span></li>
+            <li><span class="i18n-en" lang="en">Li Shangyin 李商隐 &mdash; 16 poems</span><span class="i18n-zh" lang="zh">李商隐 &mdash; 16 首</span></li>
+            <li><span class="i18n-en" lang="en">Wang Wei 王维 &mdash; 15 poems</span><span class="i18n-zh" lang="zh">王维 &mdash; 15 首</span></li>
+            <li><span class="i18n-en" lang="en">Liu Yuxi 刘禹锡 &mdash; 14 poems</span><span class="i18n-zh" lang="zh">刘禹锡 &mdash; 14 首</span></li>
+            <li><span class="i18n-en" lang="en">Bai Juyi 白居易 &mdash; 14 poems</span><span class="i18n-zh" lang="zh">白居易 &mdash; 14 首</span></li>
+            <li><span class="i18n-en" lang="en">Du Mu 杜牧 &mdash; 14 poems</span><span class="i18n-zh" lang="zh">杜牧 &mdash; 14 首</span></li>
+            <li><span class="i18n-en" lang="en">Meng Haoran 孟浩然 &mdash; 7 poems</span><span class="i18n-zh" lang="zh">孟浩然 &mdash; 7 首</span></li>
+            <li><span class="i18n-en" lang="en">+ many more poets</span><span class="i18n-zh" lang="zh">+ 更多诗人</span></li>
           </ul>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Ci Lyrics (宋词) — 146 Lyrics</h3>
-          <p>Masterpieces of Song dynasty lyric poetry:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Ci Lyrics (宋词) &mdash; 146 Lyrics</span>
+            <span class="i18n-zh" lang="zh">宋词 &mdash; 146 首</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Masterpieces of Song dynasty lyric poetry:</span>
+            <span class="i18n-zh" lang="zh">宋代词作精品：</span>
+          </p>
           <ul class="book-list">
-            <li>Xin Qiji 辛弃疾 — 22 lyrics</li>
-            <li>Su Shi 苏轼 — 19 lyrics</li>
-            <li>Li Qingzhao 李清照 — 19 lyrics</li>
-            <li>Liu Yong 柳永 — 13 lyrics</li>
-            <li>Ouyang Xiu 欧阳修 — 12 lyrics</li>
-            <li>Yan Jidao 晏几道 — 9 lyrics</li>
-            <li>Yan Shu 晏殊 — 8 lyrics</li>
-            <li>+ more lyricists</li>
+            <li><span class="i18n-en" lang="en">Xin Qiji 辛弃疾 &mdash; 22 lyrics</span><span class="i18n-zh" lang="zh">辛弃疾 &mdash; 22 首</span></li>
+            <li><span class="i18n-en" lang="en">Su Shi 苏轼 &mdash; 19 lyrics</span><span class="i18n-zh" lang="zh">苏轼 &mdash; 19 首</span></li>
+            <li><span class="i18n-en" lang="en">Li Qingzhao 李清照 &mdash; 19 lyrics</span><span class="i18n-zh" lang="zh">李清照 &mdash; 19 首</span></li>
+            <li><span class="i18n-en" lang="en">Liu Yong 柳永 &mdash; 13 lyrics</span><span class="i18n-zh" lang="zh">柳永 &mdash; 13 首</span></li>
+            <li><span class="i18n-en" lang="en">Ouyang Xiu 欧阳修 &mdash; 12 lyrics</span><span class="i18n-zh" lang="zh">欧阳修 &mdash; 12 首</span></li>
+            <li><span class="i18n-en" lang="en">Yan Jidao 晏几道 &mdash; 9 lyrics</span><span class="i18n-zh" lang="zh">晏几道 &mdash; 9 首</span></li>
+            <li><span class="i18n-en" lang="en">Yan Shu 晏殊 &mdash; 8 lyrics</span><span class="i18n-zh" lang="zh">晏殊 &mdash; 8 首</span></li>
+            <li><span class="i18n-en" lang="en">+ more lyricists</span><span class="i18n-zh" lang="zh">+ 更多词人</span></li>
           </ul>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Classical Prose 古文观止 — 222 Articles</h3>
-          <p>Selected masterworks from the Guwen Guanzhi anthology by authors including Su Shi (苏轼), Han Yu (韩愈), Fan Zhongyan (范仲淹), Tao Yuanming (陶渊明), Liu Zongyuan (柳宗元), Ouyang Xiu (欧阳修), Wang Xizhi (王羲之), Sima Qian (司马迁) and more.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Classical Prose 古文观止 &mdash; 222 Articles</span>
+            <span class="i18n-zh" lang="zh">古文观止 &mdash; 222 篇</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Selected masterworks from the Guwen Guanzhi anthology by authors including Su Shi (苏轼), Han Yu (韩愈), Fan Zhongyan (范仲淹), Tao Yuanming (陶渊明), Liu Zongyuan (柳宗元), Ouyang Xiu (欧阳修), Wang Xizhi (王羲之), Sima Qian (司马迁) and more.</span>
+            <span class="i18n-zh" lang="zh">《古文观止》选集精选，作者包括苏轼、韩愈、范仲淹、陶渊明、柳宗元、欧阳修、王羲之、司马迁等。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Modern Prose (近代文章) — 25 Works</h3>
-          <p>Modern Chinese literary works by Lu Xun (鲁迅), Zhu Ziqing (朱自清), Liang Qichao (梁启超), Lao She (老舍), Feng Zikai (丰子恺), Hu Shi (胡适), Yu Dafu (郁达夫), and others.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Modern Prose (近代文章) &mdash; 25 Works</span>
+            <span class="i18n-zh" lang="zh">近代文章 &mdash; 25 篇</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Modern Chinese literary works by Lu Xun (鲁迅), Zhu Ziqing (朱自清), Liang Qichao (梁启超), Lao She (老舍), Feng Zikai (丰子恺), Hu Shi (胡适), Yu Dafu (郁达夫), and others.</span>
+            <span class="i18n-zh" lang="zh">近代文学名作，作者包括鲁迅、朱自清、梁启超、老舍、丰子恺、胡适、郁达夫等。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Progressive Reading with Pinyin</h3>
-          <p>Every article comes with <strong>complete pinyin annotation</strong> and <strong>English translation</strong>. Toggle pinyin and translations on or off to match your reading level. Sentence-by-sentence TTS playback with auto mode lets you practice reading along hands-free.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Progressive Reading with Pinyin</span>
+            <span class="i18n-zh" lang="zh">带拼音的渐进式阅读</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Every article comes with <strong>complete pinyin annotation</strong> and <strong>English translation</strong>. Toggle pinyin and translations on or off to match your reading level. Sentence-by-sentence TTS playback with auto mode lets you practice reading along hands-free.</span>
+            <span class="i18n-zh" lang="zh">每篇文章都附 <strong>完整拼音标注</strong> 与 <strong>英文翻译</strong>。可按你的阅读水平开关拼音与翻译。逐句 TTS 播放 + 自动模式，可免手跟读。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="hanzi-test" class="feature-section">
-    <h2>5. Hanzi Test (汉字测试)</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/soundsrightcn_char_test.png" alt="Hanzi Test" /></div>
-      <div class="content">
-        <p>Reinforce character recognition and recall with three timed test modes. Each question has a <strong>10-second timer</strong> and auto-advances after answering.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">5. Hanzi Test (汉字测试)</span>
+      <span class="i18n-zh" lang="zh">5. 汉字测试</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/soundsrightcn_char_test.png" alt="Hanzi Test" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Reinforce character recognition and recall with three timed test modes. Each question has a <strong>10-second timer</strong> and auto-advances after answering.</span>
+          <span class="i18n-zh" lang="zh">通过三种限时测试巩固汉字识别与回忆。每题 <strong>10 秒计时</strong>，答完自动进入下一题。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>4 Test Modes</h3>
-          <div class="test-mode"><span class="num">1</span> <span><strong>Listen &amp; Choose Character (听句选字)</strong> — Hear a sentence, then choose the correct character from options</span></div>
-          <div class="test-mode"><span class="num">2</span> <span><strong>Fill in the Blank (填空)</strong> — Read a sentence with a missing character and select the right one</span></div>
-          <div class="test-mode"><span class="num">3</span> <span><strong>Listen &amp; Choose Meaning (听音选义)</strong> — Hear a character and pick its correct definition</span></div>
-          <div class="test-mode"><span class="num">4</span> <span><strong>Listen &amp; Identify (听句辨字)</strong> — Hear a sentence and identify the target character within it</span></div>
+          <h3>
+            <span class="i18n-en" lang="en">4 Test Modes</span>
+            <span class="i18n-zh" lang="zh">4 种测试模式</span>
+          </h3>
+          <div class="test-mode"><span class="num">1</span> <span><strong>听句选字 (Listen &amp; Choose Character)</strong> &mdash;
+            <span class="i18n-en" lang="en">Hear a sentence, then choose the correct character from options</span>
+            <span class="i18n-zh" lang="zh">听一句子，从选项中选出正确的汉字</span>
+          </span></div>
+          <div class="test-mode"><span class="num">2</span> <span><strong>填空 (Fill in the Blank)</strong> &mdash;
+            <span class="i18n-en" lang="en">Read a sentence with a missing character and select the right one</span>
+            <span class="i18n-zh" lang="zh">阅读缺字的句子，选出正确汉字</span>
+          </span></div>
+          <div class="test-mode"><span class="num">3</span> <span><strong>听音选义 (Listen &amp; Choose Meaning)</strong> &mdash;
+            <span class="i18n-en" lang="en">Hear a character and pick its correct definition</span>
+            <span class="i18n-zh" lang="zh">听一个字的读音，选出正确释义</span>
+          </span></div>
+          <div class="test-mode"><span class="num">4</span> <span><strong>听句辨字 (Listen &amp; Identify)</strong> &mdash;
+            <span class="i18n-en" lang="en">Hear a sentence and identify the target character within it</span>
+            <span class="i18n-zh" lang="zh">听一句子，辨认其中的目标字</span>
+          </span></div>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Auto-Advance &amp; Wordbook Integration</h3>
-          <p>After selecting an answer, feedback is shown for 1.2 seconds before automatically moving to the next question. Characters you answer incorrectly are <strong>automatically added</strong> to your Wordbook for later review. A score of 60% or higher counts as passed.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Auto-Advance &amp; Wordbook Integration</span>
+            <span class="i18n-zh" lang="zh">自动前进 + 生词本联动</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">After selecting an answer, feedback is shown for 1.2 seconds before automatically moving to the next question. Characters you answer incorrectly are <strong>automatically added</strong> to your Wordbook for later review. A score of 60% or higher counts as passed.</span>
+            <span class="i18n-zh" lang="zh">选完答案后，反馈显示 1.2 秒，然后自动进入下一题。答错的字会被 <strong>自动加入</strong> 生词本，便于后续复习。正确率达到 60% 即视为通过。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Customizable Sessions</h3>
-          <p>Choose which HSK levels to test, enable or disable individual test modes, and set the number of questions per session. Track your accuracy and per-mode statistics after each test.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Customizable Sessions</span>
+            <span class="i18n-zh" lang="zh">可自定义</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Choose which HSK levels to test, enable or disable individual test modes, and set the number of questions per session. Track your accuracy and per-mode statistics after each test.</span>
+            <span class="i18n-zh" lang="zh">选择测试的 HSK 等级、开关各测试模式、设置题数。每次测试后查看正确率与分模式统计。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="ci-test" class="feature-section">
-    <h2>6. Ci Test (词语测试)</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/soundsrightcn_word_test.png" alt="Ci Test" /></div>
-      <div class="content">
-        <p>Test your vocabulary knowledge with the same structured approach as Hanzi Test, adapted for words and phrases. <strong>10-second timer</strong> per question with auto-advance.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">6. Ci Test (词语测试)</span>
+      <span class="i18n-zh" lang="zh">6. 词语测试</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/soundsrightcn_word_test.png" alt="Ci Test" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Test your vocabulary knowledge with the same structured approach as Hanzi Test, adapted for words and phrases. <strong>10-second timer</strong> per question with auto-advance.</span>
+          <span class="i18n-zh" lang="zh">用与汉字测试相同的结构化方式检验词汇掌握。<strong>10 秒计时</strong>，自动前进。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>4 Test Modes</h3>
-          <div class="test-mode"><span class="num">1</span> <span><strong>Listen &amp; Choose Word (听句选词)</strong> — Hear a sentence, then choose the correct word from options</span></div>
-          <div class="test-mode"><span class="num">2</span> <span><strong>Fill in the Blank (填空)</strong> — Read a sentence with a missing word and select the right one</span></div>
-          <div class="test-mode"><span class="num">3</span> <span><strong>Listen &amp; Choose Meaning (听音选义)</strong> — Hear a word and pick its correct definition</span></div>
-          <div class="test-mode"><span class="num">4</span> <span><strong>Listen &amp; Identify (听句辨词)</strong> — Hear a sentence and identify the target word within it</span></div>
+          <h3>
+            <span class="i18n-en" lang="en">4 Test Modes</span>
+            <span class="i18n-zh" lang="zh">4 种测试模式</span>
+          </h3>
+          <div class="test-mode"><span class="num">1</span> <span><strong>听句选词 (Listen &amp; Choose Word)</strong> &mdash;
+            <span class="i18n-en" lang="en">Hear a sentence, then choose the correct word from options</span>
+            <span class="i18n-zh" lang="zh">听一句子，从选项中选出正确的词</span>
+          </span></div>
+          <div class="test-mode"><span class="num">2</span> <span><strong>填空 (Fill in the Blank)</strong> &mdash;
+            <span class="i18n-en" lang="en">Read a sentence with a missing word and select the right one</span>
+            <span class="i18n-zh" lang="zh">阅读缺词的句子，选出正确词语</span>
+          </span></div>
+          <div class="test-mode"><span class="num">3</span> <span><strong>听音选义 (Listen &amp; Choose Meaning)</strong> &mdash;
+            <span class="i18n-en" lang="en">Hear a word and pick its correct definition</span>
+            <span class="i18n-zh" lang="zh">听一个词的读音，选出正确释义</span>
+          </span></div>
+          <div class="test-mode"><span class="num">4</span> <span><strong>听句辨词 (Listen &amp; Identify)</strong> &mdash;
+            <span class="i18n-en" lang="en">Hear a sentence and identify the target word within it</span>
+            <span class="i18n-zh" lang="zh">听一句子，辨认其中的目标词</span>
+          </span></div>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Auto-Advance &amp; Wordbook Integration</h3>
-          <p>Same smooth experience as Hanzi Test: 1.2-second feedback display, then auto-advance. Missed words are automatically collected into your Wordbook. Track per-mode accuracy and overall performance.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Auto-Advance &amp; Wordbook Integration</span>
+            <span class="i18n-zh" lang="zh">自动前进 + 生词本联动</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Same smooth experience as Hanzi Test: 1.2-second feedback display, then auto-advance. Missed words are automatically collected into your Wordbook. Track per-mode accuracy and overall performance.</span>
+            <span class="i18n-zh" lang="zh">与汉字测试相同的流畅体验：反馈显示 1.2 秒后自动前进。答错的词会自动加入生词本。可查看分模式正确率与整体表现。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Vocabulary Type Selection</h3>
-          <p>Choose to test on <strong>common words (常用词)</strong>, <strong>idioms (成语)</strong>, <strong>proverbs (谚语)</strong>, or all combined. Filter by HSK level to match your current learning stage.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Vocabulary Type Selection</span>
+            <span class="i18n-zh" lang="zh">词汇类型选择</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Choose to test on <strong>common words (常用词)</strong>, <strong>idioms (成语)</strong>, <strong>proverbs (谚语)</strong>, or all combined. Filter by HSK level to match your current learning stage.</span>
+            <span class="i18n-zh" lang="zh">可选择只测 <strong>常用词</strong>、<strong>成语</strong>、<strong>谚语</strong> 或全部混合。按 HSK 等级筛选，匹配你的当前学习阶段。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="dialogue-test" class="feature-section">
-    <h2>7. Dialogue Test (对话测试)</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/soundsrightcn_dialogue_test.png" alt="Dialogue Test" /></div>
-      <div class="content">
-        <p>Test your spoken Chinese under time pressure. Record your part in real dialogues and receive multi-dimensional pronunciation scoring for each line.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">7. Dialogue Test (对话测试)</span>
+      <span class="i18n-zh" lang="zh">7. 对话测试</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/soundsrightcn_dialogue_test.png" alt="Dialogue Test" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Test your spoken Chinese under time pressure. Record your part in real dialogues and receive multi-dimensional pronunciation scoring for each line.</span>
+          <span class="i18n-zh" lang="zh">在限时压力下检验口语。在真实对话中录音，每句获得多维发音评分。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>A/B Speaker Recording</h3>
-          <p>Play the role of <strong>Speaker A, Speaker B, or both</strong>. TTS plays the other speaker's lines, and you record yours. Each recording is automatically scored with a timeout based on line length.</p>
+          <h3>
+            <span class="i18n-en" lang="en">A/B Speaker Recording</span>
+            <span class="i18n-zh" lang="zh">A / B 角色录音</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Play the role of <strong>Speaker A, Speaker B, or both</strong>. TTS plays the other speaker's lines, and you record yours. Each recording is automatically scored with a timeout based on line length.</span>
+            <span class="i18n-zh" lang="zh">扮演 <strong>A、B 或双角</strong>。TTS 播放对方的词，你录制自己的。每次录音按句子长度自动设置超时并评分。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Multi-Dimensional Scoring</h3>
-          <p>Every line is evaluated on four dimensions:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Multi-Dimensional Scoring</span>
+            <span class="i18n-zh" lang="zh">多维度评分</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Every line is evaluated on four dimensions:</span>
+            <span class="i18n-zh" lang="zh">每句按四个维度评估：</span>
+          </p>
           <ul>
-            <li><strong>Accuracy</strong> — correctness of individual character pronunciation and tones</li>
-            <li><strong>Fluency</strong> — natural rhythm, pacing, and connected speech</li>
-            <li><strong>Pronunciation</strong> — tonal precision for Mandarin's four tones plus neutral tone</li>
-            <li><strong>Completeness</strong> — whether all characters in the target line were spoken</li>
+            <li><span class="i18n-en" lang="en"><strong>Accuracy</strong> &mdash; correctness of individual character pronunciation and tones</span><span class="i18n-zh" lang="zh"><strong>准确度</strong> &mdash; 单字发音与声调的正确性</span></li>
+            <li><span class="i18n-en" lang="en"><strong>Fluency</strong> &mdash; natural rhythm, pacing, and connected speech</span><span class="i18n-zh" lang="zh"><strong>流利度</strong> &mdash; 自然节奏、停顿与连贯</span></li>
+            <li><span class="i18n-en" lang="en"><strong>Pronunciation</strong> &mdash; tonal precision for Mandarin's four tones plus neutral tone</span><span class="i18n-zh" lang="zh"><strong>发音</strong> &mdash; 普通话四声 + 轻声的声调精度</span></li>
+            <li><span class="i18n-en" lang="en"><strong>Completeness</strong> &mdash; whether all characters in the target line were spoken</span><span class="i18n-zh" lang="zh"><strong>完整度</strong> &mdash; 目标句中所有字是否都已读出</span></li>
           </ul>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Character-Level Color Feedback</h3>
-          <p>After each attempt, recognized characters are <strong>color-coded</strong> — green for correct, red for wrong — so you can see exactly which characters need more practice.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Character-Level Color Feedback</span>
+            <span class="i18n-zh" lang="zh">逐字颜色反馈</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">After each attempt, recognized characters are <strong>color-coded</strong> &mdash; green for correct, red for wrong &mdash; so you can see exactly which characters need more practice.</span>
+            <span class="i18n-zh" lang="zh">每次尝试后，识别出的字会被 <strong>着色</strong> &mdash; 绿色正确、红色错误 &mdash; 一眼看出哪些字需要加强。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Detailed Results</h3>
-          <p>After completing a dialogue, swipe through a <strong>line-by-line breakdown</strong> showing scores for each exchange. Compare your recording against the target to identify specific weaknesses.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Detailed Results</span>
+            <span class="i18n-zh" lang="zh">详细结果</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">After completing a dialogue, swipe through a <strong>line-by-line breakdown</strong> showing scores for each exchange. Compare your recording against the target to identify specific weaknesses.</span>
+            <span class="i18n-zh" lang="zh">完成后可滑动查看 <strong>逐句明细</strong>，显示每轮对话的得分。对比你的录音与目标，找出具体薄弱点。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   <section id="article-test" class="feature-section">
-    <h2>8. Article Test (文章测试)</h2>
-    <div class="feature-row">
-      <div class="screenshot"><img src="screenshots/soundsrightcn_article_test.png" alt="Article Test" /></div>
-      <div class="content">
-        <p>Reading comprehension tests based on classical and modern Chinese literature. Choose texts from any category and test your understanding.</p>
-
+    <h2>
+      <span class="i18n-en" lang="en">8. Article Test (文章测试)</span>
+      <span class="i18n-zh" lang="zh">8. 文章测试</span>
+    </h2>
+    <div class="section-hero"><div class="section-screenshot"><img src="screenshots/soundsrightcn_article_test.png" alt="Article Test" /></div><div class="section-intro"><p>
+          <span class="i18n-en" lang="en">Reading comprehension tests based on classical and modern Chinese literature. Choose texts from any category and test your understanding.</span>
+          <span class="i18n-zh" lang="zh">基于古今中文文学的阅读理解测试。从任意分类中选择文本，检验理解力。</span>
+        </p></div></div>
+      
+      
         <div class="card">
-          <h3>3 Test Modes</h3>
-          <div class="test-mode"><span class="num">1</span> <span><strong>Classical → Vernacular</strong> — Read a line of classical Chinese and choose the correct modern translation</span></div>
-          <div class="test-mode"><span class="num">2</span> <span><strong>Vernacular → Classical</strong> — Read a modern translation and identify the original classical Chinese line</span></div>
-          <div class="test-mode"><span class="num">3</span> <span><strong>Fill in the Blank</strong> — Read a passage with a missing line and select the correct one from options</span></div>
+          <h3>
+            <span class="i18n-en" lang="en">3 Test Modes</span>
+            <span class="i18n-zh" lang="zh">3 种测试模式</span>
+          </h3>
+          <div class="test-mode"><span class="num">1</span> <span><strong>Classical &rarr; Vernacular</strong> &mdash;
+            <span class="i18n-en" lang="en">Read a line of classical Chinese and choose the correct modern translation</span>
+            <span class="i18n-zh" lang="zh">阅读文言文，选出正确的现代翻译</span>
+          </span></div>
+          <div class="test-mode"><span class="num">2</span> <span><strong>Vernacular &rarr; Classical</strong> &mdash;
+            <span class="i18n-en" lang="en">Read a modern translation and identify the original classical Chinese line</span>
+            <span class="i18n-zh" lang="zh">阅读现代翻译，选出对应的原文</span>
+          </span></div>
+          <div class="test-mode"><span class="num">3</span> <span><strong>Fill in the Blank</strong> &mdash;
+            <span class="i18n-en" lang="en">Read a passage with a missing line and select the correct one from options</span>
+            <span class="i18n-zh" lang="zh">阅读缺句段落，从选项中选出正确句子</span>
+          </span></div>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Category &amp; Author Selection</h3>
-          <p>Choose from all literary categories:</p>
+          <h3>
+            <span class="i18n-en" lang="en">Category &amp; Author Selection</span>
+            <span class="i18n-zh" lang="zh">分类与作者选择</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">Choose from all literary categories:</span>
+            <span class="i18n-zh" lang="zh">可从所有文学分类中选择：</span>
+          </p>
           <ul class="category-grid">
-            <li>Pre-Qin Masters (先秦诸子与典籍)</li>
-            <li>Classical Poetry (古典诗歌)</li>
-            <li>Ci Lyrics (宋词)</li>
-            <li>Ming-Qing Fiction (四大名著)</li>
-            <li>Classical Prose (古文观止)</li>
-            <li>Modern Prose (近代文章)</li>
+            <li><span class="i18n-en" lang="en">Pre-Qin Masters (先秦诸子与典籍)</span><span class="i18n-zh" lang="zh">先秦诸子与典籍</span></li>
+            <li><span class="i18n-en" lang="en">Classical Poetry (古典诗歌)</span><span class="i18n-zh" lang="zh">古典诗歌</span></li>
+            <li><span class="i18n-en" lang="en">Ci Lyrics (宋词)</span><span class="i18n-zh" lang="zh">宋词</span></li>
+            <li><span class="i18n-en" lang="en">Ming-Qing Fiction (四大名著)</span><span class="i18n-zh" lang="zh">四大名著</span></li>
+            <li><span class="i18n-en" lang="en">Classical Prose (古文观止)</span><span class="i18n-zh" lang="zh">古文观止</span></li>
+            <li><span class="i18n-en" lang="en">Modern Prose (近代文章)</span><span class="i18n-zh" lang="zh">近代文章</span></li>
           </ul>
-          <p>Within each category, select specific authors or books to focus your test.</p>
+          <p>
+            <span class="i18n-en" lang="en">Within each category, select specific authors or books to focus your test.</span>
+            <span class="i18n-zh" lang="zh">每个分类下，可选择具体作者或书本来聚焦测试。</span>
+          </p>
         </div>
-
+      
+      
         <div class="card">
-          <h3>Auto-Advance &amp; Scoring</h3>
-          <p>After selecting an answer, the correct response is highlighted for 1 second before automatically advancing. Track your accuracy across categories and test modes. Wrong answers are added to your Wordbook.</p>
+          <h3>
+            <span class="i18n-en" lang="en">Auto-Advance &amp; Scoring</span>
+            <span class="i18n-zh" lang="zh">自动前进与评分</span>
+          </h3>
+          <p>
+            <span class="i18n-en" lang="en">After selecting an answer, the correct response is highlighted for 1 second before automatically advancing. Track your accuracy across categories and test modes. Wrong answers are added to your Wordbook.</span>
+            <span class="i18n-zh" lang="zh">选完答案后，正确答案会高亮 1 秒，然后自动进入下一题。可跨分类与测试模式跟踪正确率。答错的会加入生词本。</span>
+          </p>
         </div>
-      </div>
-    </div>
+      
+    
   </section>
 
   </div>
 
   <footer>
-    <div style="margin-bottom:0.75rem;"><a href="privacy-cn.html" style="color:var(--accent); font-family:'Poppins',sans-serif; font-size:0.85rem; font-weight:500;">Privacy Policy</a></div>
-    <div class="copy"><img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" alt="">粤公网安备44030002011542号 &nbsp;&nbsp; <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2026028389号-1</a></div>
-    <div class="copy">&copy; 2026 SoundsRight. All rights reserved.</div>
+    <div style="margin-bottom:0.75rem;"><a href="privacy-cn.html" style="color:var(--accent); font-family:'Poppins',sans-serif; font-size:0.85rem; font-weight:500;">
+      <span class="i18n-en" lang="en">Privacy Policy</span>
+      <span class="i18n-zh" lang="zh">隐私政策</span>
+    </a></div>
+    <div class="copy"><img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" alt="">粤公网安备 44030002011542 号 &nbsp;&nbsp; <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2026028389号-1</a></div>
+    <div class="copy">
+      <span class="i18n-en" lang="en">&copy; 2026 SoundsRight. All rights reserved.</span>
+      <span class="i18n-zh" lang="zh">&copy; 2026 SoundsRight. 保留所有权利。</span>
+    </div>
   </footer>
+
+  <script src="i18n.js" defer></script>
+  <script>
+    (function () {
+      function initSectionTabs() {
+        var strip = document.querySelector(".section-tabs");
+        if (!strip) return;
+        var tabs = strip.querySelectorAll(".section-tab");
+        var sections = document.querySelectorAll(".feature-section");
+
+        function activate(id) {
+          for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+          for (var i = 0; i < sections.length; i++) sections[i].classList.remove("active");
+          for (var i = 0; i < tabs.length; i++) {
+            if (tabs[i].getAttribute("data-target") === id) {
+              tabs[i].classList.add("active");
+              tabs[i].scrollIntoView({ block: "nearest", inline: "center" });
+              break;
+            }
+          }
+          var target = document.getElementById(id);
+          if (target) target.classList.add("active");
+        }
+
+        for (var i = 0; i < tabs.length; i++) {
+          (function (tab) {
+            tab.addEventListener("click", function (e) {
+              e.preventDefault();
+              var id = tab.getAttribute("data-target");
+              activate(id);
+              if (history.replaceState) history.replaceState(null, "", "#" + id);
+            });
+          })(tabs[i]);
+        }
+
+        var hash = window.location.hash.replace("#", "");
+        if (hash && document.getElementById(hash)) {
+          activate(hash);
+        } else if (tabs.length) {
+          activate(tabs[0].getAttribute("data-target"));
+        }
+
+        window.addEventListener("hashchange", function () {
+          var h = window.location.hash.replace("#", "");
+          if (h && document.getElementById(h)) activate(h);
+        });
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initSectionTabs);
+      } else {
+        initSectionTabs();
+      }
+    })();
+  </script>
 </body>
 </html>
